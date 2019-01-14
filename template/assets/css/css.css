@@ -1,0 +1,77 @@
+body{
+    margin: 0;
+    background: #cccccc;
+}
+.main{
+    display: flex;
+    flex-wrap: wrap;
+    height: 100vh;
+
+}
+.orta{
+    background: #49bcfa;
+    width: 70%;
+
+}
+.sag{
+     background: #4efa2c;
+     width: 30%;
+ }
+.firma{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-content: center;
+    height: 33.33%;
+    background: #8b2825;
+}
+.saat{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 33.33%;
+    background: #202e40;
+}
+.havadrm{
+    height: 33.33%;
+    background: #1F567C;
+}
+.clearfix {
+    border: 3px solid #4CAF50;
+    padding: 5px;
+    overflow: auto;
+}
+
+.img2 {
+    float: right;
+}
+div p#date,p#time{
+    margin: 0;
+}
+#date
+{
+    font-family: "Courier New", Courier, monospace;
+    float: right;
+    color: #e7e7e7;
+    font-size:30px;
+    width:80%;
+}
+#time
+{
+    font-family: "Courier New", Courier, monospace;
+    float: right;
+    font-size:70px;
+    color: #e7e7e7;
+    width:80%;
+}
+.firmaadi{
+    font-family: "Courier New", Courier, monospace;
+    color: #e7e7e7;
+    font-size:40px;
+}
+.adres{
+    font-family: "Courier New", Courier, monospace;
+    color: #959595;
+    font-size:30px;
+ }
