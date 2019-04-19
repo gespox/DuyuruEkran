@@ -1,10 +1,10 @@
+<?php session_start();?>
 <!doctype html>
 <html lang="en">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
     <link rel="stylesheet" href="css/main.css">
@@ -89,17 +89,15 @@
             <div class="card card-signin my-5">
                 <div class="card-body">
                     <h5 class="card-title text-center">Giris Yapin</h5>
-                    <form class="form-signin">
+                    <form class="form-signin" method="post">
                         <div class="form-label-group">
                             <input type="email" id="inputEmail" class="form-control" placeholder="email adresi" name="email" required autofocus>
                             <label for="inputEmail">E-Mail Adresi</label>
                         </div>
-
                         <div class="form-label-group">
                             <input type="password" id="inputPassword" class="form-control" placeholder="Sifre" name="psw" required>
                             <label for="inputPassword">Sifre</label>
                         </div>
-
                         <div class="custom-control custom-checkbox mb-3">
                             <input type="checkbox" class="custom-control-input" name="hatirla" id="customCheck1" value="1">
                             <label class="custom-control-label" for="customCheck1">Sifreyi Hatirla</label>
@@ -107,6 +105,7 @@
                         <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" name="girisbtn">Giris Yap</button>
                        </form>
                </div>
+                <?php require_once "login.php";?>
             </div>
 
         </div>
