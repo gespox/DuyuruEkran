@@ -16,12 +16,8 @@ if(isset($_POST['girisbtn']))
 
     if($islem) // Karşığılı varsa buraya gir dedik
     {
-        if($hatirla){
         $_SESSION['mail'] = $islem['mail']; // Giriş yaptığımız kullanici adımızı SEssion atadık
         $_SESSION['id'] = $islem['id_kullanici'];
-
-        }
-
         if($islem['yetki']) {
             yonlendir("panel/pAdmin/panelAdmin.php");
             //header('Location: ' . "panel/teknikerpanel.php");

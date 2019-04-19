@@ -1,21 +1,21 @@
 <?php
 session_start();
-if(!isset($_SESSION['id'])) {
-    yonlendir("../index.php");
-    function yonlendir($url){
-        if (!headers_sent()){
-            header('Location: '.$url);
-            exit;
-        }
-        else{
-            echo '<script type="text/javascript">';
-            echo 'window.location.href="'.$url.'";';
-            echo '</script>';
-            echo '<noscript>';
-            echo '<meta http-equiv="refresh" content="0;url='.$url.'" />';
-            echo '</noscript>'; exit;
-        }
+function yonlendir($url){
+    if (!headers_sent()){
+        header('Location: '.$url);
+        exit;
     }
+    else{
+        echo '<script type="text/javascript">';
+        echo 'window.location.href="'.$url.'";';
+        echo '</script>';
+        echo '<noscript>';
+        echo '<meta http-equiv="refresh" content="0;url='.$url.'" />';
+        echo '</noscript>'; exit;
+    }
+}
+if(!isset($_SESSION['id'])) {
+    yonlendir("../../index.php");
 }
 else{
     ?>
@@ -27,7 +27,7 @@ else{
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Tekniker Paneli</title>
+        <title>Duyuru Duzenleme Paneli</title>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="panelUser.css">
     </head>
@@ -35,7 +35,7 @@ else{
     <div id="header">
         <?php //include "header.php"; ?>
         <div class="logo">
-            <a href="#">Teknik <span>Servis Otomasyonu</span></a>
+            <a href="#">Duyuru <span>Duzenleme Paneli</span></a>
         </div>
         <div class="bilgiler">
             <span>  <?php //echo "Tekniker: ". $_SESSION["ad"]." ".$_SESSION["soyad"]." " ; ?></span>
