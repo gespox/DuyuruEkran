@@ -22,7 +22,7 @@ else{
     <!doctype html>
     <html lang="en">
     <head>
-        <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico"/>
+       <!-- <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico"/>!-->
         <meta charset="UTF-8">
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -32,79 +32,68 @@ else{
         <link rel="stylesheet" href="panelUser.css">
     </head>
     <body>
-    <div id="header">
-        <?php //include "header.php"; ?>
-        <div class="logo">
-            <a href="#">Duyuru <span>Duzenleme Paneli</span></a>
+        <div id="header">
+            <?php
+            //Header Ekleme
+            include "header.php";
+            ?>
         </div>
-        <div class="bilgiler">
-            <span>  <?php //echo "Tekniker: ". $_SESSION["ad"]." ".$_SESSION["soyad"]." " ; ?></span>
-            <form id="cikisbtn" action="../cikis.php">
-                <button id="cikisbtn" onclick="return confirm('Cikis yapmak istiyor musunuz?');" name="cikisbtn"><img src="img/cik.svg" width="24" height="24" > Çıkış Yap</button>
-            </form>
-        </div>
-    </div>
-    <div id="container">
-        <?php //include "sidebar.php"; ?>
-        <div class="sidebar">
-            <ul id="nav">
-                <li  >
-                    <a href="#"> <img src="img/genel.svg" width="24" height="24" > Genel Durum</a>
-                </li>
-                <li>
-                    <a href="#"> <img src="img/servis.svg" width="24" height="24" > Servis Düzenle</a>
-                </li>
-                <li>
-                    <a href="#"> <img src="img/musteri.svg" width="24" height="24" > Müşteriler</a>
-                </li>
-                <li >
-                    <a href="#"><img src="img/marka.svg" width="24" height="24" >Markalar</a>
-                </li>
-                <li>
-                    <a href="#"> <img src="img/cihaz.svg" width="24" height="24" > Cihazlar</a>
-                </li>
-                <li>
-                    <a href="#"> <img src="img/tekniker.svg" width="24" height="24" > Tekniker Ekip</a>
-                </li>
-            </ul>
-        </div>
-        <div class="content">
-            <?php //include "maincontent.php"; ?>
-            <h1>Admin Paneli</h1>
-            <span>Genel Gorunum...</span>
-            <div id="box">
-                <div class="box-top">Servisteki Urunler</div>
-                <div class="box-panel">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis delectus facilis sunt temporibus vero voluptate. Aliquam consequatur deserunt, distinctio dolorem facilis, illo ipsam, nam nulla numquam provident quis sed tempora.
-                    <style><?php include('panelcss/servis.css'); ?></style>
-                    <?php //include "servis.php"; ?>
-                </div>
-            </div>
-            <div id="box">
-                <div class="box-top">Markalar </div>
-                <div class="box-panel">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquam assumenda, blanditiis, consectetur dolore eaque enim illo iste iure modi mollitia natus nulla officiis omnis quaerat quisquam sint totam veritatis.
-                    <style><?php include('panelcss/marka.css'); ?></style>
-                </div>
-            </div>
-            <div id="box">
-                <div class="box-top">Cihazlar</div>
-                <div class="box-panel">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, accusamus cum dignissimos dolores eos error ex explicabo facere inventore nesciunt numquam obcaecati reiciendis saepe. Iste itaque molestiae non optio veniam.
-                    <style><?php include('panelcss/cihaz.css'); ?></style>
-                </div>
-            </div>
-            <div id="box">
-                <div class="box-top">Teknik Ekip</div>
-                <div class="box-panel">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus blanditiis consectetur dolor doloremque dolores error laboriosam modi numquam placeat provident quisquam, sunt velit voluptates. Amet itaque modi nihil quas sit?
-                    <style><?php include('panelcss/ekip.css'); ?></style>
+        <div id="container">
+            <?php
+            //Sidebar Ekleme
+            include "sidebar.php";
+
+            ?>
+            <div class="content">
+                <h1>Gorunum Paneli</h1>
+                <div id="box">
+                    <div class="box-top">Olusturulan Template'lar</div>
+                    <div class="box-panel">
+                        <?php require_once"../../baglan.php"?>
+
+                        <div style="overflow-x:auto;">
+                            <table>
+                                <tr>
+                                    <th>Firma</th>
+                                    <th>Baslik</th>
+                                    <th>Metin</th>
+                                    <th>Resim</th>
+                                </tr>
+                                <?php
+                                $id=$_SESSION['id'];
+                                $sql = "SELECT firmaad,baslik,metin,resimurl FROM template t,firma f,baslik b,metin m,resim r WHERE 
+                                                            t.id_kullanici='$id' AND 
+                                                            t.id_baslik=b.id_baslik AND
+                                                            t.id_metin=m.id_metin AND
+                                                            t.id_resim=r.id_resim AND
+                                                            t.id_firma=f.id_firma
+                                                            ";
+                                $result = $conn->query($sql);
+                                if ($result->rowCount() > 0) {
+                                    // output data of each row
+                                    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                                        echo "<tr>";
+                                        echo "<td>" . $row['firmaad'] . "</td>";
+                                        echo "<td>" . $row["baslik"] . "</td>";
+                                        echo "<td>" . $row["metin"] . "</td>";
+                                        echo "<td>" . $row["resimurl"] . "</td>";
+                                        echo "</tr>";
+                                    }//while end
+                                }else {//if end
+                               ?>
+                            </table>
+                            <?php
+
+                                    echo "Sonuç Bulunamadı";
+                                }
+                                $conn = null;
+                                ?>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- #container -->
-    <script src="paneljs/ajax.js" type="text/javascript"></script>
     </body>
     </html>
     <?php
