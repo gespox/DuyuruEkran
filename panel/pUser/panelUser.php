@@ -76,7 +76,7 @@ else{
                                         echo "<td>" . $row['firmaad'] . "</td>";
                                         echo "<td>" . $row["baslik"] . "</td>";
                                         echo "<td>" . $row["metin"] . "</td>";
-                                        echo "<td>" . $row["resimurl"] . "</td>";
+                                        echo "<td><img src='" . $row["resimurl"] . "' width='100' height='100'> </img</td>";
                                         echo "</tr>";
                                     }//while end
                                 }else {//if end
