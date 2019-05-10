@@ -1,19 +1,6 @@
 <?php
 session_start();
-function yonlendir($url){
-    if (!headers_sent()){
-        header('Location: '.$url);
-        exit;
-    }
-    else{
-        echo '<script type="text/javascript">';
-        echo 'window.location.href="'.$url.'";';
-        echo '</script>';
-        echo '<noscript>';
-        echo '<meta http-equiv="refresh" content="0;url='.$url.'" />';
-        echo '</noscript>'; exit;
-    }
-}
+require_once "yondendir.php";
 if(!isset($_SESSION['id'])) {
     yonlendir("../../index.php");
 }
@@ -76,7 +63,7 @@ else{
                                         echo "<td>" . $row['firmaad'] . "</td>";
                                         echo "<td>" . $row["baslik"] . "</td>";
                                         echo "<td>" . $row["metin"] . "</td>";
-                                        echo "<td><img src='" . $row["resimurl"] . "' width='100' height='100'> </img</td>";
+                                        echo "<td><img id='myImg' src='" . $row["resimurl"] . "' width='100' height='100'> </img</td>";
                                         echo "</tr>";
                                     }//while end
                                 }else {//if end
@@ -94,6 +81,19 @@ else{
                 </div>
             </div>
         </div>
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+            <!-- The Close Button -->
+            <span class="close">&times;</span>
+
+            <!-- Modal Content (The Image) -->
+            <img class="modal-content" id="img01">
+
+            <!-- Modal Caption (Image Text) -->
+            <div id="caption"></div>
+        </div>
+        <script src="pUserjs.js"></script>
     </body>
     </html>
     <?php
