@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 <link rel="stylesheet" href="css/main.css">
 <style>
     body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
@@ -72,9 +73,9 @@
         <!-- Right-sided navbar links -->
         <div class="w3-right w3-hide-small">
             <a href="#about" class="w3-bar-item w3-button">Hakkımızda</a>
-            <a href="#team" class="w3-bar-item w3-button"><i class="fa fa-user"></i> Ekip</a>
+            <a href="#team" class="w3-bar-item w3-button"><i class="fas fa-user-friends"></i> Ekip</a>
             <a href="#contact" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> İletişim</a>
-            <a href="#" class="w3-bar-item w3-button" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-sign-in"></i> Giriş</a>
+            <a href="#" class="w3-bar-item w3-button" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-sign-in-alt"></i> Giriş</a>
         </div>
         <!-- Hide right-floated links on small screens and replace them with a menu icon -->
 
@@ -116,21 +117,23 @@
             <p>Yayınlayacağınız duyuruyu internet olan her yerden yöneterek zamandan ve paradan tasarruf sağlayın.</p>
         </div>
         <div class="w3-quarter">
-            <i class="fa fa-heart w3-margin-bottom w3-jumbo"></i>
+
+            <i class="fas fa-hand-holding-heart w3-margin-bottom w3-jumbo"></i>
             <p class="w3-large">Kullanıcı Dostu</p>
-            <p>Basit temalar yardımıyla hiçbir kod bilgili gerekmeden kolay kullanın.</p>
+            <p>Basit arayüz yardımıyla hiçbir kod bilgili gerekmeden kolayca kullanın.</p>
         </div>
 
         <div class="w3-quarter">
-            <i class="fa fa-diamond w3-margin-bottom w3-jumbo"></i>
-            <p class="w3-large">Kolay Erişim</p>
-            <p>7/24 ileşitişim kolaylığı sağlayın.</p>
+            <i class="fas fa-headset w3-margin-bottom w3-jumbo"></i>
+            <p class="w3-large">7/24 Destek </p>
+            <p>İhtiyaç duyduğunuz her an teknik ekibimiz bir tık ötenizde</p>
         </div>
 
         <div class="w3-quarter">
-            <i class="fa fa-diamond w3-margin-bottom w3-jumbo"></i>
+
+            <i class="fas fa-users w3-margin-bottom w3-jumbo"></i>
             <p class="w3-large">Kolay Erişim</p>
-            <p>7/24 ileşitişim kolaylığı sağlayın.</p>
+            <p>Yayınladığınız duyurularla istediğiniz hedef kitleye kısa sürede ulaşın.</p>
         </div>
     </div>
 </div>
@@ -142,8 +145,10 @@
     <div class="w3-row-padding w3-grayscale" style="margin-top:64px">
         <div class="w3-col l3 m6 w3-margin-bottom">
             <div class="w3-card">
-                <img src="/w3images/team2.jpg" alt="John" style="width:100%">
+
+
                 <div class="w3-container">
+                    <img src="img/sait.jpeg" alt="Sait"  height="250" width="100%">
                     <h3>Mehmet Sait OKAN</h3>
                     <p class="w3-opacity">Bilgisayar Mühendisi</p>
                     <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
@@ -153,8 +158,9 @@
         </div>
         <div class="w3-col l3 m6 w3-margin-bottom">
             <div class="w3-card">
-                <img src="/w3images/team1.jpg" alt="Jane" style="width:100%">
+
                 <div class="w3-container">
+                    <img src="img/dyg.jpeg" alt="Duygu" height="250" width="100%">
                     <h3>Duygu KARAKAVUK</h3>
                     <p class="w3-opacity">Bilgisayar Mühendisi</p>
                     <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
@@ -164,8 +170,9 @@
         </div>
         <div class="w3-col l3 m6 w3-margin-bottom">
             <div class="w3-card">
-                <img src="/w3images/team1.jpg" alt="Jane" style="width:100%">
+
                 <div class="w3-container">
+                    <img src="img/gyuksek.jpg" alt="Gürkan" height="250" width="100%">
                     <h3>Ahhmet Gürkan YÜKSEK</h3>
                     <p class="w3-opacity">Ekip Sorumlusu</p>
                     <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
@@ -184,7 +191,7 @@
         <p><i class="fa fa-map-marker fa-fw w3-xxlarge w3-margin-right"></i> Sivas,Türkiye </p>
         <p><i class="fa fa-envelope fa-fw w3-xxlarge w3-margin-right"> </i> Email: iletisim@duyuruekran.com</p>
         <br>
-        <form action="/action_page.php" target="_blank">
+        <form action="#" target="_blank">
             <p><input class="w3-input w3-border" type="text" placeholder="İsim" >   </p>
             <p><input class="w3-input w3-border" type="text" placeholder="Email">   </p>
             <p><input class="w3-input w3-border" type="text" placeholder="Mesajınız"> </p>
