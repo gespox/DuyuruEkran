@@ -15,12 +15,12 @@ require_once "../../baglan.php";
 <style>
     html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 </style>
-<body class="w3-light-grey ilanekleme">
+<body class="w3-light-grey ilanduzenle">
+
 
 
 <!--***************** Sidebar  ****************-->
 <?php require_once "sidebar.php"; ?>
-
 
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
@@ -81,7 +81,7 @@ require_once "../../baglan.php";
     <span class="close">&times;</span>
 
     <!-- Modal Content (The Image) -->
-    <img class="modal-content" id="img01">
+    <img src="" class="modal-content" id="img01">
 
     <!-- Modal Caption (Image Text) -->
     <div id="caption"></div>

@@ -15,12 +15,12 @@ require_once "../../baglan.php";
 <style>
     html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 </style>
-<body class="w3-light-grey ilanekleme">
+
+<body class="w3-light-grey geneldurum">
 
 
 <!--***************** Sidebar  ****************-->
 <?php require_once "sidebar.php"; ?>
-
 
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
@@ -52,15 +52,15 @@ require_once "../../baglan.php";
             $result = $conn->query($sql);
             if ($result->rowCount() > 0) {
                 // output data of each row
-                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 
-                    echo "<tr>";
-                    echo "<td>" . $row['firmaad'] . "</td>";
-                    echo "<td>" . $row["baslik"] . "</td>";
-                    echo "<td>" . $row["metin"] . "</td>";
-                    echo "<td><img id='myImg' src='" . $row["resimurl"] . "' width='100' height='100'> </img</td>";
-                    echo "</tr>";
-                }//while end
+                        echo "<tr>";
+                        echo "<td>" . $row['firmaad'] . "</td>";
+                        echo "<td>" . $row["baslik"] . "</td>";
+                        echo "<td>" . $row["metin"] . "</td>";
+                        echo "<td><img id='myImg' src='" . $row["resimurl"] . "' width='100' height='100'> </img</td>";
+                        echo "</tr>";
+                    }//while end
 
             }else {//if end
             ?>

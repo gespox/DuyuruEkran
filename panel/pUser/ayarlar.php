@@ -15,12 +15,12 @@ require_once "../../baglan.php";
 <style>
     html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 </style>
-<body class="w3-light-grey ilanekleme">
+<body class="w3-light-grey ayarlar">
+
 
 
 <!--***************** Sidebar  ****************-->
 <?php require_once "sidebar.php"; ?>
-
 
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">

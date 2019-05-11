@@ -18,11 +18,12 @@ if(isset($_POST['girisbtn']))
     {
         $_SESSION['mail'] = $islem['mail']; // Giriş yaptığımız kullanici adımızı SEssion atadık
         $_SESSION['id'] = $islem['id_kullanici'];
+        $_SESSION['kadi'] = $islem['kullanici_adi'];
         if($islem['yetki']) {
             yonlendir("panel/pAdmin/panelAdmin.php");
             //header('Location: ' . "panel/teknikerpanel.php");
         }else{
-            yonlendir("panel/pUser/panelUser.php");
+            yonlendir("panel/pUser/pUser.php");
 
         }
     }

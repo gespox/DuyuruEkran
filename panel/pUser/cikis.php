@@ -3,7 +3,7 @@ session_start();
 $_SESSION = array();
 unset($_SESSION);
 session_destroy();
-yonlendir("../index.php");
+yonlendir("../../index.php");
 function yonlendir($url){
     if (!headers_sent()){
         header('Location: '.$url);
