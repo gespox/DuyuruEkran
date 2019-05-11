@@ -1,3 +1,4 @@
+<?php ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container">
         <a class="navbar-brand" href="#">Duyuru Ekran</a>
