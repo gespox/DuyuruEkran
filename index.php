@@ -107,45 +107,47 @@
 
 <!-- About Section -->
 <div class="w3-container" style="padding:128px 16px" id="about">
-    <h3 class="w3-center">ABOUT THE COMPANY</h3>
-    <p class="w3-center w3-large">Key features of our company</p>
+    <h3 class="w3-center">HAKKIMIZDA</h3>
+
     <div class="w3-row-padding w3-center" style="margin-top:64px">
         <div class="w3-quarter">
             <i class="fa fa-desktop w3-margin-bottom w3-jumbo w3-center"></i>
             <p class="w3-large">Uzaktan Yönetim </p>
-            <p>Yayınlayacağınız duyuruyu uzaktan yöneterek zamandan ve paradan tasarruf sağlayın.</p>
+            <p>Yayınlayacağınız duyuruyu internet olan her yerden yöneterek zamandan ve paradan tasarruf sağlayın.</p>
         </div>
         <div class="w3-quarter">
             <i class="fa fa-heart w3-margin-bottom w3-jumbo"></i>
             <p class="w3-large">Kullanıcı Dostu</p>
-            <p>Duyurular ve önemli haberler, kağıtla duvar panolarına asılmak yerine Dijital İlan Panosunda yerini alacak. Bu sayede hem kişilerin ilgisi çekilecek hem de kâğıt israfının önüne geçilecek.</p>
+            <p>Basit temalar yardımıyla hiçbir kod bilgili gerekmeden kolay kullanın.</p>
         </div>
+
         <div class="w3-quarter">
             <i class="fa fa-diamond w3-margin-bottom w3-jumbo"></i>
-            <p class="w3-large">Kolay İletişim</p>
-            <p>Kurumunuza ait İletişim bilgileri, anlık tarih, saat ve bulunduğumuz ile göre hava durumu.</p>
+            <p class="w3-large">Kolay Erişim</p>
+            <p>7/24 ileşitişim kolaylığı sağlayın.</p>
         </div>
+
         <div class="w3-quarter">
-            <i class="fa fa-cog w3-margin-bottom w3-jumbo"></i>
-            <p class="w3-large">Support</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+            <i class="fa fa-diamond w3-margin-bottom w3-jumbo"></i>
+            <p class="w3-large">Kolay Erişim</p>
+            <p>7/24 ileşitişim kolaylığı sağlayın.</p>
         </div>
     </div>
 </div>
 
 <!-- Team Section -->
 <div class="w3-container" style="padding:128px 16px" id="team">
-    <h3 class="w3-center">THE TEAM</h3>
-    <p class="w3-center w3-large">The ones who runs this company</p>
+    <h3 class="w3-center">EKİP BİLGİLERİ </h3>
+
     <div class="w3-row-padding w3-grayscale" style="margin-top:64px">
         <div class="w3-col l3 m6 w3-margin-bottom">
             <div class="w3-card">
                 <img src="/w3images/team2.jpg" alt="John" style="width:100%">
                 <div class="w3-container">
-                    <h3>John Doe</h3>
-                    <p class="w3-opacity">CEO & Founder</p>
+                    <h3>Mehmet Sait OKAN</h3>
+                    <p class="w3-opacity">Bilgisayar Mühendisi</p>
                     <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-                    <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> Contact</button></p>
+                    <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> İletişim </button></p>
                 </div>
             </div>
         </div>
@@ -153,32 +155,21 @@
             <div class="w3-card">
                 <img src="/w3images/team1.jpg" alt="Jane" style="width:100%">
                 <div class="w3-container">
-                    <h3>Anja Doe</h3>
-                    <p class="w3-opacity">Art Director</p>
+                    <h3>Duygu KARAKAVUK</h3>
+                    <p class="w3-opacity">Bilgisayar Mühendisi</p>
                     <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-                    <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> Contact</button></p>
+                    <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> İletişim </button></p>
                 </div>
             </div>
         </div>
         <div class="w3-col l3 m6 w3-margin-bottom">
             <div class="w3-card">
-                <img src="/w3images/team3.jpg" alt="Mike" style="width:100%">
+                <img src="/w3images/team1.jpg" alt="Jane" style="width:100%">
                 <div class="w3-container">
-                    <h3>Mike Ross</h3>
-                    <p class="w3-opacity">Web Designer</p>
+                    <h3>Ahhmet Gürkan YÜKSEK</h3>
+                    <p class="w3-opacity">Ekip Sorumlusu</p>
                     <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-                    <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> Contact</button></p>
-                </div>
-            </div>
-        </div>
-        <div class="w3-col l3 m6 w3-margin-bottom">
-            <div class="w3-card">
-                <img src="/w3images/team4.jpg" alt="Dan" style="width:100%">
-                <div class="w3-container">
-                    <h3>Dan Star</h3>
-                    <p class="w3-opacity">Designer</p>
-                    <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-                    <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> Contact</button></p>
+                    <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> İletişim </button></p>
                 </div>
             </div>
         </div>
@@ -187,32 +178,30 @@
 
 <!-- Contact Section -->
 <div class="w3-container w3-light-grey" style="padding:128px 16px" id="contact">
-    <h3 class="w3-center">CONTACT</h3>
-    <p class="w3-center w3-large">Lets get in touch. Send us a message:</p>
+    <h3 class="w3-center">İLETİŞİM</h3>
+
     <div style="margin-top:48px">
-        <p><i class="fa fa-map-marker fa-fw w3-xxlarge w3-margin-right"></i> Chicago, US</p>
-        <p><i class="fa fa-phone fa-fw w3-xxlarge w3-margin-right"></i> Phone: +00 151515</p>
-        <p><i class="fa fa-envelope fa-fw w3-xxlarge w3-margin-right"> </i> Email: mail@mail.com</p>
+        <p><i class="fa fa-map-marker fa-fw w3-xxlarge w3-margin-right"></i> Sivas,Türkiye </p>
+        <p><i class="fa fa-envelope fa-fw w3-xxlarge w3-margin-right"> </i> Email: iletisim@duyuruekran.com</p>
         <br>
         <form action="/action_page.php" target="_blank">
-            <p><input class="w3-input w3-border" type="text" placeholder="Name" required name="Name"></p>
-            <p><input class="w3-input w3-border" type="text" placeholder="Email" required name="Email"></p>
-            <p><input class="w3-input w3-border" type="text" placeholder="Subject" required name="Subject"></p>
-            <p><input class="w3-input w3-border" type="text" placeholder="Message" required name="Message"></p>
+            <p><input class="w3-input w3-border" type="text" placeholder="İsim" >   </p>
+            <p><input class="w3-input w3-border" type="text" placeholder="Email">   </p>
+            <p><input class="w3-input w3-border" type="text" placeholder="Mesajınız"> </p>
             <p>
                 <button class="w3-button w3-black" type="submit">
-                    <i class="fa fa-paper-plane"></i> SEND MESSAGE
+                    <i class="fa fa-paper-plane"></i> MESAJ GÖNDER
                 </button>
             </p>
         </form>
         <!-- Image of location/map -->
-        <img src="#" class="w3-image w3-greyscale" style="width:100%;margin-top:48px">
+
     </div>
 </div>
 
 <!-- Footer -->
 <footer class="w3-center w3-black w3-padding-64">
-    <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+    <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>Yukarı</a>
 </footer>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
