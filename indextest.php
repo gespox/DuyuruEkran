@@ -77,18 +77,18 @@
     <div class="w3-row-padding w3-center" style="margin-top:64px">
         <div class="w3-quarter">
             <i class="fa fa-desktop w3-margin-bottom w3-jumbo w3-center"></i>
-            <p class="w3-large">Responsive</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+            <p class="w3-large">Uzaktan Yönetim </p>
+            <p>Yayınlayacağınız duyuruyu uzaktan yöneterek zamandan ve paradan tasarruf sağlayın.</p>
         </div>
         <div class="w3-quarter">
             <i class="fa fa-heart w3-margin-bottom w3-jumbo"></i>
-            <p class="w3-large">Passion</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+            <p class="w3-large">Kullanıcı Dostu</p>
+            <p>Duyurular ve önemli haberler, kağıtla duvar panolarına asılmak yerine Dijital İlan Panosunda yerini alacak. Bu sayede hem kişilerin ilgisi çekilecek hem de kâğıt israfının önüne geçilecek.</p>
         </div>
         <div class="w3-quarter">
             <i class="fa fa-diamond w3-margin-bottom w3-jumbo"></i>
-            <p class="w3-large">Design</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+            <p class="w3-large">Kolay İletişim</p>
+            <p>Kurumunuza ait İletişim bilgileri, anlık tarih, saat ve bulunduğumuz ile göre hava durumu.</p>
         </div>
         <div class="w3-quarter">
             <i class="fa fa-cog w3-margin-bottom w3-jumbo"></i>
