@@ -143,12 +143,11 @@
     <h3 class="w3-center">EKİP BİLGİLERİ </h3>
 
     <div class="w3-row-padding w3-grayscale" style="margin-top:64px">
-        <div class="w3-col l3 m6 w3-margin-bottom">
+
+        <div class="w3-col l4 m6 w3-margin-bottom">
             <div class="w3-card">
-
-
                 <div class="w3-container">
-                    <img src="img/sait.jpeg" alt="Sait"  height="250" width="100%">
+                    <img src="img/sait.jpeg" alt="Sait"  height="400" width="100%">
                     <h3>Mehmet Sait OKAN</h3>
                     <p class="w3-opacity">Bilgisayar Mühendisi</p>
                     <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
@@ -156,11 +155,10 @@
                 </div>
             </div>
         </div>
-        <div class="w3-col l3 m6 w3-margin-bottom">
+        <div class="w3-col l4 m6 w3-margin-bottom">
             <div class="w3-card">
-
                 <div class="w3-container">
-                    <img src="img/dyg.jpeg" alt="Duygu" height="250" width="100%">
+                    <img src="img/dyg.jpeg" alt="Duygu" height="400" width="100%">
                     <h3>Duygu KARAKAVUK</h3>
                     <p class="w3-opacity">Bilgisayar Mühendisi</p>
                     <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
@@ -168,11 +166,10 @@
                 </div>
             </div>
         </div>
-        <div class="w3-col l3 m6 w3-margin-bottom">
+        <div class="w3-col l4 m6 w3-margin-bottom">
             <div class="w3-card">
-
                 <div class="w3-container">
-                    <img src="img/gyuksek.jpg" alt="Gürkan" height="250" width="100%">
+                    <img src="img/gyuksek.jpg" alt="Gürkan" height="400" width="100%">
                     <h3>Ahhmet Gürkan YÜKSEK</h3>
                     <p class="w3-opacity">Ekip Sorumlusu</p>
                     <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>

@@ -29,51 +29,14 @@ require_once "../../baglan.php";
     <header class="w3-container" style="padding-top:22px">
         <h5><b><i class="fa fa-dashboard"> </i> Genel Gorunum</b></h5>
     </header>
+    <form action="upload.php" method="post" enctype="multipart/form-data">
+        Select image to upload:
+        <input type="file" name="fileToUpload" id="fileToUpload">
+        <input type="submit" value="Upload Image" name="submit">
+    </form>
 
-    <!-- **************Table******** -->
-    <div style="overflow-x:auto;">
-        <table>
-            <tr>
-                <th>Firma</th>
-                <th>Baslik</th>
-                <th>Metin</th>
-                <th>Resim</th>
-            </tr>
-            <?php
-
-            $id = $_SESSION['id'];
-            $sql = "SELECT firmaad,baslik,metin,resimurl FROM template t,firma f,baslik b,metin m,resim r WHERE 
-                                                            t.id_kullanici='$id' AND 
-                                                            t.id_baslik=b.id_baslik AND
-                                                            t.id_metin=m.id_metin AND
-                                                            t.id_resim=r.id_resim AND
-                                                            t.id_firma=f.id_firma
-                                                            ";
-            $result = $conn->query($sql);
-            if ($result->rowCount() > 0) {
-                // output data of each row
-                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-
-                    echo "<tr>";
-                    echo "<td>" . $row['firmaad'] . "</td>";
-                    echo "<td>" . $row["baslik"] . "</td>";
-                    echo "<td>" . $row["metin"] . "</td>";
-                    echo "<td><img id='myImg' src='" . $row["resimurl"] . "' width='100' height='100'> </img</td>";
-                    echo "</tr>";
-                }//while end
-
-            }else {//if end
-            ?>
-        </table>
-        <?php
-
-        echo "Sonuç Bulunamadı";
-        }
-        $conn = null;
-
-        ?>
-    </div>
 </div>
+
 <!-- The Modal -->
 <div id="myModal" class="modal">
 
