@@ -1,13 +1,14 @@
-<?php
-?>
+<?php session_start();?>
 <!DOCTYPE html>
 <html>
 <title>Dijital Duyuru Ekranları </title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/main.css">
 <style>
     body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 
@@ -15,12 +16,11 @@
         height: 100%;
         line-height: 1.8;
     }
-
     /* Full height image header */
     .bgimg-1 {
         background-size: cover;
         background-position: center;
-        background-image: url("/htdocs/DuyuruEkran/img/bg.png");
+        background-image: url("img/bg.png");
         min-height: 100%;
     }
 
@@ -29,7 +29,41 @@
     }
 </style>
 <body>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Admin Paneline Giris</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Giris Yapin</h5>
+                    <form class="form-signin" method="post">
+                        <div class="form-label-group">
+                            <input type="email" id="inputEmail" class="form-control" placeholder="email adresi" name="email" required autofocus>
+                            <label for="inputEmail">E-Mail Adresi</label>
+                        </div>
+                        <div class="form-label-group">
+                            <input type="password" id="inputPassword" class="form-control" placeholder="Sifre" name="psw" required>
+                            <label for="inputPassword">Sifre</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-3">
+                            <input type="checkbox" class="custom-control-input" name="hatirla" id="customCheck1" value="1">
+                            <label class="custom-control-label" for="customCheck1">Sifreyi Hatirla</label>
+                        </div>
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" name="girisbtn">Giris Yap</button>
+                    </form>
+                </div>
+                <?php require_once "login.php";?>
+            </div>
 
+        </div>
+    </div>
+</div>
 <!-- Navbar (sit on top) -->
 <div class="w3-top">
     <div class="w3-bar w3-white w3-card" id="myNavbar">
@@ -39,7 +73,7 @@
             <a href="#about" class="w3-bar-item w3-button">Hakkımızda</a>
             <a href="#team" class="w3-bar-item w3-button"><i class="fa fa-user"></i> Ekip</a>
             <a href="#contact" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> İletişim</a>
-            <a href="#" class="w3-bar-item w3-button"><i class="fa fa-sign-in"></i> Giriş</a>
+            <a href="#" class="w3-bar-item w3-button" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-sign-in"></i> Giriş</a>
         </div>
         <!-- Hide right-floated links on small screens and replace them with a menu icon -->
 
@@ -55,7 +89,7 @@
     <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">Hakkımızda</a>
     <a href="#team" onclick="w3_close()" class="w3-bar-item w3-button">Ekip</a>
     <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">İletişim</a>
-    <a href="#" onclick="w3_close()" class="w3-bar-item w3-button">Giriş</a>
+    <a href="#" onclick="w3_close()" class="w3-bar-item w3-button" data-toggle="modal" data-target="#exampleModalCenter">Giriş</a>
 </nav>
 
 <!-- Header with full-height image -->
@@ -180,7 +214,9 @@
 <footer class="w3-center w3-black w3-padding-64">
     <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
 </footer>
-
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script>
     // Toggle between showing and hiding the sidebar when clicking the menu icon
     var mySidebar = document.getElementById("mySidebar");
