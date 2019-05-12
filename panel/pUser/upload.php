@@ -2,13 +2,12 @@
 session_start();
 require_once "../../baglan.php";
 $userid=$_SESSION['id'];
-$sql = "SELECT COUNT(id_resim) FROM resim WHERE id_kullanici=$userid";
+$sql = "SELECT COUNT(id_resim) FROM resim WHERE id_kullanici='$userid'";
 $result = $conn->query($sql)->fetchColumn();
 
 $target_dir = "img/";
-$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-
-echo $target_file;
+$imgName= $userid."-".++$result."-".basename($_FILES["fileToUpload"]["name"]);
+$target_file = $target_dir .$imgName;
 
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -51,4 +50,3 @@ if ($uploadOk == 0) {
     }
 }
 ?>
-*/

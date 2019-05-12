@@ -164,6 +164,32 @@ body.ayarlar a.ayarlar
 }
 /******top bar***********/
 .topbar{
-    background-color:#1abc9c!important
+    background-color:#009688!important
+}
 
+/**********************INPUT FILE CSS**********/
+input[type="file"] {
+    cursor: pointer !Important;
+    font: 300 14px sans-serif;
+    color:#9e9e9e;
+}
+input[type="file"]::-webkit-file-upload-button
+{
+    font: 300 14px  sans-serif;
+    background: #009688;
+    border: 0;
+    padding: 12px 25px;
+    cursor: pointer;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+input[type="file"]::-ms-browse {
+    font: 300 14px 'Roboto', sans-serif;
+    background: #009688;
+    border: 0;
+    padding: 12px 25px;
+    cursor: pointer;
+    color: #fff;
+    text-transform: uppercase;
 }

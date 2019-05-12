@@ -86,7 +86,8 @@ require_once "../../baglan.php";
     <!-- Modal Caption (Image Text) -->
     <div id="caption"></div>
 </div>
-<script src="pUserjs.js"></script>
+<script src="js/modal.js"></script>
+<script src="js/sidebar.js"></script>
 
 </body>
 </html>
