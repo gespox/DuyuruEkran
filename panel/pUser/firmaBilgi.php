@@ -55,11 +55,13 @@ require_once "../../baglan.php";
                     echo "</tbody>";
 
                 }
-                echo "</table>";
+
             }
+
             else {
-            echo "Sonuç Bulunamadı";
+            echo "<tr><td>Firma Bulunamadı.</td><td></td><td></td><td></td><td></td></tr>";
             }
+            echo "</table>";
             ?>
     </div>
     <h3 style="text-align: center">Firma Ekleyin</h3>
@@ -70,7 +72,7 @@ require_once "../../baglan.php";
         <p>
             <label for="adres">Adres</label>
             <textarea id="adres" class="w3-input w3-border w3-round-large" name="adres" style="resize:none" required> </textarea>
-        <p>
+
         <p>
             <label for="telefon">Telefon</label>
             <input id="telefon" class="w3-input w3-border w3-round-large" name="telefon" type="number" required></p>
@@ -101,7 +103,6 @@ require_once "../../baglan.php";
                 ?>
             </b></h4>
     </form>
-
 </div>
 <script src="js/sidebar.js"></script>
 </body>

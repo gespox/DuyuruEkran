@@ -6,7 +6,7 @@
  * Time: 21:38
  */?>
 
-<a href="temp_1.php" download="Tema">
+<a href="../panel/pUser/temp_1.php" download="Tema">
     <h3>indir</h3>
 </a>
 

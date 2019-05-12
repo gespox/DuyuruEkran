@@ -38,11 +38,13 @@ require_once "../../baglan.php";
                 <th>Baslik</th>
                 <th>Metin</th>
                 <th>Resim</th>
+                <th>İlanı Görüntüle</th>
+                <th>İlanı İndir</th>
             </tr>
             <?php
 
             $id = $_SESSION['id'];
-            $sql = "SELECT firmaad,baslik,metin,resimurl FROM template t,firma f,baslik b,metin m,resim r WHERE 
+            $sql = "SELECT firmaad,baslik,metin,resimurl,id_template FROM template t,firma f,baslik b,metin m,resim r WHERE 
                                                             t.id_kullanici='$id' AND 
                                                             t.id_baslik=b.id_baslik AND
                                                             t.id_metin=m.id_metin AND
@@ -59,6 +61,8 @@ require_once "../../baglan.php";
                         echo "<td>" . $row["baslik"] . "</td>";
                         echo "<td>" . $row["metin"] . "</td>";
                         echo "<td><img class='myImg' id='myImg' src='" . $row["resimurl"] . "' width='100' height='100'> </td>";
+                        echo "<td><a style='text-align: center' href='temp_1.php?id=".$row['id_template']."' target='_blank' ><i class=\"fas fa-eye\"></i></a> </td>";
+                        echo "<td><a style='text-align: center' href='temp_1.php?id=".$row['id_template']."' download><i class=\"fas fa-download\"></i></a> </td>";
                         echo "</tr>";
                     }//while end
 

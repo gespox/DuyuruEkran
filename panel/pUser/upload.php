@@ -70,7 +70,7 @@ if ($uploadOk == 0) {
 
         $url="pUser.php";
         yonlendir($url,3);
-        echo "Ekleme Başarılı, 3 saniye sonra yönlendirileceksiniz.";
+        echo "<h3 style='text-align: center;color: green'>Ekleme Başarılı, 3 saniye sonra yönlendirileceksiniz.</h3>";
     } else {
         $url="ilanEkle.php";
         yonlendir($url,3);
