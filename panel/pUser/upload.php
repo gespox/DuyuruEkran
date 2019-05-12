@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once "../../baglan.php";
+require_once "yondendir.php";
 $userid=$_SESSION['id'];
 $sql = "SELECT COUNT(id_resim) FROM resim WHERE id_kullanici='$userid'";
 $result = $conn->query($sql)->fetchColumn();
@@ -8,17 +9,15 @@ $result = $conn->query($sql)->fetchColumn();
 $target_dir = "img/";
 $imgName= $userid."-".++$result."-".basename($_FILES["fileToUpload"]["name"]);
 $target_file = $target_dir .$imgName;
-
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 // Check if image file is a actual image or fake image
 if(isset($_POST["submit"])) {
     $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
     if($check !== false) {
-        echo "File is an image - " . $check["mime"] . ".";
         $uploadOk = 1;
     } else {
-        echo "File is not an image.";
+        echo "Yüklenen Dosya Resim değildir.";
         $uploadOk = 0;
     }
 }
@@ -29,18 +28,20 @@ if (file_exists($target_file)) {
 }
 // Check file size
 if ($_FILES["fileToUpload"]["size"] > 1024*1024*2) {
-    echo "Sorry, your file is too large.";
+    echo "Üzgünüz, Dosya boyutu max 2MB'tır.";
     $uploadOk = 0;
 }
 // Allow certain file formats
 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
     && $imageFileType != "gif" ) {
-    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+    echo "Üzgünüz, Sadece  JPG, JPEG, PNG & GIF formatlarında dosya yükleyebilirsiniz.";
     $uploadOk = 0;
 }
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
-    echo "Sorry, your file was not uploaded.";
+    echo "Üzgünüz Dosya Yüklenemedi. Tekrar yüklemek için yönlendiriliyorsunuz.";
+    $url="ilanEkle.php";
+    yonlendir($url,3);
 // if everything is ok, try to upload file
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
@@ -67,12 +68,13 @@ if ($uploadOk == 0) {
     VALUES ('$userid','$last_id_baslik','$last_id_metin','$last_id_resim','$firma')";
         $conn->exec($sqlilan);
 
-        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-
-
-
+        $url="pUser.php";
+        yonlendir($url,3);
+        echo "Ekleme Başarılı, 3 saniye sonra yönlendirileceksiniz.";
     } else {
-        echo "Sorry, there was an error uploading your file.";
+        $url="ilanEkle.php";
+        yonlendir($url,3);
+        echo "Üzgünüz bir hata oluştu lütfen tekrar deneyiniz! Yönlendirme işlemi için bekleyiniz.";
     }
 }
 ?>

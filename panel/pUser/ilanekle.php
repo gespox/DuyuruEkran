@@ -31,7 +31,7 @@ require_once "../../baglan.php";
             <input id="baslik" class="w3-input w3-border w3-round-large" name="baslik" type="text" required></p>
         <p>
             <label for="metin">Duyuru Metni</label>
-            <textarea id="metin" class="w3-input w3-border w3-round-large" name="metin" style="resize:none"> </textarea>
+            <textarea id="metin" class="w3-input w3-border w3-round-large" name="metin" style="resize:none" required> </textarea>
         <p>
             <label for="firma">Duyurunun Yayınlanacağı Firma</label>
             <?php
@@ -56,7 +56,7 @@ require_once "../../baglan.php";
         </p>
         <p>
             <label for="fileToUpload">Yüknelecek Fotoğraf <b>:</b> </label>
-            <input type="file" name="fileToUpload" id="fileToUpload">
+            <input type="file" name="fileToUpload" id="fileToUpload" required>
         </p>
         <div class="w3-center"><p>
         <input type="submit" value="Gonder" name="submit" class="w3-btn w3-teal" style="width:30%"></p>
