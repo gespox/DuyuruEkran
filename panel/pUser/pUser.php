@@ -58,7 +58,7 @@ require_once "../../baglan.php";
                         echo "<td>" . $row['firmaad'] . "</td>";
                         echo "<td>" . $row["baslik"] . "</td>";
                         echo "<td>" . $row["metin"] . "</td>";
-                        echo "<td><img id='myImg' src='" . $row["resimurl"] . "' width='100' height='100'> </img</td>";
+                        echo "<td><img class='myImg' id='myImg' src='" . $row["resimurl"] . "' width='100' height='100'> </img</td>";
                         echo "</tr>";
                     }//while end
 

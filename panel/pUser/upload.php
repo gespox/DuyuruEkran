@@ -44,7 +44,33 @@ if ($uploadOk == 0) {
 // if everything is ok, try to upload file
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+        $baslik=$_POST['baslik'];
+        $metin=$_POST['metin'];
+        $firma=$_POST['firma'];
+
+        $sqlbaslik = "INSERT INTO baslik (baslik)
+    VALUES ('$baslik')";
+        $conn->exec($sqlbaslik);
+        $last_id_baslik = $conn->lastInsertId();
+
+        $sqlmetin = "INSERT INTO metin (metin)
+    VALUES ('$metin')";
+        $conn->exec($sqlmetin);
+        $last_id_metin = $conn->lastInsertId();
+
+        $sqlresim = "INSERT INTO resim (id_kullanici,resimurl)
+    VALUES ('$userid','$target_file')";
+        $conn->exec($sqlresim);
+        $last_id_resim = $conn->lastInsertId();
+
+        $sqlilan = "INSERT INTO template (id_kullanici,id_baslik,id_metin,id_resim,id_firma)
+    VALUES ('$userid','$last_id_baslik','$last_id_metin','$last_id_resim','$firma')";
+        $conn->exec($sqlilan);
+
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+
+
+
     } else {
         echo "Sorry, there was an error uploading your file.";
     }
