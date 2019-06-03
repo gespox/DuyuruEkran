@@ -16,7 +16,7 @@ require_once "../../baglan.php";
     html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 </style>
 
-<body class="w3-light-grey geneldurum">
+<body class="w3-light-grey ilanekleme">
 
 
 <!--***************** Sidebar  ****************-->
@@ -30,10 +30,35 @@ require_once "../../baglan.php";
     </header>
 
     <!-- **************Table******** -->
-    <div style="overflow-x:auto;">
+    <form action="upload.php" method="post" enctype="multipart/form-data" class="w3-container w3-card-4 w3-light-grey">
+        <p>
+            <label for="kullanici_adi">Kullanıcı Adı</label>
+            <input id="kullanici_adi" class="w3-input w3-border w3-round-large" name="kullanici_adi" type="text" required></p>
+        <p>
+            <label for="mail">Mail</label>
+            <textarea id="mail" class="w3-input w3-border w3-round-large" name="mail" style="resize:none" required> </textarea>
+        <p>
+            <label for="sifre">Şifre</label>
+            <textarea id="sifre" class="w3-input w3-border w3-round-large" name="sifre" style="resize:none" required> </textarea>
+        <p>
+            <label for="yetki">Yetki</label>
 
+            <select id="yetki" name="yetki" class="w3-select w3-border w3-round-large" required>
+                <option value="" disabled selected>Yetki Seçin</option>
 
-    </div>
+                <option value='0' >Kullanıcı Yetkisi</option>
+                <option value='1' >Admin Yetkisi</option>
+
+            </select>
+        </p>
+        <p>
+            <label for="fileToUpload">Yüknelecek Fotoğraf <b>:</b> </label>
+            <input type="file" name="fileToUpload" id="fileToUpload" required>
+        </p>
+        <div class="w3-center"><p>
+                <input type="submit" value="Gonder" name="submit" class="w3-btn w3-teal" style="width:30%"></p>
+        </div>
+    </form>
 </div>
 <!-- The Modal -->
 <div id="myModal" class="modal">

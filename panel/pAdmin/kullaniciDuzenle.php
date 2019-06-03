@@ -16,7 +16,7 @@ require_once "../../baglan.php";
     html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 </style>
 
-<body class="w3-light-grey geneldurum">
+<body class="w3-light-grey ilanduzenle">
 
 
 <!--***************** Sidebar  ****************-->
@@ -31,8 +31,44 @@ require_once "../../baglan.php";
 
     <!-- **************Table******** -->
     <div style="overflow-x:auto;">
+        <table>
+            <tr>
+                <th>Kullanıcı Id</th>
+                <th>Kullanıcı Adı</th>
+                <th>Mail</th>
+                <th>Şifre</th>
+                <th>Yetki</th>
+                <th>Düzenle</th>
+            </tr>
+            <?php
 
+            $id = $_SESSION['id'];
+            $sql = "SELECT * FROM kullanici" ;
+            $result = $conn->query($sql);
+            if ($result->rowCount() > 0) {
+                // output data of each row
+                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 
+                    echo "<tr>";
+                    echo "<td>" . $row['id_kullanici'] . "</td>";
+                    echo "<td>" . $row["kullanici_adi"] . "</td>";
+                    echo "<td>" . $row["mail"] . "</td>";
+                    echo "<td>" . $row["sifre"] . "</td>";
+                    echo "<td>" . $row["yetki"] . "</td>";
+                    echo "<td><a style='text-align: center' href='temp_1.php?id=".$row['id_template']."' target='_blank' ><i class=\"fas fa-eye\"></i></a> </td>";
+                    echo "</tr>";
+                }//while end
+
+            }else {//if end
+            ?>
+        </table>
+        <?php
+
+        echo "Sonuç Bulunamadı";
+        }
+        $conn = null;
+
+        ?>
     </div>
 </div>
 <!-- The Modal -->
