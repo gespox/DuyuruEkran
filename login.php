@@ -1,37 +1,46 @@
 <?php
 ob_start();
-if(isset($_POST['girisbtn']))
-{
+if(isset($_POST['girisbtn'])) {
     require_once "baglan.php";
-    $email=$_POST["email"];
-    $psw=$_POST["psw"];
-    if(isset($_POST["hatirla"])){
-        $hatirla=1;
-    }else{
-        $hatirla=0;
-    }
-    $sorgu=$conn->prepare("SELECT * FROM kullanici WHERE mail=? and sifre=?"); // sql yazarak verilerin doğruluğunu kontrol ediyoruz.
-    $sorgu->execute(array($email,$psw)); //Kontrol edilecek olan değişkenleri yazdık
-    $islem=$sorgu->fetch(); // Burada sorguyu parcalayarak girilen bilgilerin karşılığı varmı dedik
+    $email = $_POST["email"];
+    $psw = $_POST["psw"];
+    $sorgu = $conn->prepare("SELECT * FROM kullanici WHERE mail=? and sifre=?"); // sql yazarak verilerin doğruluğunu kontrol ediyoruz.
+    $sorgu->execute(array($email, $psw)); //Kontrol edilecek olan değişkenleri yazdık
+    $islem = $sorgu->fetch(); // Burada sorguyu parcalayarak girilen bilgilerin karşılığı varmı dedik
 
-    if($islem) // Karşığılı varsa buraya gir dedik
+    if ($islem) // Karşığılı varsa buraya gir dedik
     {
+
         $_SESSION['mail'] = $islem['mail']; // Giriş yaptığımız kullanici adımızı SEssion atadık
         $_SESSION['id'] = $islem['id_kullanici'];
-        $_SESSION['kadi'] = $islem['kullanici_adi'];
-        if($islem['yetki']) {
+        $_SESSION['adsoyad'] = $islem['adsoyad'];
+        if ($islem['yetki']) {
             yonlendir("panel/pAdmin/panelAdmin.php");
-            //header('Location: ' . "panel/teknikerpanel.php");
-        }else{
+
+        } else {
             yonlendir("panel/pUser/pUser.php");
 
         }
-    }
-    else//Eğer girilen bilgiler eşleşmiyorsa
+    } else//Eğer girilen bilgiler eşleşmiyorsa
     {
-        $alert = "Kullanıcı Adınız veya Şifreniz Yanlış";
-        echo "<script type='text/javascript'>alert('$alert');</script>";
+        ?>
+        <script>
+            var hatamesaji = document.getElementById('hatamesaji');
+            hatamesaji.innerText = "Kullanıcı Adınız veya Şifreniz Yanlış";
+
+            hatamesaji.style.display = 'block';
+            $(document).ready(function () {
+                // Show the Modal on load
+                $("#exampleModalCenter").modal("show");
+
+            });
+        </script>
+
+        <?php
     }
+}
+else{
+    yonlendir("index.php");
 }
 function yonlendir($url){
     if (!headers_sent()){

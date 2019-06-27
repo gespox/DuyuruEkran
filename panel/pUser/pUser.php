@@ -1,8 +1,15 @@
-<?php session_start();
+<?php
+session_start();
+if (!isset($_SESSION['id'])) {
+    require_once "yondendir.php";
+    yonlendir("../../index.php",0);
+   exit();
+}
 require_once "../../baglan.php";
 ?>
 <!DOCTYPE html>
 <html>
+<head>
 <title>Kulanıcı Paneli</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,83 +22,19 @@ require_once "../../baglan.php";
 <style>
     html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 </style>
-
-<body class="w3-light-grey geneldurum">
-
-
-<!--***************** Sidebar  ****************-->
-<?php require_once "sidebar.php"; ?>
-
-<!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:300px;margin-top:43px;">
-
+</head>
+<body class="w3-light-grey">
+    <!--***************** Sidebar  ****************-->
+    <?php require_once "sidebar.php"; ?>
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main" style="margin-left:300px;margin-top:43px;">
     <!-- Header -->
     <header class="w3-container" style="padding-top:22px">
         <h5><b><i class="fa fa-dashboard"> </i> Genel Gorunum</b></h5>
     </header>
+    <!-- CONTENT CONTAINER -->
+    <div class="w3-container w3-white w3-margin w3-padding">
 
-    <!-- **************Table******** -->
-    <div style="overflow-x:auto;">
-        <table>
-            <tr>
-                <th>Firma</th>
-                <th>Baslik</th>
-                <th>Metin</th>
-                <th>Resim</th>
-                <th>İlanı Görüntüle</th>
-                <th>İlanı İndir</th>
-            </tr>
-            <?php
-
-            $id = $_SESSION['id'];
-            $sql = "SELECT firmaad,baslik,metin,resimurl,id_template FROM template t,firma f,baslik b,metin m,resim r WHERE 
-                                                            t.id_kullanici='$id' AND 
-                                                            t.id_baslik=b.id_baslik AND
-                                                            t.id_metin=m.id_metin AND
-                                                            t.id_resim=r.id_resim AND
-                                                            t.id_firma=f.id_firma
-                                                            ";
-            $result = $conn->query($sql);
-            if ($result->rowCount() > 0) {
-                // output data of each row
-                    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-
-                        echo "<tr>";
-                        echo "<td>" . $row['firmaad'] . "</td>";
-                        echo "<td>" . $row["baslik"] . "</td>";
-                        echo "<td>" . $row["metin"] . "</td>";
-                        echo "<td><img class='myImg' id='myImg' src='" . $row["resimurl"] . "' width='100' height='100'> </td>";
-                        echo "<td><a style='text-align: center' href='temp_1.php?id=".$row['id_template']."' target='_blank' ><i class=\"fas fa-eye\"></i></a> </td>";
-                        echo "<td><a style='text-align: center' href='temp_1.php?id=".$row['id_template']."' download><i class=\"fas fa-download\"></i></a> </td>";
-                        echo "</tr>";
-                    }//while end
-
-            }else {//if end
-            ?>
-        </table>
-        <?php
-
-        echo "Sonuç Bulunamadı";
-        }
-        $conn = null;
-
-        ?>
     </div>
-</div>
-<!-- The Modal -->
-<div id="myModal" class="modal">
-
-    <!-- The Close Button -->
-    <span class="close">&times;</span>
-
-    <!-- Modal Content (The Image) -->
-    <img class="modal-content" id="img01">
-
-    <!-- Modal Caption (Image Text) -->
-    <div id="caption"></div>
-</div>
-<script src="js/modal.js"></script>
-<script src="js/sidebar.js"></script>
-
 </body>
 </html>

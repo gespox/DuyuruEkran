@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <link rel="stylesheet" href="css/main.css">
 <style>
     body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
@@ -43,7 +44,7 @@
             <div class="card card-signin my-5">
                 <div class="card-body">
                     <h5 class="card-title text-center">Giris Yapin</h5>
-                    <form class="form-signin" method="post">
+                    <form class="form-signin" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                         <div class="form-label-group">
                             <input type="email" id="inputEmail" class="form-control" placeholder="email adresi" name="email" required autofocus>
                             <label for="inputEmail">E-Mail Adresi</label>
@@ -52,16 +53,17 @@
                             <input type="password" id="inputPassword" class="form-control" placeholder="Sifre" name="psw" required>
                             <label for="inputPassword">Sifre</label>
                         </div>
-                        <div class="custom-control custom-checkbox mb-3">
-                            <input type="checkbox" class="custom-control-input" name="hatirla" id="customCheck1" value="1">
-                            <label class="custom-control-label" for="customCheck1">Sifreyi Hatirla</label>
+                        <div class="mb-3">
+                            <p class="w3-red hide" id="hatamesaji"> </p>
                         </div>
-                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" name="girisbtn">Giris Yap</button>
+                        <input class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" name="girisbtn" value="Giris Yap">
                     </form>
                 </div>
-                <?php require_once "login.php";?>
+                <?php
+                if(isset($_POST['girisbtn'])) {
+                    require_once "login.php";
+                }?>
             </div>
-
         </div>
     </div>
 </div>
@@ -207,7 +209,7 @@
 <footer class="w3-center w3-black w3-padding-64">
     <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>Yukarı</a>
 </footer>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="js/mainjs.js"></script>
 </body>
