@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 26 Haz 2019, 16:58:21
+-- Üretim Zamanı: 29 Haz 2019, 16:22:03
 -- Sunucu sürümü: 10.1.39-MariaDB
 -- PHP Sürümü: 7.2.18
 
@@ -31,8 +31,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `alt` (
   `id_alt` int(11) NOT NULL,
   `kullanici_id` int(11) NOT NULL,
-  `altduyuru_id` int(11) NOT NULL,
-  `ozel_id` int(11) NOT NULL
+  `altduyuru_id` int(11) DEFAULT NULL,
+  `ozel_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
 
 -- --------------------------------------------------------
@@ -72,25 +72,6 @@ CREATE TABLE `a_ozel` (
   `kullanici_id` int(11) NOT NULL,
   `yazi` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
-
--- --------------------------------------------------------
-
---
--- Tablo için tablo yapısı `baslik`
---
-
-CREATE TABLE `baslik` (
-  `id_baslik` int(11) NOT NULL,
-  `btext` text NOT NULL,
-  `baslik` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Tablo döküm verisi `baslik`
---
-
-INSERT INTO `baslik` (`id_baslik`, `btext`, `baslik`) VALUES
-(1, 'Duyuru Başlangıç Tarihi : 08.01.2019 - Duyuru Bitiş Tarihi : 09.01.2019\r\n\r\nÖĞRENCİLERİMİZİN DİKKATİNE ! ', 'Sınavlarla İlgili Duyuru');
 
 -- --------------------------------------------------------
 
@@ -146,6 +127,9 @@ CREATE TABLE `kullanici` (
   `id_kullanici` int(11) NOT NULL,
   `mail` varchar(100) NOT NULL,
   `sifre` varchar(30) NOT NULL,
+  `adsoyad` varchar(100) NOT NULL,
+  `telefon` bigint(20) NOT NULL,
+  `avatar` varchar(200) NOT NULL DEFAULT 'img/avatar2.png',
   `yetki` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -153,9 +137,9 @@ CREATE TABLE `kullanici` (
 -- Tablo döküm verisi `kullanici`
 --
 
-INSERT INTO `kullanici` (`id_kullanici`, `mail`, `sifre`, `yetki`) VALUES
-(1, 'admin@admin.com', 'admin', 1),
-(2, 'saitokan@gmail.com', '1', 0);
+INSERT INTO `kullanici` (`id_kullanici`, `mail`, `sifre`, `adsoyad`, `telefon`, `avatar`, `yetki`) VALUES
+(1, 'admin@admin.com', 'admin', '', 0, 'img/avatar2.png', 1),
+(2, 'saitokan@gmail.com', '1', 'Sait Okan', 5377669539, 'img/avatar2.png', 0);
 
 -- --------------------------------------------------------
 
@@ -178,24 +162,6 @@ CREATE TABLE `kurum` (
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `metin`
---
-
-CREATE TABLE `metin` (
-  `id_metin` int(11) NOT NULL,
-  `metin` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Tablo döküm verisi `metin`
---
-
-INSERT INTO `metin` (`id_metin`, `metin`) VALUES
-(1, 'Valiliğimiz tarafından Milli Eğitime bağlı okullarda 09 Ocak 2019 Çarşamba günü (yarın) okullar tatil edilmiş olup Üniversitemizde eğitim-öğretime devam edilecektir. Sınavlar belirlenen tarihlerde yapılacak olup herhangi bir erteleme söz konusu değildir. \r\n \r\nÜniversitemizde yapılması planlanan derslerin ve sınavların ileri bir tarihe ertelendiği gibi yalan ve yanlış paylaşımlar yapıldığı görülmüş olup bu ve buna benzer asılsız haberlere itibar edilmemesini, \r\n \r\nDuyurulması gereken konuların Üniversitemiz web sitesi (www.cumhuriyet.edu.tr) ve kurumsal sosyal medya hesaplarından yapılacağını, bunların haricinde yapılan duyuru ve haberlere itibar edilmemesini önemle rica ederiz.');
-
--- --------------------------------------------------------
-
---
 -- Tablo için tablo yapısı `orta`
 --
 
@@ -206,24 +172,6 @@ CREATE TABLE `orta` (
   `resimsiz_id` int(11) NOT NULL,
   `resimli_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
-
--- --------------------------------------------------------
-
---
--- Tablo için tablo yapısı `resim`
---
-
-CREATE TABLE `resim` (
-  `id_resim` int(11) NOT NULL,
-  `resimurl` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Tablo döküm verisi `resim`
---
-
-INSERT INTO `resim` (`id_resim`, `resimurl`) VALUES
-(1, '../img/img_avatar2.png');
 
 -- --------------------------------------------------------
 
@@ -328,28 +276,6 @@ CREATE TABLE `s_slider` (
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `template`
---
-
-CREATE TABLE `template` (
-  `id_template` int(11) NOT NULL,
-  `id_kullanici` int(11) NOT NULL,
-  `id_baslik` int(11) NOT NULL,
-  `id_metin` int(11) NOT NULL,
-  `id_resim` int(11) NOT NULL,
-  `id_firma` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Tablo döküm verisi `template`
---
-
-INSERT INTO `template` (`id_template`, `id_kullanici`, `id_baslik`, `id_metin`, `id_resim`, `id_firma`) VALUES
-(1, 0, 1, 1, 1, 1);
-
--- --------------------------------------------------------
-
---
 -- Tablo için tablo yapısı `yonlendirici`
 --
 
@@ -382,12 +308,6 @@ ALTER TABLE `a_ozel`
   ADD PRIMARY KEY (`id_aozel`);
 
 --
--- Tablo için indeksler `baslik`
---
-ALTER TABLE `baslik`
-  ADD PRIMARY KEY (`id_baslik`);
-
---
 -- Tablo için indeksler `ekran`
 --
 ALTER TABLE `ekran`
@@ -403,7 +323,8 @@ ALTER TABLE `firma`
 -- Tablo için indeksler `kullanici`
 --
 ALTER TABLE `kullanici`
-  ADD PRIMARY KEY (`id_kullanici`);
+  ADD PRIMARY KEY (`id_kullanici`),
+  ADD UNIQUE KEY `mail` (`mail`);
 
 --
 -- Tablo için indeksler `kurum`
@@ -412,22 +333,10 @@ ALTER TABLE `kurum`
   ADD PRIMARY KEY (`id_kurum`);
 
 --
--- Tablo için indeksler `metin`
---
-ALTER TABLE `metin`
-  ADD PRIMARY KEY (`id_metin`);
-
---
 -- Tablo için indeksler `orta`
 --
 ALTER TABLE `orta`
   ADD PRIMARY KEY (`id_orta`);
-
---
--- Tablo için indeksler `resim`
---
-ALTER TABLE `resim`
-  ADD PRIMARY KEY (`id_resim`);
 
 --
 -- Tablo için indeksler `resimli`
@@ -472,12 +381,6 @@ ALTER TABLE `s_slider`
   ADD PRIMARY KEY (`id_sslider`);
 
 --
--- Tablo için indeksler `template`
---
-ALTER TABLE `template`
-  ADD PRIMARY KEY (`id_template`);
-
---
 -- Tablo için indeksler `yonlendirici`
 --
 ALTER TABLE `yonlendirici`
@@ -506,12 +409,6 @@ ALTER TABLE `a_ozel`
   MODIFY `id_aozel` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Tablo için AUTO_INCREMENT değeri `baslik`
---
-ALTER TABLE `baslik`
-  MODIFY `id_baslik` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
 -- Tablo için AUTO_INCREMENT değeri `ekran`
 --
 ALTER TABLE `ekran`
@@ -536,22 +433,10 @@ ALTER TABLE `kurum`
   MODIFY `id_kurum` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Tablo için AUTO_INCREMENT değeri `metin`
---
-ALTER TABLE `metin`
-  MODIFY `id_metin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
 -- Tablo için AUTO_INCREMENT değeri `orta`
 --
 ALTER TABLE `orta`
   MODIFY `id_orta` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Tablo için AUTO_INCREMENT değeri `resim`
---
-ALTER TABLE `resim`
-  MODIFY `id_resim` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `resimli`
@@ -594,12 +479,6 @@ ALTER TABLE `s_duyuru`
 --
 ALTER TABLE `s_slider`
   MODIFY `id_sslider` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Tablo için AUTO_INCREMENT değeri `template`
---
-ALTER TABLE `template`
-  MODIFY `id_template` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `yonlendirici`
