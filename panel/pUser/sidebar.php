@@ -10,6 +10,9 @@ if (!isset($_SESSION['id'])) {
 require_once "../../baglan.php";
 ?>
 <style>
+    a:hover {
+        text-decoration: none;
+    }
     button:focus {outline:0;}
 </style>
 <!-- Top container -->
@@ -82,43 +85,40 @@ require_once "../../baglan.php";
         }
     </script>
 <hr>
-    <div class="w3-container">
-
+    <div class="w3-container sidebarMenu">
             <div class="w3-center w3-deep-orange w3-hover-red w3-padding-small w3-round-xxlarge w3-margin-bottom" style="cursor: pointer" >
                 <i class="fas fa-desktop fa-3x"></i><br>
                 <h5 class="w3-wide"><b>Ekrani Izle</b></h5>
             </div>
-
         <button class="w3-button w3-padding-16 w3-hide-large w3-block w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Menüyü Kapat </button>
         <button class="w3-padding-16 w3-button w3-block w3-left-align w3-white w3-leftbar w3-border-white w3-hover-border-red">
             Bilgi Ekrani </button>
         <button onclick="myFunction('orta')" class="w3-padding-16 w3-button w3-block w3-left-align w3-white w3-leftbar w3-border-white w3-hover-border-red">
             Orta Bolum &nbsp;<i class="fa fa-caret-down"></i></button>
         <div id="orta" class="w3-hide">
-            <a class="w3-button w3-block w3-left-align" href="#">Link 1</a>
-            <a class="w3-button w3-block w3-left-align" href="#">Link 2</a>
-            <a class="w3-button w3-block w3-left-align" href="#">Link 3</a>
+            <a class="w3-button w3-block w3-left-align" href="OrtaSlider.php">&emsp;<i class="fas fa-caret-right"></i> Slider</a>
+            <a class="w3-button w3-block w3-left-align" href="OrtaResimli.php">&emsp;<i class="fas fa-caret-right"></i> Resimli Duyuru</a>
+            <a class="w3-button w3-block w3-left-align" href="OrtaResimsiz.php">&emsp;<i class="fas fa-caret-right"></i> Resimsiz Duyuru</a>
         </div>
         <button onclick="myFunction('alt')" class="w3-padding-16 w3-button w3-block w3-left-align w3-white w3-leftbar w3-border-white w3-hover-border-red">
             Alt Bolum &nbsp;<i class="fa fa-caret-down"></i></button>
         <div id="alt" class="w3-hide">
-            <a class="w3-button w3-block w3-left-align" href="#">Link 1</a>
-            <a class="w3-button w3-block w3-left-align" href="#">Link 2</a>
-            <a class="w3-button w3-block w3-left-align" href="#">Link 3</a>
+            <a class="w3-button w3-block w3-left-align" href="AltDuyuru.php">&emsp;<i class="fas fa-caret-right"></i> Kayan Duyuru</a>
+            <a class="w3-button w3-block w3-left-align" href="AltOzel.php">&emsp;<i class="fas fa-caret-right"></i> Özel Yazı</a>
         </div>
         <button onclick="myFunction('sag')" class="w3-padding-16 w3-button w3-block w3-left-align w3-white w3-leftbar w3-border-white w3-hover-border-red">
             Sag Bolum &nbsp;<i class="fa fa-caret-down"></i></button>
         <div id="sag" class="w3-hide">
-            <a class="w3-button w3-block w3-left-align" href="#">Link 1</a>
-            <a class="w3-button w3-block w3-left-align" href="#">Link 2</a>
-            <a class="w3-button w3-block w3-left-align" href="#">Link 3</a>
+            <a class="w3-button w3-block w3-left-align" href="SagDuyuru.php">&emsp;<i class="fas fa-caret-right"></i> Küçük Duyuru</a>
+            <a class="w3-button w3-block w3-left-align" href="SagSayac.php">&emsp;<i class="fas fa-caret-right"></i> Sayaç Ekle</a>
+            <a class="w3-button w3-block w3-left-align" href="SagSlider.php">&emsp;<i class="fas fa-caret-right"></i> Resim Köşesi</a>
         </div>
         <button onclick="myFunction('ayarlar')" class="w3-padding-16 w3-button w3-block w3-left-align w3-white w3-leftbar w3-border-white w3-hover-border-red">
             Ayarlar &nbsp;<i class="fa fa-caret-down"></i></button>
         <div id="ayarlar" class="w3-hide">
-            <a class="w3-button w3-block w3-left-align" href="#">Link 1</a>
-            <a class="w3-button w3-block w3-left-align" href="#">Link 2</a>
-            <a class="w3-button w3-block w3-left-align" href="#">Link 3</a>
+            <a class="w3-button w3-block w3-left-align" href="AyarEkran.php">&emsp;<i class="fas fa-caret-right"></i> Ekran Ayarları</a>
+            <a class="w3-button w3-block w3-left-align" href="AyarKurum.php">&emsp;<i class="fas fa-caret-right"></i> Kurum Ayarları</a>
+            <a class="w3-button w3-block w3-left-align" href="AyarKullanici.php">&emsp;<i class="fas fa-caret-right"></i> Kullanıcı Ayarları</a>
         </div>
     </div>
     <script>
@@ -132,8 +132,6 @@ require_once "../../baglan.php";
         }
     </script>
 </nav>
-
-
 <script>function w3_open() {
         var mySidebar=document.getElementById("mySidebar");
 

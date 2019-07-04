@@ -75,38 +75,49 @@ if(isset($_POST["submit"])) {
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
     // Check if image file is a actual image or fake image
     $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-    if ($check !== false) {
-        $uploadOk = 1;
-    } else {
-        echo "Yüklenen Dosya Resim Olmalidir(JPG,JPEG veya PNG Formatlarinda).";
+    if ($check == false) {
+        echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+           HATA! Yüklenen Dosya JPG,JPEG veya PNG Formatlarinda Resim Olmalidir.
+            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+        </div>";
         $uploadOk = 0;
-    }
-    // Check if file already exists
-    if (file_exists($target_file)) {
-        echo "Dosya Mevcut. ";
+    } // Check file size
+    elseif ($_FILES["fileToUpload"]["size"] > 1024 * 1024 * 2) {
+        echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+           HATA! Dosya boyutu max 2MB'tır.
+            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+        </div>";
         $uploadOk = 0;
-    }
-    // Check file size
-    if ($_FILES["fileToUpload"]["size"] > 1024 * 1024 * 2) {
-        echo "Üzgünüz, Dosya boyutu max 2MB'tır.";
+    } // Allow certain file formats
+    elseif ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
+        echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+            Sadece  JPG, JPEG, PNG formatlarında resim yükleyebilirsiniz.
+            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+        </div>";
         $uploadOk = 0;
-    }
-    // Allow certain file formats
-    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
-        echo "Üzgünüz, Sadece  JPG, JPEG, PNG formatlarında dosya yükleyebilirsiniz.";
-        $uploadOk = 0;
-    }
-    // Check if $uploadOk is set to 0 by an error
-    if ($uploadOk == 0) {
-        echo "Üzgünüz Dosya Yüklenemedi.";
-        // if everything is ok, try to upload file
-    } else {
-        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-            $bitis = $_POST['bitis'];
-            $sqlslider = "INSERT INTO slider (kullanici_id,slider_url,bitis) VALUES ('$userid','$target_file','$bitis')";
-            $conn->exec($sqlslider);
+    } // Check if $uploadOk is set to 0 by an error
+    else {
+        if ($uploadOk == 0) {
+            echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+             Üzgünüz bir hata oluştu lütfen tekrar deneyiniz!
+            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+        </div>";
+            // if everything is ok, try to upload file
         } else {
-            echo "Üzgünüz bir hata oluştu lütfen tekrar deneyiniz!";
+            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                $bitis = $_POST['bitis'];
+                $sqlslider = "INSERT INTO slider (kullanici_id,slider_url,bitis) VALUES ('$userid','$target_file','$bitis')";
+                $conn->exec($sqlslider);
+                echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+            Slider Basariyla Eklendi!
+            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+        </div>";
+            } else {
+                echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+            Üzgünüz bir hata oluştu lütfen tekrar deneyiniz!
+            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+        </div>";
+            }
         }
     }
 }?>
@@ -117,11 +128,9 @@ if(isset($_POST["sil"])){
     $sqlSil="DELETE FROM slider WHERE id_slider='$sliderID'";
     $conn->exec($sqlSil);
     echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>
-            This is a info alert—check it out!
+            Slider Basariyla Silindi!
             <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
         </div>";
-
-
 }
 ?>
         <div class="w3-container w3-margin w3-padding ">
@@ -135,7 +144,6 @@ if(isset($_POST["sil"])){
                 </tr>
                 </thead>
                 <tbody>
-
                 <?php
 
                 $id = $_SESSION['id'];
@@ -159,12 +167,27 @@ if(isset($_POST["sil"])){
                     }//while end
 
                 }else {
-                      echo "</tbody></table><br>Sonuç Bulunamadı";
+                      echo "</tbody></table><div class=\"alert alert-info\">
+     Kayitli Slider Yok.
+  </div>";
                 }
             ?>
                 </tbody>
             </table>
         </div>
     </div>
+    <div id="myModal" class="modal">
+
+        <!-- The Close Button -->
+        <span class="close">&times;</span>
+
+        <!-- Modal Content (The Image) -->
+        <img src="" class="modal-content" id="img01">
+
+        <!-- Modal Caption (Image Text) -->
+        <div id="caption"></div>
+    </div>
+
+    <script src="js/pUserjs.js"></script>
 </body>
 </html>
