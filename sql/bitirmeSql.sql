@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 29 Haz 2019, 16:22:03
+-- Üretim Zamanı: 04 Tem 2019, 20:52:44
 -- Sunucu sürümü: 10.1.39-MariaDB
 -- PHP Sürümü: 7.2.18
 
@@ -72,6 +72,24 @@ CREATE TABLE `a_ozel` (
   `kullanici_id` int(11) NOT NULL,
   `yazi` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `bildirim`
+--
+
+CREATE TABLE `bildirim` (
+  `id_bildirim` int(11) NOT NULL,
+  `bildirimText` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Tablo döküm verisi `bildirim`
+--
+
+INSERT INTO `bildirim` (`id_bildirim`, `bildirimText`) VALUES
+(2, 'test bildirim');
 
 -- --------------------------------------------------------
 
@@ -245,6 +263,13 @@ CREATE TABLE `slider` (
   `sure` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
 
+--
+-- Tablo döküm verisi `slider`
+--
+
+INSERT INTO `slider` (`id_slider`, `kullanici_id`, `slider_url`, `bitis`, `sure`) VALUES
+(10, 2, 'img/slider/2-2-Gorselvize2.jpeg', '2019-07-25', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -306,6 +331,12 @@ ALTER TABLE `a_duyuru`
 --
 ALTER TABLE `a_ozel`
   ADD PRIMARY KEY (`id_aozel`);
+
+--
+-- Tablo için indeksler `bildirim`
+--
+ALTER TABLE `bildirim`
+  ADD PRIMARY KEY (`id_bildirim`);
 
 --
 -- Tablo için indeksler `ekran`
@@ -409,6 +440,12 @@ ALTER TABLE `a_ozel`
   MODIFY `id_aozel` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- Tablo için AUTO_INCREMENT değeri `bildirim`
+--
+ALTER TABLE `bildirim`
+  MODIFY `id_bildirim` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- Tablo için AUTO_INCREMENT değeri `ekran`
 --
 ALTER TABLE `ekran`
@@ -466,7 +503,7 @@ ALTER TABLE `sayac`
 -- Tablo için AUTO_INCREMENT değeri `slider`
 --
 ALTER TABLE `slider`
-  MODIFY `id_slider` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_slider` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `s_duyuru`
