@@ -38,7 +38,7 @@ if (!isset($_SESSION['id'])) {
         class="w3-button w3-red w3-display-topright">x</span>
             <div class="w3-container">
                 <ul class="w3-ul w3-card-4">
-                    <li class="w3-display-container bildirimler">Jill <span onclick="this.parentElement.parentNode.removeChild(this.parentElement);bildirimGuncelle()" class="w3-button w3-transparent w3-display-right">&times;</span></li>
+                    <li class="w3-display-container bildirimler">JillJillJillJi llJi llJillJillJi llJillJil lJill <span onclick="this.parentElement.parentNode.removeChild(this.parentElement);bildirimGuncelle()" class="w3-button w3-transparent w3-display-right">&times;</span></li>
                     <li class="w3-display-container bildirimler">Adam <span onclick="this.parentElement.parentNode.removeChild(this.parentElement);bildirimGuncelle()" class="w3-button w3-transparent w3-display-right">&times;</span></li>
                     <li class="w3-display-container bildirimler">Eve <span onclick="this.parentElement.parentNode.removeChild(this.parentElement);bildirimGuncelle()" class="w3-button w3-transparent w3-display-right">&times;</span></li>
                 </ul>
