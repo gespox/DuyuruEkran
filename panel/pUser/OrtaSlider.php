@@ -18,6 +18,8 @@ require_once "../../baglan.php";
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet"  href="../../css/afteredit.css">
     <style>
@@ -36,6 +38,7 @@ require_once "../../baglan.php";
     <!-- CONTENT CONTAINER -->
 
     <div class="w3-container w3-white w3-margin w3-padding">
+        <div class="w3-container w3-margin w3-padding">
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data">
             <div class="form-group">
                 <div class="form-group row">
@@ -59,6 +62,7 @@ require_once "../../baglan.php";
                 </div>
             </div>
         </form>
+    </div>
 <?php
 if(isset($_POST["submit"])) {
     $userid = $_SESSION['id'];
@@ -74,12 +78,12 @@ if(isset($_POST["submit"])) {
     if ($check !== false) {
         $uploadOk = 1;
     } else {
-        echo "Yüklenen Dosya Resim değildir.";
+        echo "Yüklenen Dosya Resim Olmalidir(JPG,JPEG veya PNG Formatlarinda).";
         $uploadOk = 0;
     }
     // Check if file already exists
     if (file_exists($target_file)) {
-        echo "Sorry, file already exists.";
+        echo "Dosya Mevcut. ";
         $uploadOk = 0;
     }
     // Check file size
@@ -94,7 +98,7 @@ if(isset($_POST["submit"])) {
     }
     // Check if $uploadOk is set to 0 by an error
     if ($uploadOk == 0) {
-        echo "Üzgünüz Dosya Yüklenemedi. Tekrar yüklemek için yönlendiriliyorsunuz.";
+        echo "Üzgünüz Dosya Yüklenemedi.";
         // if everything is ok, try to upload file
     } else {
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
@@ -106,34 +110,58 @@ if(isset($_POST["submit"])) {
         }
     }
 }?>
-        <div class="w3-container w3-margin-top-16">
+<?php
+if(isset($_POST["sil"])){
+    $sliderID=$_POST["sliderID"];
+
+    $sqlSil="DELETE FROM slider WHERE id_slider='$sliderID'";
+    $conn->exec($sqlSil);
+    echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>
+            This is a info alert—check it out!
+            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+        </div>";
+
+
+}
+?>
+        <div class="w3-container w3-margin w3-padding ">
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+
+                    <th scope="col">Resim</th>
+                    <th scope="col">Bitis Tarihi</th>
+                    <th scope="col">Sil</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
+
+                <?php
+
+                $id = $_SESSION['id'];
+                $sql = "SELECT * FROM slider s WHERE s.kullanici_id='$id'";
+                $result = $conn->query($sql);
+                if ($result->rowCount() > 0) {
+                    // output data of each row
+                    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+
+                        echo "<tr>";
+                        echo "<td><img id='myImg' src='" . $row["slider_url"] . "' width='100' height='100'> </img</td>";
+                        echo "<td>" . $row['bitis'] . "</td>";
+                        echo "<td>";?>
+                        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                            <input type="hidden" name="sliderID" value="<?php echo $row['id_slider']?>">
+           <button name="sil" class="w3-button w3-circle w3-red" onclick="return confirm('Silmek istiyor musunuz?');">X</button>
+                        </form>
+                      <?php  echo"</td>";
+
+                        echo "</tr>";
+                    }//while end
+
+                }else {
+                      echo "</tbody></table><br>Sonuç Bulunamadı";
+                }
+            ?>
                 </tbody>
             </table>
         </div>

@@ -7,13 +7,14 @@ if (!isset($_SESSION['id'])) {
     yonlendir("../../index.php",0);
     exit();
 }
+require_once "../../baglan.php";
 ?>
 <style>
     button:focus {outline:0;}
 </style>
 <!-- Top container -->
 <div class="w3-bar w3-top w3-teal w3-large topbar" style="z-index:4">
-    <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey " onclick="w3_open();"><i class="fa fa-bars"></i>  Menü</button>
+    <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey " onclick="w3_open();"><i class="fa fa-bars"></i> Menü</button>
     <span class="w3-bar-item w3-right">Duyuru Ekran Paneli</span>
 </div>
 <!-- Sidebar/menu -->
@@ -30,17 +31,30 @@ if (!isset($_SESSION['id'])) {
         </div>
         <div class="w3-col s8 w3-bar">
             <span>Hoşgeldin, <strong><?php echo $_SESSION['adsoyad'];?></strong></span><br>
-<a title="Bildirimler" class="w3-bar-item w3-button" onclick="document.getElementById('id01').style.display='block'"><i class="fa fa-envelope"></i> <span class="w3-badge w3-tiny w3-red" id="bildirimsayisi">9</span></a>
-<a href="cikis.php" onclick="return confirm('Çıkış yapmak istiyor musunuz?');" title="Çıkış Yap" class="w3-bar-item w3-button"><i class="fas fa-sign-out-alt"></i></a>
-</div>
+            <a title="Bildirimler" class="w3-bar-item w3-button" onclick="document.getElementById('id01').style.display='block'"><i class="fa fa-envelope"></i> <span class="w3-badge w3-tiny w3-red" id="bildirimsayisi">9</span></a>
+            <a href="cikis.php" onclick="return confirm('Çıkış yapmak istiyor musunuz?');" title="Çıkış Yap" class="w3-bar-item w3-button"><i class="fas fa-sign-out-alt"></i></a>
+        </div>
         <div id="id01" class="w3-panel w3-gray w3-opacity-min w3-display-container" style="display:none">
   <span onclick="this.parentElement.style.display='none'"
         class="w3-button w3-red w3-display-topright">x</span>
             <div class="w3-container">
                 <ul class="w3-ul w3-card-4">
-                    <li class="w3-display-container bildirimler">JillJillJillJi llJi llJillJillJi llJillJil lJill <span onclick="this.parentElement.parentNode.removeChild(this.parentElement);bildirimGuncelle()" class="w3-button w3-transparent w3-display-right">&times;</span></li>
-                    <li class="w3-display-container bildirimler">Adam <span onclick="this.parentElement.parentNode.removeChild(this.parentElement);bildirimGuncelle()" class="w3-button w3-transparent w3-display-right">&times;</span></li>
-                    <li class="w3-display-container bildirimler">Eve <span onclick="this.parentElement.parentNode.removeChild(this.parentElement);bildirimGuncelle()" class="w3-button w3-transparent w3-display-right">&times;</span></li>
+                    <?php
+                    if($_SESSION['bildirim']) {
+                        $sqlBildirim = "SELECT * FROM bildirim";
+                        $resultBildirim = $conn->query($sqlBildirim);
+                        $countbildirim = $resultBildirim->rowCount();
+                        if ($countbildirim > 0) {
+                            while ($rowBildirim = $resultBildirim->fetch(PDO::FETCH_ASSOC)) {
+                                ?>
+                                <li class="w3-display-container bildirimler"><?php echo $rowBildirim['bildirimText'] ?>
+                                    <span onclick="this.parentElement.parentNode.removeChild(this.parentElement);bildirimGuncelle()"
+                                          class="w3-button w3-transparent w3-display-right">&times;</span></li>
+                                <?php
+                            }
+                        }
+                    }
+                   ?>
                 </ul>
             </div>
         </div>
@@ -51,6 +65,7 @@ if (!isset($_SESSION['id'])) {
         bildirimSayisi.innerText=sayi;
         if(sayi==0){
             bildirimSayisi.style.display="none";
+            <?php $_SESSION['bildirim']=0;  ?>
         }
         else{
             bildirimSayisi.innerText=sayi;
@@ -60,24 +75,13 @@ if (!isset($_SESSION['id'])) {
              sayi= document.getElementsByClassName("bildirimler").length;
              if(sayi==0){
                  bildirimSayisi.style.display="none";
+                 <?php $_SESSION['bildirim']=0;  ?>
              }
              else{
             bildirimSayisi.innerText=sayi;}
         }
-
     </script>
 <hr>
-<!--
-<div class="w3-bar-block">
-
-    <a href="pUser.php" class="w3-bar-item w3-button w3-padding geneldurum"><i class="fas fa-desktop fa-fw"></i>  Genel Durum</a>
-    <a href="ilanDuzenle.php" class="w3-bar-item w3-button w3-padding ilanduzenle"><i class="fas fa-edit fa-fw"></i>  İlan Düzenleme</a>
-    <a href="ilanEkle.php" class="w3-bar-item w3-button w3-padding ilanekleme"><i class="fa fa-plus fa-fw"></i>  İlan Ekleme</a>
-    <a href="firmaBilgi.php" class="w3-bar-item w3-button w3-padding firmabilgi"><i class="fa fa-building fa-fw"></i>  Firma Bilgileri</a>
-    <a href="ayarlar.php" class="w3-bar-item w3-button w3-padding ayarlar"><i class="fa fa-cog fa-fw"></i>  Ayarlar</a><br><br>
-</div>
--->
-
     <div class="w3-container">
 
             <div class="w3-center w3-deep-orange w3-hover-red w3-padding-small w3-round-xxlarge w3-margin-bottom" style="cursor: pointer" >

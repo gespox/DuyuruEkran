@@ -1,26 +1,7 @@
 
 table {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-
-    width: 100%;
 }
-
-th, td {
-    border: 1px solid #22783c;
-    padding: 8px;
-    text-align: left;
-}
-th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #2ecc71;
-    color: white;
-}
-
-tr:nth-child(even) {background-color: #fcfcfc;}
-tr:hover {background-color: #ddd;}
 
 
 /********************************************Model image ***********************/
@@ -84,7 +65,6 @@ tr:hover {background-color: #ddd;}
     top: 15px;
     right: 35px;
     color: #f1f1f1;
-    font-size: 40px;
     font-weight: bold;
     transition: 0.3s;
 }
