@@ -33,7 +33,7 @@ require_once "../../baglan.php";
             <img src="<?php echo $islem['avatar'];?>" class="w3-circle w3-margin-right" style="width:46px">
         </div>
         <div class="w3-col s8 w3-bar">
-            <span>Hoşgeldin, <strong><?php echo $_SESSION['adsoyad'];?></strong></span><br>
+            <span>Hoşgeldin, <strong><?php echo $islem['adsoyad'];?></strong></span><br>
             <a title="Bildirimler" class="w3-bar-item w3-button" onclick="document.getElementById('id01').style.display='block'"><i class="fa fa-envelope"></i> <span class="w3-badge w3-tiny w3-red" id="bildirimsayisi">9</span></a>
             <a href="cikis.php" onclick="return confirm('Çıkış yapmak istiyor musunuz?');" title="Çıkış Yap" class="w3-bar-item w3-button"><i class="fas fa-sign-out-alt"></i></a>
         </div>

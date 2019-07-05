@@ -66,7 +66,7 @@ require_once "../../baglan.php";
 <?php
 if(isset($_POST["submit"])) {
     $userid = $_SESSION['id'];
-    $sql = "SELECT COUNT(id_slider) FROM slider WHERE kullanici_id='$userid'";
+    $sql = "SELECT COUNT(id_slider) FROM o_slider WHERE kullanici_id='$userid'";
     $result = $conn->query($sql)->fetchColumn();
     $target_dir = "img/slider/";
     $imgName = $userid . "-" . ++$result . "-" . basename($_FILES["fileToUpload"]["name"]);
@@ -106,7 +106,7 @@ if(isset($_POST["submit"])) {
         } else {
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                 $bitis = $_POST['bitis'];
-                $sqlslider = "INSERT INTO slider (kullanici_id,slider_url,bitis) VALUES ('$userid','$target_file','$bitis')";
+                $sqlslider = "INSERT INTO o_slider (kullanici_id,slider_url,bitis) VALUES ('$userid','$target_file','$bitis')";
                 $conn->exec($sqlslider);
                 echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
             Slider Basariyla Eklendi!
@@ -125,7 +125,7 @@ if(isset($_POST["submit"])) {
 if(isset($_POST["sil"])){
     $sliderID=$_POST["sliderID"];
 
-    $sqlSil="DELETE FROM slider WHERE id_slider='$sliderID'";
+    $sqlSil="DELETE FROM o_slider WHERE id_slider='$sliderID'";
     $conn->exec($sqlSil);
     echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>
             Slider Basariyla Silindi!
@@ -147,7 +147,7 @@ if(isset($_POST["sil"])){
                 <?php
 
                 $id = $_SESSION['id'];
-                $sql = "SELECT * FROM slider s WHERE s.kullanici_id='$id'";
+                $sql = "SELECT * FROM o_slider s WHERE s.kullanici_id='$id'";
                 $result = $conn->query($sql);
                 if ($result->rowCount() > 0) {
                     // output data of each row

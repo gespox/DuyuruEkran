@@ -29,80 +29,6 @@ require_once "../../baglan.php";
 </head>
 <body class="w3-light-grey">
 <!--***************** Sidebar  ****************-->
-<?php
-if(isset($_POST["guncelle"])) {
-    $email = $_POST['email'];
-    $sifre = $_POST['sifre'];
-    $adsoyad = $_POST['adsoyad'];
-    $telefon = $_POST['telefon'];
-    if(isset( $_FILES["fileToUpload"] ) && !empty( $_FILES["fileToUpload"]["name"] )){
-        $target_dir = "img/";
-        $imgName = $kullaniciId ."-" . basename($_FILES["fileToUpload"]["name"]);
-        $target_file = $target_dir . $imgName;
-        $uploadOk = 1;
-        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-        // Check if image file is a actual image or fake image
-        $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-        if ($check == false) {
-            echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-           HATA! Yüklenen Dosya JPG,JPEG veya PNG Formatlarinda Resim Olmalidir.
-            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
-        </div>";
-            $uploadOk = 0;
-        } // Check file size
-        elseif ($_FILES["fileToUpload"]["size"] > 1024 * 1024 * 2) {
-            echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-           HATA! Dosya boyutu max 2MB'tır.
-            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
-        </div>";
-            $uploadOk = 0;
-        } // Allow certain file formats
-        elseif ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
-            echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-            Sadece  JPG, JPEG, PNG formatlarında resim yükleyebilirsiniz.
-            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
-        </div>";
-            $uploadOk = 0;
-        } // Check if $uploadOk is set to 0 by an error
-        else {
-            if ($uploadOk == 0) {
-                echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-             Üzgünüz bir hata oluştu lütfen tekrar deneyiniz!
-            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
-        </div>";
-                // if everything is ok, try to upload file
-            } else {
-                if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-
-                    $sqlUyekayit2 = "UPDATE kullanici SET avatar=? WHERE id_kullanici=?";
-                    $uyeKayit2=$conn->prepare($sqlUyekayit2);
-                    $uyeKayit2->execute([$target_file,$kullaniciId]);
-
-                } else {
-                    echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-            Üzgünüz bir hata oluştu lütfen tekrar deneyiniz!
-            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
-        </div>";
-                }
-            }
-        }
-    }
-    $sqlUyekayit = "UPDATE kullanici SET mail=?,sifre=?,adsoyad=?,telefon=? WHERE id_kullanici=?";
-    $uyeKayit=$conn->prepare($sqlUyekayit);
-    $checkUyeKayit=$uyeKayit->execute([$email,$sifre,$adsoyad,$telefon,$kullaniciId]);
-    if($checkUyeKayit) {
-
-        echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
-                         Ayarlar Basariyla Guncellendi!
-                         <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
-                      </div>";
-    }else {
-        echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-            Üzgünüz bir hata oluştu lütfen tekrar deneyiniz!
-            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
-        </div>";
-    }
-}?>
 <?php require_once "sidebar.php"; ?>
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
@@ -112,6 +38,82 @@ if(isset($_POST["guncelle"])) {
     </header>
     <!-- CONTENT CONTAINER -->
     <div class="w3-container w3-white w3-margin w3-padding">
+        <?php
+        if(isset($_POST["guncelle"])) {
+            $email = $_POST['email'];
+            $sifre = $_POST['sifre'];
+            $adsoyad = $_POST['adsoyad'];
+            $telefon = $_POST['telefon'];
+            if(isset( $_FILES["fileToUpload"] ) && !empty( $_FILES["fileToUpload"]["name"] )){
+                $target_dir = "img/";
+                $imgName = $kullaniciId ."-" . basename($_FILES["fileToUpload"]["name"]);
+                $target_file = $target_dir . $imgName;
+                $uploadOk = 1;
+                $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+                // Check if image file is a actual image or fake image
+                $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+                if ($check == false) {
+                    echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+           HATA! Yüklenen Dosya JPG,JPEG veya PNG Formatlarinda Resim Olmalidir.
+            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+        </div>";
+                    $uploadOk = 0;
+                } // Check file size
+                elseif ($_FILES["fileToUpload"]["size"] > 1024 * 1024 * 2) {
+                    echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+           HATA! Dosya boyutu max 2MB'tır.
+            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+        </div>";
+                    $uploadOk = 0;
+                } // Allow certain file formats
+                elseif ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
+                    echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+            Sadece  JPG, JPEG, PNG formatlarında resim yükleyebilirsiniz.
+            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+        </div>";
+                    $uploadOk = 0;
+                } // Check if $uploadOk is set to 0 by an error
+                else {
+                    if ($uploadOk == 0) {
+                        echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+             Üzgünüz bir hata oluştu lütfen tekrar deneyiniz!
+            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+        </div>";
+                        // if everything is ok, try to upload file
+                    } else {
+                        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+
+                            $sqlUyekayit2 = "UPDATE kullanici SET avatar=? WHERE id_kullanici=?";
+                            $uyeKayit2=$conn->prepare($sqlUyekayit2);
+                            $uyeKayit2->execute([$target_file,$kullaniciId]);
+
+                        } else {
+                            echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+            Üzgünüz bir hata oluştu lütfen tekrar deneyiniz!
+            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+        </div>";
+                        }
+                    }
+                }
+            }
+            $sqlUyekayit = "UPDATE kullanici SET mail=?,sifre=?,adsoyad=?,telefon=? WHERE id_kullanici=?";
+            $uyeKayit=$conn->prepare($sqlUyekayit);
+            $checkUyeKayit=$uyeKayit->execute([$email,$sifre,$adsoyad,$telefon,$kullaniciId]);
+            if($checkUyeKayit) {
+
+                echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                         Ayarlar Basariyla Guncellendi!
+                         <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+                      </div>";
+                
+            }else {
+                echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+            Üzgünüz bir hata oluştu lütfen tekrar deneyiniz!
+            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+        </div>";
+
+            }
+        }?>
         <div class="w3-container  w3-white w3-margin w3-padding">
 
            <?php
@@ -153,6 +155,7 @@ if(isset($_POST["guncelle"])) {
             </form>
 
         </div>
+
     </div>
 </body>
 </html>
