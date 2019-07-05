@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 04 Tem 2019, 20:52:44
+-- Üretim Zamanı: 05 Tem 2019, 20:08:13
 -- Sunucu sürümü: 10.1.39-MariaDB
 -- PHP Sürümü: 7.2.18
 
@@ -25,28 +25,22 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `alt`
---
-
-CREATE TABLE `alt` (
-  `id_alt` int(11) NOT NULL,
-  `kullanici_id` int(11) NOT NULL,
-  `altduyuru_id` int(11) DEFAULT NULL,
-  `ozel_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf32;
-
--- --------------------------------------------------------
-
---
 -- Tablo için tablo yapısı `ayarlar`
 --
 
 CREATE TABLE `ayarlar` (
   `id_ayarlar` int(11) NOT NULL,
   `kullanici_id` int(11) NOT NULL,
-  `yenileme_time` bigint(20) NOT NULL,
-  `tema` varchar(20) NOT NULL
+  `yenileme_time` bigint(20) NOT NULL DEFAULT '900000',
+  `tema` varchar(20) NOT NULL DEFAULT 'css/stil_yeni.css'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Tablo döküm verisi `ayarlar`
+--
+
+INSERT INTO `ayarlar` (`id_ayarlar`, `kullanici_id`, `yenileme_time`, `tema`) VALUES
+(1, 9, 900000, 'css/stil_yeni.css');
 
 -- --------------------------------------------------------
 
@@ -89,7 +83,7 @@ CREATE TABLE `bildirim` (
 --
 
 INSERT INTO `bildirim` (`id_bildirim`, `bildirimText`) VALUES
-(2, 'test bildirim');
+(4, 'Kullanici Panelinde Artik profil fotografi degistirebilirsiniz');
 
 -- --------------------------------------------------------
 
@@ -100,18 +94,104 @@ INSERT INTO `bildirim` (`id_bildirim`, `bildirimText`) VALUES
 CREATE TABLE `ekran` (
   `id_ekran` int(11) NOT NULL,
   `kullanici_id` int(11) NOT NULL,
-  `orta_id` int(11) NOT NULL,
-  `sag_id` int(11) NOT NULL,
-  `alt_id` int(11) NOT NULL,
-  `yenileme` int(11) NOT NULL
+  `yenileme` int(11) NOT NULL DEFAULT '10000'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Tablo döküm verisi `ekran`
 --
 
-INSERT INTO `ekran` (`id_ekran`, `kullanici_id`, `orta_id`, `sag_id`, `alt_id`, `yenileme`) VALUES
-(1, 0, 0, 0, 0, 0);
+INSERT INTO `ekran` (`id_ekran`, `kullanici_id`, `yenileme`) VALUES
+(2, 7, 10000),
+(3, 9, 10000);
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `ekran_altduyuru`
+--
+
+CREATE TABLE `ekran_altduyuru` (
+  `ekran_id` int(11) NOT NULL,
+  `altduyuru_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `ekran_altozel`
+--
+
+CREATE TABLE `ekran_altozel` (
+  `ekran_id` int(11) NOT NULL,
+  `altozel_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `ekran_resimli`
+--
+
+CREATE TABLE `ekran_resimli` (
+  `ekran_id` int(11) NOT NULL,
+  `resimli_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `ekran_resimsiz`
+--
+
+CREATE TABLE `ekran_resimsiz` (
+  `ekran_id` int(11) NOT NULL,
+  `resimsiz_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `ekran_sagduyuru`
+--
+
+CREATE TABLE `ekran_sagduyuru` (
+  `ekran_id` int(11) NOT NULL,
+  `sagduyuru_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `ekran_sagsayac`
+--
+
+CREATE TABLE `ekran_sagsayac` (
+  `ekran_id` int(11) NOT NULL,
+  `sagsayac_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `ekran_sagslider`
+--
+
+CREATE TABLE `ekran_sagslider` (
+  `ekran_id` int(11) NOT NULL,
+  `sagslider_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `ekran_slider`
+--
+
+CREATE TABLE `ekran_slider` (
+  `ekran_id` int(11) NOT NULL,
+  `slider_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf32;
 
 -- --------------------------------------------------------
 
@@ -156,8 +236,13 @@ CREATE TABLE `kullanici` (
 --
 
 INSERT INTO `kullanici` (`id_kullanici`, `mail`, `sifre`, `adsoyad`, `telefon`, `avatar`, `yetki`) VALUES
-(1, 'admin@admin.com', 'admin', '', 0, 'img/avatar2.png', 1),
-(2, 'saitokan@gmail.com', '1', 'Sait Okan', 5377669539, 'img/avatar2.png', 0);
+(1, 'admin@admin.com', 'admin', 'Admin', 5050550, 'img/1-F2497816-01.jpg', 1),
+(2, 'saitokan@gmail.com', '1', 'Sait Okan', 5377669539, 'img/avatar2.png', 0),
+(3, 'saitokan@yandex.com', '123', 'Mehmet Sait Okan', 5377669539, 'img/avatar2.png', 1),
+(4, 'asdads@yandex.com', '13', 'sdi', 234, 'img/avatar2.png', 0),
+(6, 'ali@ads.cc', '3132', 'sfdf', 2432, 'img/avatar2.png', 0),
+(7, 'asdqwe@asd.cc', '123', 'kullanici test', 123, 'img/avatar2.png', 0),
+(9, 'qweqew@qwe.com', 'qwe', 'qwe', 123, 'img/avatar2.png', 0);
 
 -- --------------------------------------------------------
 
@@ -169,35 +254,30 @@ CREATE TABLE `kurum` (
   `id_kurum` int(11) NOT NULL,
   `kullanici_id` int(11) NOT NULL,
   `ad_soyad` varchar(100) NOT NULL,
-  `il` varchar(30) NOT NULL,
-  `ilce` varchar(50) NOT NULL,
-  `logo` varchar(100) NOT NULL,
+  `il` varchar(30) DEFAULT NULL,
+  `ilce` varchar(50) DEFAULT NULL,
+  `logo` varchar(100) NOT NULL DEFAULT 'img/logo.png',
   `mail` varchar(30) NOT NULL,
   `telefon` varchar(20) NOT NULL,
-  `adres` text NOT NULL
+  `adres` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Tablo döküm verisi `kurum`
+--
+
+INSERT INTO `kurum` (`id_kurum`, `kullanici_id`, `ad_soyad`, `il`, `ilce`, `logo`, `mail`, `telefon`, `adres`) VALUES
+(1, 6, 'sfdf', NULL, NULL, 'img/logo.png', 'ali@ads.cc', '2432', NULL),
+(2, 7, 'kullanici test', NULL, NULL, 'img/logo.png', 'asdqwe@asd.cc', '123', NULL),
+(3, 9, 'qwe', NULL, NULL, 'img/logo.png', 'qweqew@qwe.com', '123', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `orta`
+-- Tablo için tablo yapısı `o_resimli`
 --
 
-CREATE TABLE `orta` (
-  `id_orta` int(11) NOT NULL,
-  `kullanici_id` int(11) NOT NULL,
-  `slider_id` int(11) NOT NULL,
-  `resimsiz_id` int(11) NOT NULL,
-  `resimli_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf32;
-
--- --------------------------------------------------------
-
---
--- Tablo için tablo yapısı `resimli`
---
-
-CREATE TABLE `resimli` (
+CREATE TABLE `o_resimli` (
   `id_resimli` int(11) NOT NULL,
   `kullanici_id` int(11) NOT NULL,
   `baslik` varchar(100) NOT NULL,
@@ -210,10 +290,10 @@ CREATE TABLE `resimli` (
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `resimsiz`
+-- Tablo için tablo yapısı `o_resimsiz`
 --
 
-CREATE TABLE `resimsiz` (
+CREATE TABLE `o_resimsiz` (
   `id_resimsiz` int(11) NOT NULL,
   `kullanici_id` int(11) NOT NULL,
   `baslik` varchar(100) NOT NULL,
@@ -225,37 +305,10 @@ CREATE TABLE `resimsiz` (
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `sag`
+-- Tablo için tablo yapısı `o_slider`
 --
 
-CREATE TABLE `sag` (
-  `id_sag` int(11) NOT NULL,
-  `kullanici_id` int(11) NOT NULL,
-  `sayac_id` int(11) NOT NULL,
-  `sduyuru_id` int(11) NOT NULL,
-  `sagslider_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf32;
-
--- --------------------------------------------------------
-
---
--- Tablo için tablo yapısı `sayac`
---
-
-CREATE TABLE `sayac` (
-  `id_sayac` int(11) NOT NULL,
-  `kullanici_id` int(11) NOT NULL,
-  `yazi` text NOT NULL,
-  `bitis` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf32;
-
--- --------------------------------------------------------
-
---
--- Tablo için tablo yapısı `slider`
---
-
-CREATE TABLE `slider` (
+CREATE TABLE `o_slider` (
   `id_slider` int(11) NOT NULL,
   `kullanici_id` int(11) NOT NULL,
   `slider_url` varchar(100) NOT NULL,
@@ -264,10 +317,10 @@ CREATE TABLE `slider` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
 
 --
--- Tablo döküm verisi `slider`
+-- Tablo döküm verisi `o_slider`
 --
 
-INSERT INTO `slider` (`id_slider`, `kullanici_id`, `slider_url`, `bitis`, `sure`) VALUES
+INSERT INTO `o_slider` (`id_slider`, `kullanici_id`, `slider_url`, `bitis`, `sure`) VALUES
 (10, 2, 'img/slider/2-2-Gorselvize2.jpeg', '2019-07-25', 0);
 
 -- --------------------------------------------------------
@@ -280,6 +333,19 @@ CREATE TABLE `s_duyuru` (
   `id_sduyuru` int(11) NOT NULL,
   `kullanici_id` int(11) NOT NULL,
   `baslik` varchar(100) NOT NULL,
+  `yazi` text NOT NULL,
+  `bitis` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `s_sayac`
+--
+
+CREATE TABLE `s_sayac` (
+  `id_sayac` int(11) NOT NULL,
+  `kullanici_id` int(11) NOT NULL,
   `yazi` text NOT NULL,
   `bitis` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
@@ -364,39 +430,21 @@ ALTER TABLE `kurum`
   ADD PRIMARY KEY (`id_kurum`);
 
 --
--- Tablo için indeksler `orta`
+-- Tablo için indeksler `o_resimli`
 --
-ALTER TABLE `orta`
-  ADD PRIMARY KEY (`id_orta`);
-
---
--- Tablo için indeksler `resimli`
---
-ALTER TABLE `resimli`
+ALTER TABLE `o_resimli`
   ADD PRIMARY KEY (`id_resimli`);
 
 --
--- Tablo için indeksler `resimsiz`
+-- Tablo için indeksler `o_resimsiz`
 --
-ALTER TABLE `resimsiz`
+ALTER TABLE `o_resimsiz`
   ADD PRIMARY KEY (`id_resimsiz`);
 
 --
--- Tablo için indeksler `sag`
+-- Tablo için indeksler `o_slider`
 --
-ALTER TABLE `sag`
-  ADD PRIMARY KEY (`id_sag`);
-
---
--- Tablo için indeksler `sayac`
---
-ALTER TABLE `sayac`
-  ADD PRIMARY KEY (`id_sayac`);
-
---
--- Tablo için indeksler `slider`
---
-ALTER TABLE `slider`
+ALTER TABLE `o_slider`
   ADD PRIMARY KEY (`id_slider`);
 
 --
@@ -404,6 +452,12 @@ ALTER TABLE `slider`
 --
 ALTER TABLE `s_duyuru`
   ADD PRIMARY KEY (`id_sduyuru`);
+
+--
+-- Tablo için indeksler `s_sayac`
+--
+ALTER TABLE `s_sayac`
+  ADD PRIMARY KEY (`id_sayac`);
 
 --
 -- Tablo için indeksler `s_slider`
@@ -425,7 +479,7 @@ ALTER TABLE `yonlendirici`
 -- Tablo için AUTO_INCREMENT değeri `ayarlar`
 --
 ALTER TABLE `ayarlar`
-  MODIFY `id_ayarlar` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_ayarlar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `a_duyuru`
@@ -443,13 +497,13 @@ ALTER TABLE `a_ozel`
 -- Tablo için AUTO_INCREMENT değeri `bildirim`
 --
 ALTER TABLE `bildirim`
-  MODIFY `id_bildirim` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_bildirim` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `ekran`
 --
 ALTER TABLE `ekran`
-  MODIFY `id_ekran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_ekran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `firma`
@@ -461,55 +515,43 @@ ALTER TABLE `firma`
 -- Tablo için AUTO_INCREMENT değeri `kullanici`
 --
 ALTER TABLE `kullanici`
-  MODIFY `id_kullanici` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_kullanici` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `kurum`
 --
 ALTER TABLE `kurum`
-  MODIFY `id_kurum` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_kurum` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- Tablo için AUTO_INCREMENT değeri `orta`
+-- Tablo için AUTO_INCREMENT değeri `o_resimli`
 --
-ALTER TABLE `orta`
-  MODIFY `id_orta` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Tablo için AUTO_INCREMENT değeri `resimli`
---
-ALTER TABLE `resimli`
+ALTER TABLE `o_resimli`
   MODIFY `id_resimli` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Tablo için AUTO_INCREMENT değeri `resimsiz`
+-- Tablo için AUTO_INCREMENT değeri `o_resimsiz`
 --
-ALTER TABLE `resimsiz`
+ALTER TABLE `o_resimsiz`
   MODIFY `id_resimsiz` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Tablo için AUTO_INCREMENT değeri `sag`
+-- Tablo için AUTO_INCREMENT değeri `o_slider`
 --
-ALTER TABLE `sag`
-  MODIFY `id_sag` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Tablo için AUTO_INCREMENT değeri `sayac`
---
-ALTER TABLE `sayac`
-  MODIFY `id_sayac` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Tablo için AUTO_INCREMENT değeri `slider`
---
-ALTER TABLE `slider`
-  MODIFY `id_slider` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+ALTER TABLE `o_slider`
+  MODIFY `id_slider` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `s_duyuru`
 --
 ALTER TABLE `s_duyuru`
   MODIFY `id_sduyuru` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Tablo için AUTO_INCREMENT değeri `s_sayac`
+--
+ALTER TABLE `s_sayac`
+  MODIFY `id_sayac` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `s_slider`
