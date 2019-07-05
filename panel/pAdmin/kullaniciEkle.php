@@ -36,34 +36,139 @@ require_once "../../baglan.php";
     </header>
     <!-- CONTENT CONTAINER -->
     <div class="w3-container w3-white w3-margin w3-padding">
-        <div class="container">
-            <form action="/action_page.php">
+        <div class="w3-container  w3-white w3-margin w3-padding">
+            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                 <div class="form-group">
-                    <label for="email">Email address:</label>
-                    <input type="email" class="form-control" id="email">
+                    <label for="email">Email Adresi:</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
                 </div>
                 <div class="form-group">
-                    <label for="pwd">Password:</label>
-                    <input type="password" class="form-control" id="pwd" name="sifre">
+                    <label for="pwd">Sifre:</label>
+                    <input type="password" class="form-control" id="pwd" name="sifre" required>
                 </div>
                 <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" class="form-control" id="name" name="adsoyad">
+                    <label for="name">Ad Soyad:</label>
+                    <input type="text" class="form-control" id="name" name="adsoyad" required>
                 </div>
                 <div class="form-group">
-                    <label for="tel">Telephone:</label>
-                    <input class="form-control" type="tel" id="tel">
+                    <label for="tel">Telefon:</label>
+                    <input class="form-control" type="tel" id="tel" name="telefon" required>
                 </div>
                 <div class="form-group">
-                    <label for="yetki">Select list (select one):</label>
-                    <select class="form-control" id="yetki" name="yetki">
-                        <option>0</option>
-                        <option>1</option>
-                        <option>2</option>
+                    <label for="yetki">Yetki:</label>
+                    <select class="form-control" id="yetki" name="yetki" required>
+                        <option value="0">Kullanici Yetkisi</option>
+                        <option value="1">Admin Yetkisi</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" name="uyeKayit">Uye Ekle</button>
             </form>
+            <?php
+            if(isset($_POST["uyeKayit"])) {
+                $email = $_POST['email'];
+                $sifre = $_POST['sifre'];
+                $adsoyad = $_POST['adsoyad'];
+                $telefon = $_POST['telefon'];
+                $yetki = $_POST['yetki'];
+                $sqlUyekayit = "INSERT INTO kullanici (mail,sifre,adsoyad,telefon,yetki) VALUES (?,?,?,?,?)";
+                $uyeKayit=$conn->prepare($sqlUyekayit);
+                $checkUyeKayit=$uyeKayit->execute([$email,$sifre,$adsoyad,$telefon,$yetki]);
+                if($checkUyeKayit) {
+                    if(!$yetki) {
+                        $kullaniciId = $conn->lastInsertId();
+
+                        $sqlKurumKayit = "INSERT INTO kurum (kullanici_id,ad_soyad,mail,telefon) VALUES (?,?,?,?)";
+                        $kurumKayit = $conn->prepare($sqlKurumKayit);
+                        $kurumKayit->execute([$kullaniciId, $adsoyad, $email, $telefon]);
+
+                        $sqlEkranKayit = "INSERT INTO ekran (kullanici_id) VALUES (?)";
+                        $ekranKayit = $conn->prepare($sqlEkranKayit);
+                        $ekranKayit->execute([$kullaniciId]);
+
+                        $sqlAyarlarKayit = "INSERT INTO ayarlar (kullanici_id) VALUES (?)";
+                        $ayarlarKayit = $conn->prepare($sqlAyarlarKayit);
+                        $ayarlarKayit->execute([$kullaniciId]);
+                    }
+                    echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                         Uye Basariyla Eklendi!
+                         <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+                      </div>";
+                }else {
+                    echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+            Üzgünüz bir hata oluştu lütfen tekrar deneyiniz!
+            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+        </div>";
+                }
+
+            }?>
+        </div>
+        <?php
+        if(isset($_POST["sil"])){
+            $kullaniciID=$_POST["kullaniciId"];
+            $sqlSil="DELETE FROM kullanici WHERE id_kullanici=?";
+            $kullaniciSil=$conn->prepare($sqlSil);
+          $checkSil= $kullaniciSil->execute([$kullaniciID]);
+          if($checkSil) {
+              echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+            Kullanici Basariyla Silindi!
+            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+        </div>";
+          }
+          else{
+              echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>
+            Hata Kullanici Silinmedi!
+            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+        </div>";
+          }
+        }
+        ?>
+        <div class="w3-container w3-margin w3-padding ">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+
+                    <th scope="col">Ad Soyad</th>
+                    <th scope="col">Mail</th>
+                    <th scope="col">Telefon</th>
+                    <th scope="col">Yetki</th>
+                    <th scope="col">Sil</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $sqlkullanici = "SELECT * FROM kullanici ORDER BY yetki DESC";
+                $resultKullanici = $conn->query($sqlkullanici);
+                if ($resultKullanici->rowCount() > 0) {
+                    while ($rowKullanici = $resultKullanici->fetch(PDO::FETCH_ASSOC)) {
+                        echo "<tr>";
+                        echo "<td>" . $rowKullanici['adsoyad'] . "</td>";
+                        echo "<td>" . $rowKullanici['mail'] . "</td>";
+                        echo "<td>" . $rowKullanici['telefon'] . "</td>";
+                        if($rowKullanici['yetki']){
+                        echo "<td>Admin Yetkisi</td>";
+                        }else{
+                            echo "<td>Kullanici Yetkisi</td>";
+                        }
+                        echo "<td>";?>
+                        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                            <input type="hidden" name="kullaniciId" value="<?php echo $rowKullanici['id_kullanici']?>">
+                            <button name="sil" class="w3-button w3-circle w3-red" <?php if($rowKullanici['yetki']){
+                                echo "disabled";
+                            } ?> onclick="return confirm('Silmek istiyor musunuz?');">X</button>
+                        </form>
+                        <?php  echo"</td>";
+
+                        echo "</tr>";
+                    }//while end
+
+                }else {
+                    echo "</tbody></table><div class=\"alert alert-info\">
+     Kayitli Kullanici Yok
+  </div>";
+                }
+                ?>
+                </tbody>
+            </table>
         </div>
 
     </div>

@@ -42,9 +42,9 @@ require_once "../../baglan.php";
     <hr>
     <div class="w3-container sidebarMenu">
         <button class="w3-button w3-padding-16 w3-hide-large w3-block w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Menüyü Kapat </button>
-        <a href="kullaniciEkle.php" class="w3-padding-16 w3-button w3-block w3-left-align w3-white w3-leftbar w3-border-white w3-hover-border-red">Kullanici Ekle</a>
-        <a href="bildirimGonder.php" class="w3-padding-16 w3-button w3-block w3-left-align w3-white w3-leftbar w3-border-white w3-hover-border-red">Bildirim Gonder</a>
-        <a href="ayarlar.php" class="w3-padding-16 w3-button w3-block w3-left-align w3-white w3-leftbar w3-border-white w3-hover-border-red">Ayarlar</a>
+        <a href="kullaniciEkle.php" class="w3-padding-16 w3-button w3-block w3-left-align w3-white w3-leftbar w3-border-white w3-hover-border-red"><i class="fas fa-caret-right"></i> Kullanici Ekle</a>
+        <a href="bildirimGonder.php" class="w3-padding-16 w3-button w3-block w3-left-align w3-white w3-leftbar w3-border-white w3-hover-border-red"><i class="fas fa-caret-right"></i> Bildirim Gonder</a>
+        <a href="ayarlar.php" class="w3-padding-16 w3-button w3-block w3-left-align w3-white w3-leftbar w3-border-white w3-hover-border-red"><i class="fas fa-caret-right"></i> Ayarlar</a>
     </div>
 </nav>
 <script>function w3_open() {
