@@ -60,7 +60,7 @@ table {
 }
 
 /* The Close Button */
-.close {
+.closeModal {
     position: absolute;
     top: 15px;
     right: 35px;
@@ -69,8 +69,8 @@ table {
     transition: 0.3s;
 }
 
-.close:hover,
-.close:focus {
+.closeModal:hover,
+.closeModal:focus {
     color: #bbb;
     text-decoration: none;
     cursor: pointer;

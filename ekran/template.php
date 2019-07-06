@@ -175,13 +175,10 @@
 
                         <div class='item '>
                             <p class="havadurumu_gun">Pazartesi</p>
-
                             <img src='https://s.yimg.com/zz/combo?a/i/us/nws/weather/gr/0d.png' class="havadurumu_icon" />
                             <p class="havadurumu_yer">MERKEZ</p>
                             <p class="havadurumu_derece">21&deg;</p>
                         </div>
-
-
                     </div>
                 </div>
             </div>

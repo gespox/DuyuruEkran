@@ -88,6 +88,10 @@ require_once "../../baglan.php";
                         $sqlAyarlarKayit = "INSERT INTO ayarlar (kullanici_id) VALUES (?)";
                         $ayarlarKayit = $conn->prepare($sqlAyarlarKayit);
                         $ayarlarKayit->execute([$kullaniciId]);
+
+                        $sqlOZelAlanKayit = "INSERT INTO a_ozel (kullanici_id) VALUES (?)";
+                        $OzelAlanKayit = $conn->prepare($sqlOZelAlanKayit);
+                        $OzelAlanKayit->execute([$kullaniciId]);
                     }
                     echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
                          Uye Basariyla Eklendi!

@@ -179,7 +179,7 @@ if(isset($_POST["sil"])){
     <div id="myModal" class="modal">
 
         <!-- The Close Button -->
-        <span class="close">&times;</span>
+        <span class="closeModal">&times;</span>
 
         <!-- Modal Content (The Image) -->
         <img src="" class="modal-content" id="img01">

@@ -105,7 +105,7 @@ require_once "../../baglan.php";
                          Ayarlar Basariyla Guncellendi!
                          <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
                       </div>";
-                
+
             }else {
                 echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
             Üzgünüz bir hata oluştu lütfen tekrar deneyiniz!
