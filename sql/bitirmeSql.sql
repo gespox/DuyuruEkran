@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 06 Tem 2019, 16:46:18
--- Sunucu sürümü: 10.1.39-MariaDB
--- PHP Sürümü: 7.2.18
+-- Üretim Zamanı: 07 Tem 2019, 00:09:36
+-- Sunucu sürümü: 10.1.36-MariaDB
+-- PHP Sürümü: 7.2.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -32,7 +32,7 @@ CREATE TABLE `ayarlar` (
   `id_ayarlar` int(11) NOT NULL,
   `kullanici_id` int(11) NOT NULL,
   `yenileme_time` bigint(20) NOT NULL DEFAULT '900000',
-  `tema` varchar(20) NOT NULL DEFAULT 'css/stil_yeni.css',
+  `tema` varchar(20) NOT NULL DEFAULT 'yesil',
   `orta_Sure` int(11) NOT NULL DEFAULT '10000',
   `sagSlider_sure` int(11) NOT NULL DEFAULT '10000',
   `sagDuyuru_sure` int(11) NOT NULL DEFAULT '10000',
@@ -44,7 +44,8 @@ CREATE TABLE `ayarlar` (
 --
 
 INSERT INTO `ayarlar` (`id_ayarlar`, `kullanici_id`, `yenileme_time`, `tema`, `orta_Sure`, `sagSlider_sure`, `sagDuyuru_sure`, `sagSayac_sure`) VALUES
-(1, 9, 900000, 'css/stil_yeni.css', 10000, 10000, 10000, 10000);
+(1, 9, 900000, 'yesil', 10000, 10000, 10000, 10000),
+(2, 11, 86400000, 'bordo', 30000, 30000, 120000, 300000);
 
 -- --------------------------------------------------------
 
@@ -83,7 +84,8 @@ CREATE TABLE `a_ozel` (
 --
 
 INSERT INTO `a_ozel` (`id_aozel`, `kullanici_id`, `yazi`) VALUES
-(2, 2, 'Selamlar');
+(2, 2, 'Selamlar'),
+(3, 11, NULL);
 
 -- --------------------------------------------------------
 
@@ -122,7 +124,8 @@ CREATE TABLE `ekran` (
 INSERT INTO `ekran` (`id_ekran`, `kullanici_id`, `yenileme`) VALUES
 (2, 7, 10000),
 (3, 9, 10000),
-(4, 2, 10000);
+(4, 2, 10000),
+(5, 11, 10000);
 
 -- --------------------------------------------------------
 
@@ -262,7 +265,8 @@ INSERT INTO `kullanici` (`id_kullanici`, `mail`, `sifre`, `adsoyad`, `telefon`, 
 (6, 'ali@ads.cc', '3132', 'sfdf', 2432, 'img/avatar2.png', 0),
 (7, 'asdqwe@asd.cc', '123', 'kullanici test', 123, 'img/avatar2.png', 0),
 (9, 'qweqew@qwe.com', 'qwe', 'qwe', 123, 'img/avatar2.png', 0),
-(10, 'sulu@gmail.com', '12345678', 'Suleyman Fiskiyecioglugil', 536, 'img/avatar2.png', 1);
+(10, 'sulu@gmail.com', '12345678', 'Suleyman Fiskiyecioglugil', 536, 'img/avatar2.png', 1),
+(11, 'sait@gmail.com', '1', 'Sait Okan', 5377669539, 'img/avatar2.png', 0);
 
 -- --------------------------------------------------------
 
@@ -273,9 +277,9 @@ INSERT INTO `kullanici` (`id_kullanici`, `mail`, `sifre`, `adsoyad`, `telefon`, 
 CREATE TABLE `kurum` (
   `id_kurum` int(11) NOT NULL,
   `kullanici_id` int(11) NOT NULL,
+  `kurumAd` varchar(200) DEFAULT NULL,
   `ad_soyad` varchar(100) NOT NULL,
   `il` varchar(30) DEFAULT NULL,
-  `ilce` varchar(50) DEFAULT NULL,
   `logo` varchar(100) NOT NULL DEFAULT 'img/logo.png',
   `mail` varchar(30) NOT NULL,
   `telefon` varchar(20) NOT NULL,
@@ -286,10 +290,11 @@ CREATE TABLE `kurum` (
 -- Tablo döküm verisi `kurum`
 --
 
-INSERT INTO `kurum` (`id_kurum`, `kullanici_id`, `ad_soyad`, `il`, `ilce`, `logo`, `mail`, `telefon`, `adres`) VALUES
-(1, 6, 'sfdf', NULL, NULL, 'img/logo.png', 'ali@ads.cc', '2432', NULL),
-(2, 7, 'kullanici test', NULL, NULL, 'img/logo.png', 'asdqwe@asd.cc', '123', NULL),
-(3, 9, 'qwe', NULL, NULL, 'img/logo.png', 'qweqew@qwe.com', '123', NULL);
+INSERT INTO `kurum` (`id_kurum`, `kullanici_id`, `kurumAd`, `ad_soyad`, `il`, `logo`, `mail`, `telefon`, `adres`) VALUES
+(1, 6, NULL, 'sfdf', NULL, 'img/logo.png', 'ali@ads.cc', '2432', NULL),
+(2, 7, NULL, 'kullanici test', NULL, 'img/logo.png', 'asdqwe@asd.cc', '123', NULL),
+(3, 9, NULL, 'qwe', NULL, 'img/logo.png', 'qweqew@qwe.com', '123', NULL),
+(4, 11, 'sait asd', 'Sait Okan', 'batman', 'img/11-daireVesikalik.png', 'saitokan@yandex.com', '05377669539', 'Carsibasi Mahallesi Hikmet Isik Caddesi No:30 Bahce Apt. Kat:4 Daire:11 Sivas/Merkez');
 
 -- --------------------------------------------------------
 
@@ -517,7 +522,7 @@ ALTER TABLE `yonlendirici`
 -- Tablo için AUTO_INCREMENT değeri `ayarlar`
 --
 ALTER TABLE `ayarlar`
-  MODIFY `id_ayarlar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_ayarlar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `a_duyuru`
@@ -529,7 +534,7 @@ ALTER TABLE `a_duyuru`
 -- Tablo için AUTO_INCREMENT değeri `a_ozel`
 --
 ALTER TABLE `a_ozel`
-  MODIFY `id_aozel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_aozel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `bildirim`
@@ -541,7 +546,7 @@ ALTER TABLE `bildirim`
 -- Tablo için AUTO_INCREMENT değeri `ekran`
 --
 ALTER TABLE `ekran`
-  MODIFY `id_ekran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_ekran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `firma`
@@ -553,13 +558,13 @@ ALTER TABLE `firma`
 -- Tablo için AUTO_INCREMENT değeri `kullanici`
 --
 ALTER TABLE `kullanici`
-  MODIFY `id_kullanici` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_kullanici` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `kurum`
 --
 ALTER TABLE `kurum`
-  MODIFY `id_kurum` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_kurum` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `o_resimli`
