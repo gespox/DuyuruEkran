@@ -158,7 +158,7 @@ require_once "../../baglan.php";
                     <input type="text" class="form-control" id="name" name="adsoyad" value="<?php echo $row['ad_soyad'];  ?>" required>
                 </div>
                 <div class="form-group">
-                    <label for="yetki">Şehir:</label>
+                    <label for="sehir">Şehir:</label>
                     <select class="form-control" id="sehir" name="sehir" required>
                         <?php foreach($sehir as $key => $value){?>
                             <option value="<?php echo $value;?>" <?php if($row['il']!=NULL){ if($value==$row['il']){echo ' selected';}}?>><?php echo $value;?></option>
