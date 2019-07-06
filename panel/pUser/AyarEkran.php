@@ -42,78 +42,15 @@ require_once "../../baglan.php";
     <div class="w3-container w3-white w3-margin w3-padding">
         <?php
         if(isset($_POST["guncelle"])) {
-            $kurumad=$_POST['kurumad'];
-            $adsoyad = $_POST['adsoyad'];
-            $sehir=$_POST['sehir'];
-            $email = $_POST['email'];
-            $telefon = $_POST['telefon'];
-            $adres = $_POST['adres'];
-            if(isset( $_FILES["fileToUpload"] ) && !empty( $_FILES["fileToUpload"]["name"] )){
-                $target_dir = "img/";
-                $imgName = $kullaniciId ."-" . basename($_FILES["fileToUpload"]["name"]);
-                $target_file = $target_dir . $imgName;
-                $uploadOk = 1;
-                $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-                // Check if image file is a actual image or fake image
-                $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-                if ($check == false) {
-                    echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-           HATA! Yüklenen Dosya JPG,JPEG veya PNG Formatlarinda Resim Olmalidir.
-            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
-        </div>";
-                    $uploadOk = 0;
-                } // Check file size
-                elseif ($_FILES["fileToUpload"]["size"] > 1024 * 1024 * 2) {
-                    echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-           HATA! Dosya boyutu max 2MB'tır.
-            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
-        </div>";
-                    $uploadOk = 0;
-                } // Allow certain file formats
-                elseif ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
-                    echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-            Sadece  JPG, JPEG, PNG formatlarında resim yükleyebilirsiniz.
-            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
-        </div>";
-                    $uploadOk = 0;
-                } // Check if $uploadOk is set to 0 by an error
-                else {
-                    if ($uploadOk == 0) {
-                        echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-             Üzgünüz bir hata oluştu lütfen tekrar deneyiniz!
-            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
-        </div>";
-                        // if everything is ok, try to upload file
-                    } else {
-                        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                            $sqlUyekayit = "UPDATE kurum SET kurumAd=?,ad_soyad=?,il=?,logo=?,mail=?,telefon=?,adres=? WHERE kullanici_id=?";
-                            $uyeKayit=$conn->prepare($sqlUyekayit);
-                            $checkUyeKayit=$uyeKayit->execute([$kurumad,$adsoyad,$sehir,$target_file,$email,$telefon,$adres,$kullaniciId]);
-                            if($checkUyeKayit) {
-                                echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
-                         Ayarlar Basariyla Guncellendi!
-                         <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
-                      </div>";
-                            }else {
-                                echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-            Üzgünüz bir hata oluştu lütfen tekrar deneyiniz!
-            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
-        </div>";
-                            }
-
-                        } else {
-                            echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-            Üzgünüz bir hata oluştu lütfen tekrar deneyiniz!
-            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
-        </div>";
-                        }
-                    }
-                }
-            }
-            else{
-                $sqlUyekayit = "UPDATE kurum SET kurumAd=?,ad_soyad=?,il=?,mail=?,telefon=?,adres=? WHERE kullanici_id=?";
+            $yenileme=$_POST['yenileme'];
+            $tema = $_POST['tema'];
+            $orta=$_POST['orta'];
+            $sagSlider = $_POST['sagSlider'];
+            $sagduyuru = $_POST['sagDuyuru'];
+            $sagSayac = $_POST['sagSayac'];
+                $sqlUyekayit = "UPDATE ayarlar SET yenileme_time=?,tema=?,orta_Sure=?,sagSlider_sure=?,sagDuyuru_sure=?,sagSayac_sure=? WHERE kullanici_id=?";
                 $uyeKayit=$conn->prepare($sqlUyekayit);
-                $checkUyeKayit=$uyeKayit->execute([$kurumad,$adsoyad,$sehir,$email,$telefon,$adres,$kullaniciId]);
+                $checkUyeKayit=$uyeKayit->execute([$yenileme,$tema,$orta,$sagSlider,$sagduyuru,$sagSayac,$kullaniciId]);
                 if($checkUyeKayit) {
                     echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
                          Ayarlar Basariyla Guncellendi!
@@ -125,14 +62,9 @@ require_once "../../baglan.php";
             <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
         </div>";
                 }
-
-            }
-
         }?>
         <div class="w3-container  w3-white w3-margin w3-padding">
             <?php
-
-
             $KullaniciSelect = "SELECT * FROM ayarlar WHERE kullanici_id=?";
             $stmt = $conn->prepare($KullaniciSelect);
             $stmt->execute([$kullaniciId]);
@@ -163,33 +95,48 @@ require_once "../../baglan.php";
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="sehir">Şehir:</label>
-                    <select class="form-control" id="sehir" name="sehir" required>
-
+                    <label for="orta">Orta Kısım Geçiş Süresi:</label>
+                    <select class="form-control" id="orta" name="orta" required>
+                        <option value="10000"<?php if ($row['orta_Sure']==10000) echo " selected";?>>10 Saniye</option>
+                        <option value="20000"<?php if ($row['orta_Sure']==20000) echo " selected";?>>20 Saniye</option>
+                        <option value="30000"<?php if ($row['orta_Sure']==30000) echo " selected";?>>30 Saniye</option>
+                        <option value="60000"<?php if ($row['orta_Sure']==60000) echo " selected";?>>1 Dakika</option>
+                        <option value="120000"<?php if ($row['orta_Sure']==120000) echo " selected";?>>2 Dakika</option>
+                        <option value="300000"<?php if ($row['orta_Sure']==300000) echo " selected";?>>5 Dakika</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email Adresi:</label>
-                    <input type="email" class="form-control" id="email" name="email" value="<?php echo $row['mail'];  ?>" required>
+                    <label for="sagSlider">Sağ Resim Köşesi Geçiş Süresi:</label>
+                    <select class="form-control" id="sagSlider" name="sagSlider" required>
+                        <option value="10000"<?php if ($row['sagSlider_sure']==10000) echo " selected";?>>10 Saniye</option>
+                        <option value="20000"<?php if ($row['sagSlider_sure']==20000) echo " selected";?>>20 Saniye</option>
+                        <option value="30000"<?php if ($row['sagSlider_sure']==30000) echo " selected";?>>30 Saniye</option>
+                        <option value="60000"<?php if ($row['sagSlider_sure']==60000) echo " selected";?>>1 Dakika</option>
+                        <option value="120000"<?php if ($row['sagSlider_sure']==120000) echo " selected";?>>2 Dakika</option>
+                        <option value="300000"<?php if ($row['sagSlider_sure']==300000) echo " selected";?>>5 Dakika</option>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label for="tel">Telefon:</label>
-                    <input class="form-control" type="tel" id="tel" name="telefon" value="<?php echo $row['telefon'];  ?>" required>
+                    <label for="sagDuyuru">Sağ Duyuru Geçiş Süresi:</label>
+                    <select class="form-control" id="sagDuyuru" name="sagDuyuru" required>
+                        <option value="10000"<?php if ($row['sagDuyuru_sure']==10000) echo " selected";?>>10 Saniye</option>
+                        <option value="20000"<?php if ($row['sagDuyuru_sure']==20000) echo " selected";?>>20 Saniye</option>
+                        <option value="30000"<?php if ($row['sagDuyuru_sure']==30000) echo " selected";?>>30 Saniye</option>
+                        <option value="60000"<?php if ($row['sagDuyuru_sure']==60000) echo " selected";?>>1 Dakika</option>
+                        <option value="120000"<?php if ($row['sagDuyuru_sure']==120000) echo " selected";?>>2 Dakika</option>
+                        <option value="300000"<?php if ($row['sagDuyuru_sure']==300000) echo " selected";?>>5 Dakika</option>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label for="adres">Adres:</label>
-                    <textarea class="form-control" id="adres" name="adres" rows="3"><?php if($row['adres']!=NULL){ echo $row['adres'];} ?></textarea>
-                </div>
-                <div class="form-group">
-                    <div class="form-group row">
-                        <label class="col-2 col-form-label" for="fileToUpload">Kurum Logo:</label>
-                        <input type="file" name="fileToUpload" class="form-control-file col-4" id="fileToUpload" >
-                        <div class="w3-col s4">
-                            Mevcut Logo:
-                            <img src="<?php echo $row['logo'];?>" class="w3-circle w3-margin-right" style="width:46px">
-                        </div>
-                    </div>
-                    <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+                    <label for="sagSayac">Sağ Sayaç Geçiş Süresi:</label>
+                    <select class="form-control" id="sagSayac" name="sagSayac" required>
+                        <option value="10000"<?php if ($row['sagSayac_sure']==10000) echo " selected";?>>10 Saniye</option>
+                        <option value="20000"<?php if ($row['sagSayac_sure']==20000) echo " selected";?>>20 Saniye</option>
+                        <option value="30000"<?php if ($row['sagSayac_sure']==30000) echo " selected";?>>30 Saniye</option>
+                        <option value="60000"<?php if ($row['sagSayac_sure']==60000) echo " selected";?>>1 Dakika</option>
+                        <option value="120000"<?php if ($row['sagSayac_sure']==120000) echo " selected";?>>2 Dakika</option>
+                        <option value="300000"<?php if ($row['sagSayac_sure']==300000) echo " selected";?>>5 Dakika</option>
+                    </select>
                 </div>
                 <button type="submit" class="btn btn-primary" name="guncelle">Guncelle</button>
             </form>
