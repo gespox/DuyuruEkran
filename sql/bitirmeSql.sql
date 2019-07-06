@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 05 Tem 2019, 20:08:13
+-- Üretim Zamanı: 06 Tem 2019, 16:46:18
 -- Sunucu sürümü: 10.1.39-MariaDB
 -- PHP Sürümü: 7.2.18
 
@@ -32,15 +32,19 @@ CREATE TABLE `ayarlar` (
   `id_ayarlar` int(11) NOT NULL,
   `kullanici_id` int(11) NOT NULL,
   `yenileme_time` bigint(20) NOT NULL DEFAULT '900000',
-  `tema` varchar(20) NOT NULL DEFAULT 'css/stil_yeni.css'
+  `tema` varchar(20) NOT NULL DEFAULT 'css/stil_yeni.css',
+  `orta_Sure` int(11) NOT NULL DEFAULT '10000',
+  `sagSlider_sure` int(11) NOT NULL DEFAULT '10000',
+  `sagDuyuru_sure` int(11) NOT NULL DEFAULT '10000',
+  `sagSayac_sure` int(11) NOT NULL DEFAULT '10000'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
 
 --
 -- Tablo döküm verisi `ayarlar`
 --
 
-INSERT INTO `ayarlar` (`id_ayarlar`, `kullanici_id`, `yenileme_time`, `tema`) VALUES
-(1, 9, 900000, 'css/stil_yeni.css');
+INSERT INTO `ayarlar` (`id_ayarlar`, `kullanici_id`, `yenileme_time`, `tema`, `orta_Sure`, `sagSlider_sure`, `sagDuyuru_sure`, `sagSayac_sure`) VALUES
+(1, 9, 900000, 'css/stil_yeni.css', 10000, 10000, 10000, 10000);
 
 -- --------------------------------------------------------
 
@@ -55,6 +59,13 @@ CREATE TABLE `a_duyuru` (
   `bitis` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
 
+--
+-- Tablo döküm verisi `a_duyuru`
+--
+
+INSERT INTO `a_duyuru` (`id_aduyuru`, `kullanici_id`, `yazi`, `bitis`) VALUES
+(3, 2, 'asdasdasd', '2019-07-17');
+
 -- --------------------------------------------------------
 
 --
@@ -64,8 +75,15 @@ CREATE TABLE `a_duyuru` (
 CREATE TABLE `a_ozel` (
   `id_aozel` int(11) NOT NULL,
   `kullanici_id` int(11) NOT NULL,
-  `yazi` text NOT NULL
+  `yazi` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Tablo döküm verisi `a_ozel`
+--
+
+INSERT INTO `a_ozel` (`id_aozel`, `kullanici_id`, `yazi`) VALUES
+(2, 2, 'Selamlar');
 
 -- --------------------------------------------------------
 
@@ -103,7 +121,8 @@ CREATE TABLE `ekran` (
 
 INSERT INTO `ekran` (`id_ekran`, `kullanici_id`, `yenileme`) VALUES
 (2, 7, 10000),
-(3, 9, 10000);
+(3, 9, 10000),
+(4, 2, 10000);
 
 -- --------------------------------------------------------
 
@@ -236,13 +255,14 @@ CREATE TABLE `kullanici` (
 --
 
 INSERT INTO `kullanici` (`id_kullanici`, `mail`, `sifre`, `adsoyad`, `telefon`, `avatar`, `yetki`) VALUES
-(1, 'admin@admin.com', 'admin', 'Admin', 5050550, 'img/1-F2497816-01.jpg', 1),
-(2, 'saitokan@gmail.com', '1', 'Sait Okan', 5377669539, 'img/avatar2.png', 0),
+(1, 'admin@admin.com', 'admin', 'Admin Admin', 23241234, 'img/1-kullanici1img1.png', 1),
+(2, 'saitokan@gmail.com', '1', 'Mehmet Sait Okan', 5377669539, 'img/2-DSC_0004+.jpg', 0),
 (3, 'saitokan@yandex.com', '123', 'Mehmet Sait Okan', 5377669539, 'img/avatar2.png', 1),
 (4, 'asdads@yandex.com', '13', 'sdi', 234, 'img/avatar2.png', 0),
 (6, 'ali@ads.cc', '3132', 'sfdf', 2432, 'img/avatar2.png', 0),
 (7, 'asdqwe@asd.cc', '123', 'kullanici test', 123, 'img/avatar2.png', 0),
-(9, 'qweqew@qwe.com', 'qwe', 'qwe', 123, 'img/avatar2.png', 0);
+(9, 'qweqew@qwe.com', 'qwe', 'qwe', 123, 'img/avatar2.png', 0),
+(10, 'sulu@gmail.com', '12345678', 'Suleyman Fiskiyecioglugil', 536, 'img/avatar2.png', 1);
 
 -- --------------------------------------------------------
 
@@ -283,9 +303,15 @@ CREATE TABLE `o_resimli` (
   `baslik` varchar(100) NOT NULL,
   `yazi` text NOT NULL,
   `resim_url` varchar(100) NOT NULL,
-  `bitis` date NOT NULL,
-  `sure` bigint(20) NOT NULL
+  `bitis` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Tablo döküm verisi `o_resimli`
+--
+
+INSERT INTO `o_resimli` (`id_resimli`, `kullanici_id`, `baslik`, `yazi`, `resim_url`, `bitis`) VALUES
+(2, 2, 'asdad', 'asdad', 'img/ResimliDuyuru/2-DaG51gvV4AA-yZv.jpg', '2019-07-13');
 
 -- --------------------------------------------------------
 
@@ -298,9 +324,16 @@ CREATE TABLE `o_resimsiz` (
   `kullanici_id` int(11) NOT NULL,
   `baslik` varchar(100) NOT NULL,
   `yazi` text NOT NULL,
-  `bitis` date NOT NULL,
-  `sure` bigint(20) NOT NULL
+  `bitis` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+--
+-- Tablo döküm verisi `o_resimsiz`
+--
+
+INSERT INTO `o_resimsiz` (`id_resimsiz`, `kullanici_id`, `baslik`, `yazi`, `bitis`) VALUES
+(2, 2, 'Resimsiz', 'Duyuru icerigi', '2019-07-17'),
+(3, 2, 'Duygu ozel', 'duyuru duygu', '2019-07-13');
 
 -- --------------------------------------------------------
 
@@ -312,16 +345,15 @@ CREATE TABLE `o_slider` (
   `id_slider` int(11) NOT NULL,
   `kullanici_id` int(11) NOT NULL,
   `slider_url` varchar(100) NOT NULL,
-  `bitis` date NOT NULL,
-  `sure` bigint(20) NOT NULL
+  `bitis` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
 
 --
 -- Tablo döküm verisi `o_slider`
 --
 
-INSERT INTO `o_slider` (`id_slider`, `kullanici_id`, `slider_url`, `bitis`, `sure`) VALUES
-(10, 2, 'img/slider/2-2-Gorselvize2.jpeg', '2019-07-25', 0);
+INSERT INTO `o_slider` (`id_slider`, `kullanici_id`, `slider_url`, `bitis`) VALUES
+(11, 2, 'img/slider/2-2-2-2-cover-4-1170x800.jpg', '2019-07-11');
 
 -- --------------------------------------------------------
 
@@ -350,6 +382,13 @@ CREATE TABLE `s_sayac` (
   `bitis` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
 
+--
+-- Tablo döküm verisi `s_sayac`
+--
+
+INSERT INTO `s_sayac` (`id_sayac`, `kullanici_id`, `yazi`, `bitis`) VALUES
+(3, 2, 'asdasdad', '2019-07-21');
+
 -- --------------------------------------------------------
 
 --
@@ -359,7 +398,6 @@ CREATE TABLE `s_sayac` (
 CREATE TABLE `s_slider` (
   `id_sslider` int(11) NOT NULL,
   `kullanici_id` int(11) NOT NULL,
-  `resim_ad` varchar(100) NOT NULL,
   `resim_url` text NOT NULL,
   `bitis` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
@@ -485,13 +523,13 @@ ALTER TABLE `ayarlar`
 -- Tablo için AUTO_INCREMENT değeri `a_duyuru`
 --
 ALTER TABLE `a_duyuru`
-  MODIFY `id_aduyuru` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_aduyuru` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `a_ozel`
 --
 ALTER TABLE `a_ozel`
-  MODIFY `id_aozel` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_aozel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `bildirim`
@@ -503,7 +541,7 @@ ALTER TABLE `bildirim`
 -- Tablo için AUTO_INCREMENT değeri `ekran`
 --
 ALTER TABLE `ekran`
-  MODIFY `id_ekran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_ekran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `firma`
@@ -515,7 +553,7 @@ ALTER TABLE `firma`
 -- Tablo için AUTO_INCREMENT değeri `kullanici`
 --
 ALTER TABLE `kullanici`
-  MODIFY `id_kullanici` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_kullanici` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `kurum`
@@ -527,37 +565,37 @@ ALTER TABLE `kurum`
 -- Tablo için AUTO_INCREMENT değeri `o_resimli`
 --
 ALTER TABLE `o_resimli`
-  MODIFY `id_resimli` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_resimli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `o_resimsiz`
 --
 ALTER TABLE `o_resimsiz`
-  MODIFY `id_resimsiz` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_resimsiz` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `o_slider`
 --
 ALTER TABLE `o_slider`
-  MODIFY `id_slider` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_slider` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `s_duyuru`
 --
 ALTER TABLE `s_duyuru`
-  MODIFY `id_sduyuru` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_sduyuru` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `s_sayac`
 --
 ALTER TABLE `s_sayac`
-  MODIFY `id_sayac` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_sayac` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `s_slider`
 --
 ALTER TABLE `s_slider`
-  MODIFY `id_sslider` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_sslider` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `yonlendirici`
