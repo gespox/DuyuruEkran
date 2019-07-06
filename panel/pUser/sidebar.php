@@ -10,6 +10,9 @@ if (!isset($_SESSION['id'])) {
 require_once "../../baglan.php";
 ?>
 <style>
+    a{
+        text-decoration: none;
+    }
     a:hover {
         text-decoration: none;
     }
