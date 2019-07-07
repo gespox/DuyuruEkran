@@ -1,15 +1,30 @@
 <?php
 if(isset($_GET['eId'])){
-
+$ekran_id=$_GET['eId'];
 }
-
+require_once "../baglan.php";
+$selectkullaniciSQL = "SELECT kullanici_id FROM ekran WHERE id_ekran=?";
+$stmt = $conn->prepare($selectkullaniciSQL);
+$stmt->execute([$ekran_id]);
+$kullaniciGetir = $stmt->fetch();
+$kullanici_id=$kullaniciGetir['kullanici_id'];
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <!--  Kurum Adi -->
     <title>
-        Cumhuriyet Universitesi Bilgisayar Muhendisligi Kanalı | DuyuruTV
+        <?php
+        $kurumbilgi = "SELECT * FROM kurum WHERE kullanici_id=?";
+        $kurumadgetir = $conn->prepare($kurumbilgi);
+        $kurumadgetir->execute([$kullanici_id]);
+        $kurumbilgiGetir = $kurumadgetir->fetch();
+        if($kurumbilgiGetir['kurumAd']!=NULL){
+            echo $kurumbilgiGetir['kurumAd']." | Duyuru Ekranı";
+        }else{
+            echo "Duyuru Ekranı";
+        }
+        ?>
     </title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/stil_yeni.css">
@@ -17,9 +32,18 @@ if(isset($_GET['eId'])){
     <link rel="stylesheet" href="css/bootstrap.min.css">
    <link href="https://fonts.googleapis.com/css?family=Roboto:900" rel="stylesheet" type="text/css" />
     <!--  Css Ayar -->
-    <link id="csstasarim" href="css/stil_yesil.css" rel="stylesheet" type="text/css" />
+    <?php
+    $ayarsql = "SELECT * FROM ayarlar WHERE kullanici_id=?";
+    $ayarBaglanti = $conn->prepare($ayarsql);
+    $ayarBaglanti->execute([$kullanici_id]);
+    $ayarBilgiGetir = $ayarBaglanti->fetch();
+    ?>
+    <link id="csstasarim" href="css/stil_<?php echo $ayarBilgiGetir['tema']?>.css" rel="stylesheet" type="text/css" />
     <link rel="icon" href="img/ico.png" />
     <script type="text/javascript">
+        setTimeout(function(){
+            window.location.reload(1);
+        }, <?php echo $ayarBilgiGetir['yenileme_time']; ?>);
         var timer1ID;
         function timer1_Tick() {
             var now = new Date();
@@ -49,39 +73,101 @@ if(isset($_GET['eId'])){
 <!--**************** ORTA  *****************-->
     <div class="slider_alti_zemin orta_bolum">
         <div id="pnlModul">
-            <div id="marketslider" class="carousel-fade carousel slide" data-interval="1000" data-ride="carousel">
+            <div id="marketslider" class="carousel-fade carousel slide" data-interval="<?php echo 1000;//$ayarBilgiGetir['orta_Sure']?>" data-ride="carousel">
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
                     <!--**************** TANITIM EKRANI  *****************-->
                     <div class='item active'><img src = 'img/fon.png' class='fon' />
                         <div class='ilkekran_yazi_kutu'>
-                            <p class='ilkekran_yazi'>Cumhuriyet Universitesi Bilgisayar Muhendisligi<br/> KANALINA HOŞ GELDİNİZ...<br/> <br/></p>
+                            <p class='ilkekran_yazi'>
+                                <?php if($kurumbilgiGetir['kurumAd']!=NULL){
+                                echo $kurumbilgiGetir['kurumAd']."<br/> DUYURU EKRANINA HOŞ GELDİNİZ...<br/> <br/>";
+                                }else{
+                                echo "<br/> DUYURU EKRANINA HOŞ GELDİNİZ...<br/> <br/>";
+                                }
+                                ?></p>
                         </div>
                     </div>
                     <!--**************** RESIMLI DUYURU  *****************-->
-                    <div class='item'><img src='img/fon.png'  class='fon' />
-                        <p class='slidersola fon_sayfa_baslik'>Yonetici Modulu test</p>
-                        <img src = 'img/4379_9030371.png' class='yoneticimesaji_resim'>
-                        <p class='yoneticimesaji_resim_yazi' > Yonetici Modulu test <br/> Yonetici Ad SAoyad</p>
-                        <p class='yoneticimesaji_yazi' style='font-size: 2.4vw'>asjdgjhgasdhgadsjh asjdgjhgasdhgadsjh asjdgjhgasdhgadsjh asjdgjhgasdhgadsjh asjdgjhgasdhgadsjh </p>
-                    </div>
+
+                   <?php
+                   $resimlisql = "SELECT * FROM ekran_resimli WHERE ekran_id=?";
+                   $resimliBaglanti = $conn->prepare($resimlisql);
+                   $resimliBaglanti->execute([$ekran_id]);
+                   if ($resimliBaglanti->rowCount() > 0) {
+                       while ($rowResimliEkran = $resimliBaglanti->fetch(PDO::FETCH_ASSOC)) {
+                           $sqlSelectResimli = "SELECT * FROM o_resimli WHERE id_resimli=? AND bitis >= CURDATE()";
+                           $preResimli = $conn->prepare($sqlSelectResimli);
+                           $preResimli->execute([$rowResimliEkran['resimli_id']]);
+                           if ($preResimli->rowCount() > 0) {
+                               while ($rowResimli = $preResimli->fetch(PDO::FETCH_ASSOC)) {
+                                   ?>
+                                   <div class='item'>
+                                       <img src='img/fon.png' class='fon'/>
+                                       <p class='slidersola fon_sayfa_baslik'><?php echo $rowResimli['baslik']; ?></p>
+                                       <img src='../panel/pUser/<?php echo $rowResimli['resim_url']; ?>'
+                                            class='resimlimmodul_resim'>
+                                       <p class='resimlimodul_yazi'><?php echo $rowResimli['yazi']; ?></p>
+                                   </div>
+                                   <?php
+                               }//while end
+
+                           }
+                       }
+                   }?>
                     <!--**************** SLIDER  *****************-->
+                    <?php
+                    $slidersql = "SELECT * FROM ekran_slider WHERE ekran_id=?";
+                    $sliderBaglanti = $conn->prepare($slidersql);
+                    $sliderBaglanti->execute([$ekran_id]);
+                    if ($sliderBaglanti->rowCount() > 0) {
+                        while ($rowsliderEkran = $sliderBaglanti->fetch(PDO::FETCH_ASSOC)) {
+                            $sqlSelectslider = "SELECT * FROM o_slider WHERE id_slider=? AND bitis >= CURDATE()";
+                            $preslider = $conn->prepare($sqlSelectslider);
+                            $preslider->execute([$rowsliderEkran['slider_id']]);
+                            if ($preslider->rowCount() > 0) {
+                                while ($rowslider = $preslider->fetch(PDO::FETCH_ASSOC)) {
+                                    ?>
+                                    <div class='item'><img src='../panel/pUser/<?php echo $rowslider['slider_url']; ?>' class='galeri_resim'/></div>
 
 
-                    <div class='item'><img src='img/fon.png'  class='fon' /><p class='slidersola fon_sayfa_baslik'>Resimli Modul 2</p><img src= 'img/4379_3596186.jpg' class='resimlimmodul_resim'><p class='resimlimodul_yazi' >Resimli Duyuru modul yazisia dsm gajgsdg hjhgajd fdfa bdfbmdf bmd fufkhfkjfldsfResimli Duyuru modul yazisia dsm gajgsdg hjhgajd fdfa bdfbmdf bmd fufkhfkjfldsfResimli Duyuru modul yazisia dsm gajgsdg hjhgajd fdfa bdfbmdf bmd fufkhfkjfldsfResimli Duyuru modul yazisia dsm gajgsdg hjhgajd fdfa bdfbmdf bmd fufkhfkjfldsf</p></div>
+                                    <?php
+                                }//while end
 
-                    <div class='item'><img src='img/fon.png'  class='fon' /><p class='slidersola fon_sayfa_baslik'>Resimli Modul</p><img src= 'img/4379_1986047.jpg' class='resimlimmodul_resim'><p class='resimlimodul_yazi' >Resimli Duyuru modul yazisia dsm gajgsdg hjhgajd fdfa bdfbmdf bmd fufkhfkjfldsf Resimli Duyuru modul yazisia dsm gajgsdg hjhgajd fdfa bdfbmdf bmd fufkhfkjfldsf Resimli Duyuru modul yazisia dsm gajgsdg hjhgajd fdfa bdfbmdf bmd fufkhfkjfldsf Resimli Duyuru modul yazisia dsm gajgsdg hjhgajd fdfa bdfbmdf bmd fufkhfkjfldsf </p></div>
-
-                    <div class='item'><img src='img/fon.png'  class='fon' /><p class='slidersola' style='text-align:right; width: 75%; position: absolute; top: 11%; right: 0px;padding-right: 3%; font-size: 2.3vw'>deneme resimsiz baslik222</p><div style= 'font-size: 1.7vw; text-align: left; position: absolute; padding-left: 5%; top: 27%;'><p style='float: none;font-size:2.7vw'>vahmet veli sait mehmet ali deli kun belli ahmet veli sait mehmet ali deli kun belli ahmet veli sait mehmet ali deli kun belli ahmet veli sait mehmet ali deli kun belli ahmet veli sait mehmet ali deli kun </p></div></div>
-
-                    <div class='item'><img src='img/fon.png'  class='fon' /><p class='slidersola' style='text-align:right; width: 75%; position: absolute; top: 11%; right: 0px;padding-right: 3%; font-size: 2.3vw'>deneme resimsiz baslik</p><div style= 'font-size: 1.7vw; text-align: left; position: absolute; padding-left: 5%; top: 27%;'><p style='float: none;font-size:2.7vw'>deneme resimsiz yazi adshakjsdhhhhhhhhhhhhhhhhhhhhajhadshadsdeneme resimsiz yazi adshakjsdhhhhhhhhhhhhhhhhhhhhajhadshadsdeneme resimsiz yazi adshakjsdhhhhhhhhhhhhhhhhhhhhajhadshadsdeneme resimsiz yazi adshakjsdhhhhhhhhhhhhhhhhhhhhajhadshadsdeneme resimsiz yazi adshakjsdhhhhhhhhhhhhhhhhhhhhajhadshadsdeneme resimsiz yazi adshakjsdhhhhhhhhhhhhhhhhhhhhajhadshads</p></div></div>
+                            }
+                        }
+                    }?>
+                    <!--**************** RESIMSIZ  *****************-->
+                    <?php
+                    $resimsizsql = "SELECT * FROM ekran_resimsiz WHERE ekran_id=?";
+                    $resimsizBaglanti = $conn->prepare($resimsizsql);
+                    $resimsizBaglanti->execute([$ekran_id]);
+                    if ($resimsizBaglanti->rowCount() > 0) {
+                        while ($rowResimsizEkran = $resimsizBaglanti->fetch(PDO::FETCH_ASSOC)) {
+                            $sqlSelectResimsiz = "SELECT * FROM o_resimsiz WHERE id_resimsiz=? AND bitis >= CURDATE()";
+                            $preResimsiz = $conn->prepare($sqlSelectResimsiz);
+                            $preResimsiz->execute([$rowResimsizEkran['resimsiz_id']]);
+                            if ($preResimsiz->rowCount() > 0) {
+                                while ($rowResimsiz = $preResimsiz->fetch(PDO::FETCH_ASSOC)) {
+                                    ?>
+                                    <div class='item'>
+                                        <img src='img/fon.png'  class='fon' />
+                                        <p class='slidersola' style='text-align:right; width: 75%; position: absolute; top: 11%; right: 0px;padding-right: 3%; font-size: 2.3vw'><?php echo $rowResimsiz['baslik']; ?></p>
+                                        <div style= 'font-size: 1.7vw; text-align: left; position: absolute; padding-left: 5%; top: 27%;'>
+                                            <p style='float: none;font-size:2.7vw'><?php echo $rowResimsiz['yazi']; ?></p>
+                                        </div>
+                                    </div>
+                                    <?php
+                                }//while end
+                            }
+                        }
+                    }?>
                 </div>
             </div>
-
         </div>
     </div>
     <!--**************** LOGO  *****************-->
-    <img class='orta_logo' src='img/4379_4997656.png'/>
+    <img class='orta_logo' src='../panel/pUser/<?php echo $kurumbilgiGetir['logo']; ?>'/>
     <!--**************** SAG  *****************-->
     <div class="sag_bolum_zemin sag_bolum">
         <p class="sagbolum_ust_cizgi"></p>
@@ -89,54 +175,120 @@ if(isset($_GET['eId'])){
         <!--**************** TARIH-SAAT  *****************-->
         <div class="sag_tarih_saat_kutu">
             <p class="sag_tarih_gun">
-                22 Haziran 2019
-                Cumartesi
+                <?php
+                setlocale(LC_TIME, "turkish"); //başka bir dil içinse burada belirteceksin.
+                setlocale(LC_ALL,'turkish'); //başka bir dil içinse burada belirteceksin.
+                echo strftime('%e %B %Y %A ');
+                ?>
             </p>
-            <div class="sag_saat" id="saatim"></div>
+            <div class="sag_saat" id="saatim">
+                12:00:00
+            </div>
         </div>
         <!--**************** SAG SLIDER  *****************-->
-        <div id='resimkosesislider' class='carousel slide' data-interval='1000' data-ride='carousel'>
-                <div class='carousel-inner'>
-                    <div class='item active'>
-                        <img src='img/4379_393273.jpg' style='width:100%; height: 100%'/>
-                    </div>
-                    <div class='item'><img src='img/4379_814932.jpg' style='width:100%; height: 100%'/>
-                    </div>
-                </div>
+        <div id='resimkosesislider' class='carousel slide' data-interval='<?php echo 1000;//$ayarBilgiGetir['sagSlider_sure']?>' data-ride='carousel'>
+            <div class='carousel-inner'>
+        <?php
+        $sagslidersql = "SELECT * FROM ekran_sagslider WHERE ekran_id=?";
+        $sagsliderBaglanti = $conn->prepare($sagslidersql);
+        $sagsliderBaglanti->execute([$ekran_id]);
+        if ($sagsliderBaglanti->rowCount() > 0) {
+            $i=0;
+            while ($rowsagsliderEkran = $sagsliderBaglanti->fetch(PDO::FETCH_ASSOC)) {
+                $sqlSelectsagslider = "SELECT * FROM s_slider WHERE id_sslider=? AND bitis >= CURDATE()";
+                $preSagSlider = $conn->prepare($sqlSelectsagslider);
+                $preSagSlider->execute([$rowsagsliderEkran['sagslider_id']]);
+                if ($preSagSlider->rowCount() > 0) {
+                    while ($rowsagSlider = $preSagSlider->fetch(PDO::FETCH_ASSOC)) {
+                        ?>
+                                <div class='item <?php if($i==0)echo " active"; ?>'>
+                                    <img src='../panel/pUser/<?php echo $rowsagSlider['resim_url']; ?>' style='width:100%; height: 100%'/>
+                                </div>
+                        <?php
+                    $i++;
+                    }//while end
+                }
+            }
+        }?>
             </div>
+        </div>
+
         <!--**************** SAYAC  *****************-->
         <div class="sag_bosluk">
-            <div id="sayacslider" class="carousel slide" data-interval="1000" data-ride="carousel">
+            <div id="sayacslider" class="carousel slide" data-interval="<?php echo 1000;//$ayarBilgiGetir['sagSayac_sure']?>" data-ride="carousel">
                 <div class="carousel-inner">
+                    <?php
+                    $sagsayacsql = "SELECT * FROM ekran_sagsayac WHERE ekran_id=?";
+                    $sagsayacBaglanti = $conn->prepare($sagsayacsql);
+                    $sagsayacBaglanti->execute([$ekran_id]);
+                    if ($sagsayacBaglanti->rowCount() > 0) {
+                        $i=0;
+                        while ($rowsagsayacEkran = $sagsayacBaglanti->fetch(PDO::FETCH_ASSOC)) {
+                            $sqlSelectsagsayac = "SELECT * FROM s_sayac WHERE id_sayac=? AND bitis >= CURDATE()";
+                            $preSagsayac = $conn->prepare($sqlSelectsagsayac);
+                            $preSagsayac->execute([$rowsagsayacEkran['sagsayac_id']]);
+                            if ($preSagsayac->rowCount() > 0) {
+                                while ($rowsagsayac = $preSagsayac->fetch(PDO::FETCH_ASSOC)) {
+                                    ?>
+                                    <div class='item <?php if($i==0)echo " active"; ?>'>
+                                        <p class="sagbaslikalti sag_baslik"><?php echo $rowsagsayac['yazi']; ?></p>
+                                        <p class="sag_icerik_orta"><?php
+                                            $now = time(); // or your date as well
+                                            $your_date = strtotime($rowsagsayac['bitis']);
+                                            $datediff =$your_date- $now;
+                                            $fark=round($datediff / (60 * 60 * 24));
+                                            if($fark==-1){
+                                                echo "BUGÜN";
+                                            }
+                                            elseif ($fark==0){
+                                                echo "YARIN";
+                                            }
+                                            else{
+                                                echo ++$fark." Gun Kaldı";
+                                            }
+                                            ?> </p>
+                                    </div>
+                                    <?php
+                                    $i++;
+                                }//while end
+                            }
+                        }
+                    }
 
-                    <div class='item active'>
-                        <p class="sagbaslikalti sag_baslik">2INDİRİM DUYURU 2</p>
-                        <p class="sag_icerik_orta">YARIN </p>
-                    </div>
+                    ?>
 
-                    <div class='item '>
-                        <p class="sagbaslikalti sag_baslik">INDİRİM DUYURU 1</p>
-                        <p class="sag_icerik_orta">BUGÜN </p>
-                    </div>
 
                 </div>
             </div>
         </div>
         <!--**************** SAG DUYURU  *****************-->
         <div class="sag_bosluk">
-            <div id="serbestmodulslider" class="carousel slide" data-interval="1000" data-ride="carousel">
+            <div id="serbestmodulslider" class="carousel slide" data-interval="<?php echo 1000;//$ayarBilgiGetir['sagDuyuru_sure']?>" data-ride="carousel">
                 <div class="carousel-inner">
-
-                    <div class='item active'>
-                        <p class="sagbaslikalti sag_baslik">Sagduyuru22</p>
-                        <p class="sag_icerik_kucuk">ilan duyurusu basligi 2 </p>
-                    </div>
-
-                    <div class='item '>
-                        <p class="sagbaslikalti sag_baslik">Sagduyuru</p>
-                        <p class="sag_icerik_kucuk">Sagduyuru icerik </p>
-                    </div>
-
+                    <?php
+                    $sagduyuru = "SELECT * FROM ekran_sagduyuru WHERE ekran_id=?";
+                    $sagduyuruBaglanti = $conn->prepare($sagduyuru);
+                    $sagduyuruBaglanti->execute([$ekran_id]);
+                    if ($sagduyuruBaglanti->rowCount() > 0) {
+                        $i=0;
+                        while ($rowsagduyuruEkran = $sagduyuruBaglanti->fetch(PDO::FETCH_ASSOC)) {
+                            $sqlSelectsagduyuru = "SELECT * FROM s_duyuru WHERE id_sduyuru=? AND bitis >= CURDATE()";
+                            $preSagduyuru = $conn->prepare($sqlSelectsagduyuru);
+                            $preSagduyuru->execute([$rowsagduyuruEkran['sagduyuru_id']]);
+                            if ($preSagduyuru->rowCount() > 0) {
+                                while ($rowsagduyuru = $preSagduyuru->fetch(PDO::FETCH_ASSOC)) {
+                                    ?>
+                                    <div class='item <?php if($i==0)echo " active"; ?>'>
+                                        <p class="sagbaslikalti sag_baslik"><?php echo $rowsagduyuru['baslik']; ?></p>
+                                        <p class="sag_icerik_kucuk"><?php echo $rowsagduyuru['yazi']; ?></p>
+                                    </div>
+                                    <?php
+                                    $i++;
+                                }//while end
+                            }
+                        }
+                    }
+                    ?>
                 </div>
             </div>
         </div>
@@ -149,15 +301,50 @@ if(isset($_GET['eId'])){
             <div class="duyuruzemin duyuru_kutu">
                 <img src="img/duyurubaslik.png" class="duyuru_icon"/>
                 <marquee scrollamount="16" direction="left" class="duyuru_yazi">
-                    222DUYURU METNİ 22DUYURU METNİ  DUYURU METNİ DUYURU METNİ22  22.06.2019&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DUYURU METNİ DUYURU METNİ  DUYURU METNİ DUYURU METNİ 22.06.2019&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</marquee>
+                    <?php
+                    $altduyuru = "SELECT * FROM ekran_altduyuru WHERE ekran_id=?";
+                    $altduyuruBaglanti = $conn->prepare($altduyuru);
+                    $altduyuruBaglanti->execute([$ekran_id]);
+                    if ($altduyuruBaglanti->rowCount() > 0) {
+                        while ($rowaltduyuruEkran = $altduyuruBaglanti->fetch(PDO::FETCH_ASSOC)) {
+                            $sqlSelectsagduyuru = "SELECT * FROM a_duyuru WHERE id_aduyuru=? AND bitis >= CURDATE()";
+                            $prealtduyuru = $conn->prepare($sqlSelectsagduyuru);
+                            $prealtduyuru->execute([$rowaltduyuruEkran['altduyuru_id']]);
+                            if ($prealtduyuru->rowCount() > 0) {
+                                while ($rowaltduyuru = $prealtduyuru->fetch(PDO::FETCH_ASSOC)) {
+                                     echo $rowaltduyuru['yazi'];
+                                     echo"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+                                }//while end
+                            }
+                            else{
+                                echo "DUYURULAR..";
+                            }
+                        }
+                    }
+                    else{
+                        echo "DUYURULAR..";
+                    }
+                    ?>
+              &nbsp;&nbsp;</marquee>
             </div>
 
             <div class="haberbandizemin haberbandi_kutu">
                 <marquee scrollamount="13" direction="left" class="haberbandi_yazi">
-                    CUMHURİYET UNİVERSİTESİ BİLGİSAYAR MUHENDİSLİGİ KANALINI İZLİYORSUNUZ... GÜZEL GÜNLER DİLERİZ.......
+                    <?php
+                    $ozelsql = "SELECT * FROM a_ozel WHERE kullanici_id=?";
+                    $ozelBaglanti = $conn->prepare($ozelsql);
+                    $ozelBaglanti->execute([$kullanici_id]);
+                    $ozelBilgiGetir = $ozelBaglanti->fetch();
+                    if($ozelBilgiGetir['yazi']!=NULL){
+                        echo $ozelBilgiGetir['yazi'];
+                    }
+                    else{
+                        echo "Duyuru Ekranına Hoş Geldiniz... GÜZEL GÜNLER DİLERİZ....";
+                    }
+                    ?>
                 </marquee>
-                <img src="img/4379_4997656.png" class="haberbandi_icon" />
-                <img src="img/sagaltlogo.png" class="haberbandi_dtlogo" />
+                <img src="../panel/pUser/<?php echo $kurumbilgiGetir['logo']; ?>" class="haberbandi_icon" />
+                <img src="img/sagaltlogo1.png" class="haberbandi_dtlogo" />
             </div>
         </div>
 

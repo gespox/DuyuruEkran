@@ -89,13 +89,8 @@ require_once "../../baglan.php";
     </script>
 <hr>
     <div class="w3-container sidebarMenu">
-        <?php
-        $sorgu = $conn->prepare("SELECT id_ekran FROM ekran WHERE kullanici_id=?"); // sql yazarak verilerin doğruluğunu kontrol ediyoruz.
-        $sorgu->execute(array($id)); //Kontrol edilecek olan değişkenleri yazdık
-        $islem = $sorgu->fetch();
-        ?>
         <img src="" class="w3-circle w3-margin-right" style="width:46px">
-        <a href="../../ekran/template.php?eId=<?php echo $islem['id_ekran'];?>" target="_blank">
+        <a href="../../ekran/template.php?eId=<?php echo $_SESSION['ekran_id'];?>" target="_blank">
             <div class="w3-center w3-deep-orange w3-hover-red w3-padding-small w3-round-xxlarge w3-margin-bottom" style="cursor: pointer" >
                 <i class="fas fa-desktop fa-3x"></i><br>
                 <h5 class="w3-wide"><b>Ekranı İzle</b></h5>
