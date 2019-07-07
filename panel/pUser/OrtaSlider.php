@@ -45,7 +45,7 @@ require_once "../../baglan.php";
                 <label class="col-2 col-form-label" for="fileToUpload">Resim Secin</label>
                 <input type="file" name="fileToUpload" class="form-control-file col-4" id="fileToUpload" required>
                 </div>
-                <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+                <small id="fileHelp" class="form-text text-muted">Resim Oranı 16*10 olarak ayarlamanız tavsiye edilir.(PNG,JPG,JPEG)</small>
             </div>
             <div class="form-group">
             <div class="form-group row">
@@ -54,7 +54,6 @@ require_once "../../baglan.php";
                     <input class="form-control" name="bitis" type="date"  id="example-date-input" required>
                 </div>
             </div>
-                <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
             </div>
             <div class="form-group row">
                 <div class="offset-sm-2 col-sm-10">

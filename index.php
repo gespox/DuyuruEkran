@@ -153,7 +153,7 @@
                     <h3>Mehmet Sait OKAN</h3>
                     <p class="w3-opacity">Bilgisayar Mühendisi</p>
                     <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-                    <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> İletişim </button></p>
+                    <p><a href="https://www.linkedin.com/in/saitokan/"><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> İletişim </button></a></p>
                 </div>
             </div>
         </div>
@@ -164,7 +164,7 @@
                     <h3>Duygu KARAKAVUK</h3>
                     <p class="w3-opacity">Bilgisayar Mühendisi</p>
                     <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-                    <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> İletişim </button></p>
+                    <p><a href="https://www.linkedin.com/in/duygu-karakavuk-50845b155/"><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> İletişim </button></a></p>
                 </div>
             </div>
         </div>
@@ -175,7 +175,7 @@
                     <h3>Ahhmet Gürkan YÜKSEK</h3>
                     <p class="w3-opacity">Ekip Sorumlusu</p>
                     <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-                    <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> İletişim </button></p>
+                    <p><a href="https://www.linkedin.com/in/g%C3%BCrkan-y%C3%BCksek-31b360108/"><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> İletişim </button></a></p>
                 </div>
             </div>
         </div>
@@ -191,9 +191,9 @@
         <p><i class="fa fa-envelope fa-fw w3-xxlarge w3-margin-right"> </i> Email: iletisim@duyuruekran.com</p>
         <br>
         <form action="#" target="_blank">
-            <p><input class="w3-input w3-border" type="text" placeholder="İsim" >   </p>
-            <p><input class="w3-input w3-border" type="text" placeholder="Email">   </p>
-            <p><input class="w3-input w3-border" type="text" placeholder="Mesajınız"> </p>
+            <p><input class="w3-input w3-border" type="text" placeholder="İsim" required >   </p>
+            <p><input class="w3-input w3-border" type="text" placeholder="Email" required>   </p>
+            <p><input class="w3-input w3-border" type="text" placeholder="Mesajınız" required> </p>
             <p>
                 <button class="w3-button w3-black" type="submit">
                     <i class="fa fa-paper-plane"></i> MESAJ GÖNDER

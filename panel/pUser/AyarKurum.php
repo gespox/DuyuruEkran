@@ -186,7 +186,7 @@ require_once "../../baglan.php";
                             <img src="<?php echo $row['logo'];?>" class="w3-circle w3-margin-right" style="width:46px">
                         </div>
                     </div>
-                    <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+                    <small id="fileHelp" class="form-text text-muted">Logo Seçiniz Dosya Boyutu:Mak:2 Mb Dosya Türü:(.png, .jpeg, .jpg) olmalıdır. Düzgün Görünmesi İçin En az 400px önerilir.</small>
                 </div>
                 <button type="submit" class="btn btn-primary" name="guncelle">Guncelle</button>
             </form>
