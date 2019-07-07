@@ -141,8 +141,6 @@ require_once "../../baglan.php";
                 52=>"ordu",80=>"osmaniye",53=>"rize",54=>"sakarya",55=>"samsun",56=>"siirt",57=>"sinop",58=>"sivas",73=>"şırnak",
                 59=>"tekirdağ",60=>"tokat",61=>"trabzon",62=>"tunceli",63=>"şanlıurfa",64=>"uşak",65=>"van",77=>"yalova",66=>"yozgat",
                 67=>"zonguldak");
-
-
             $KullaniciSelect = "SELECT * FROM kurum WHERE kullanici_id=?";
             $stmt = $conn->prepare($KullaniciSelect);
             $stmt->execute([$kullaniciId]);

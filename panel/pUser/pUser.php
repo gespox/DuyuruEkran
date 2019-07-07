@@ -30,10 +30,8 @@ require_once "../../baglan.php";
     <div class="w3-main" style="margin-left:300px;margin-top:43px;">
     <!-- Header -->
     <header class="w3-container" style="padding-top:22px">
-        
     </header>
     <!-- CONTENT CONTAINER -->
-
     <div class="w3-container w3-white w3-margin w3-padding w3-center" >
         <img src="img/duyuruEkran.png" alt="" width="600">
         <hr>

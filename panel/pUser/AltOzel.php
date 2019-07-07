@@ -57,13 +57,11 @@ require_once "../../baglan.php";
                          Ozel Alan Basariyla Guncellendi!
                          <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
                       </div>";
-
             }else {
                 echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
             Üzgünüz bir hata oluştu lütfen tekrar deneyiniz!
             <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
         </div>";
-
             }
         }?>
         <div class="w3-container  w3-white w3-margin w3-padding">

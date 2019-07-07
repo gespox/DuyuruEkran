@@ -73,7 +73,7 @@ $kullanici_id=$kullaniciGetir['kullanici_id'];
 <!--**************** ORTA  *****************-->
     <div class="slider_alti_zemin orta_bolum">
         <div id="pnlModul">
-            <div id="marketslider" class="carousel-fade carousel slide" data-interval="<?php echo 1000;//$ayarBilgiGetir['orta_Sure']?>" data-ride="carousel">
+            <div id="marketslider" class="carousel-fade carousel slide" data-interval="<?php echo $ayarBilgiGetir['orta_Sure']?>" data-ride="carousel">
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
                     <!--**************** TANITIM EKRANI  *****************-->
@@ -186,7 +186,7 @@ $kullanici_id=$kullaniciGetir['kullanici_id'];
             </div>
         </div>
         <!--**************** SAG SLIDER  *****************-->
-        <div id='resimkosesislider' class='carousel slide' data-interval='<?php echo 1000;//$ayarBilgiGetir['sagSlider_sure']?>' data-ride='carousel'>
+        <div id='resimkosesislider' class='carousel slide' data-interval='<?php echo $ayarBilgiGetir['sagSlider_sure']?>' data-ride='carousel'>
             <div class='carousel-inner'>
         <?php
         $sagslidersql = "SELECT * FROM ekran_sagslider WHERE ekran_id=?";
@@ -212,10 +212,9 @@ $kullanici_id=$kullaniciGetir['kullanici_id'];
         }?>
             </div>
         </div>
-
         <!--**************** SAYAC  *****************-->
         <div class="sag_bosluk">
-            <div id="sayacslider" class="carousel slide" data-interval="<?php echo 1000;//$ayarBilgiGetir['sagSayac_sure']?>" data-ride="carousel">
+            <div id="sayacslider" class="carousel slide" data-interval="<?php echo $ayarBilgiGetir['sagSayac_sure']?>" data-ride="carousel">
                 <div class="carousel-inner">
                     <?php
                     $sagsayacsql = "SELECT * FROM ekran_sagsayac WHERE ekran_id=?";
@@ -254,16 +253,13 @@ $kullanici_id=$kullaniciGetir['kullanici_id'];
                             }
                         }
                     }
-
                     ?>
-
-
                 </div>
             </div>
         </div>
         <!--**************** SAG DUYURU  *****************-->
         <div class="sag_bosluk">
-            <div id="serbestmodulslider" class="carousel slide" data-interval="<?php echo 1000;//$ayarBilgiGetir['sagDuyuru_sure']?>" data-ride="carousel">
+            <div id="serbestmodulslider" class="carousel slide" data-interval="<?php echo $ayarBilgiGetir['sagDuyuru_sure']?>" data-ride="carousel">
                 <div class="carousel-inner">
                     <?php
                     $sagduyuru = "SELECT * FROM ekran_sagduyuru WHERE ekran_id=?";
@@ -352,26 +348,28 @@ $kullanici_id=$kullaniciGetir['kullanici_id'];
             <div id="havadurumuslider" class="carousel slide" data-interval="1000" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-inner">
+                        <?php
+                        if($kurumbilgiGetir['il']!=NULL){
+                         $sehir=$kurumbilgiGetir['il'];
+                        }else{
+                            $sehir="istanbul";
+                        }
+                            include_once "havadurumu2.php";
+                            $weather = new Weather();
+                            $return_data= $weather->getWeatherData("$sehir, tr");
+                            $il = $return_data->location->city;
+                            $ulke = $return_data->location->country;
+                            $suan = $return_data->current_observation->condition->temperature;
+                            $code = $return_data->current_observation->condition->code;
+                            $tahmin = $return_data->forecasts;
+                            ?>
+
 
                         <div class='item active'>
                             <p class="havadurumu_gun">BUGÜN</p>
-                            <img src='https://s.yimg.com/zz/combo?a/i/us/nws/weather/gr/0d.png' class="havadurumu_icon" />
-                            <p class="havadurumu_yer">MERKEZ</p>
-                            <p class="havadurumu_derece">21&deg;</p>
-                        </div>
-
-                        <div class='item '>
-                            <p class="havadurumu_gun">YARIN</p>
-                            <img src='https://s.yimg.com/zz/combo?a/i/us/nws/weather/gr/0d.png' class="havadurumu_icon" />
-                            <p class="havadurumu_yer">MERKEZ</p>
-                            <p class="havadurumu_derece">20&deg;</p>
-                        </div>
-
-                        <div class='item '>
-                            <p class="havadurumu_gun">Pazartesi</p>
-                            <img src='https://s.yimg.com/zz/combo?a/i/us/nws/weather/gr/0d.png' class="havadurumu_icon" />
-                            <p class="havadurumu_yer">MERKEZ</p>
-                            <p class="havadurumu_derece">21&deg;</p>
+                            <img src='https://s.yimg.com/zz/combo?a/i/us/nws/weather/gr/<?php echo $code; ?>d.png' class="havadurumu_icon" />
+                            <p class="havadurumu_yer"><?php echo $il; ?></p>
+                            <p class="havadurumu_derece"><?php echo $suan; ?>&deg;</p>
                         </div>
                     </div>
                 </div>

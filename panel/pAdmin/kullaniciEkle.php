@@ -130,7 +130,6 @@ require_once "../../baglan.php";
             <table class="table table-hover">
                 <thead>
                 <tr>
-
                     <th scope="col">Ad Soyad</th>
                     <th scope="col">Mail</th>
                     <th scope="col">Telefon</th>
