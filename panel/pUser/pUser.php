@@ -34,7 +34,7 @@ require_once "../../baglan.php";
     </header>
     <!-- CONTENT CONTAINER -->
     <div class="w3-container w3-white w3-margin w3-padding">
-
+    <?php echo $_SESSION['ekran_id'];  ?>
     </div>
 </body>
 </html>
