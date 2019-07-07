@@ -40,7 +40,7 @@ require_once "../../baglan.php";
             <a title="Bildirimler" class="w3-bar-item w3-button" onclick="document.getElementById('id01').style.display='block'"><i class="fa fa-envelope"></i> <span class="w3-badge w3-tiny w3-red" id="bildirimsayisi">9</span></a>
             <a href="cikis.php" onclick="return confirm('Çıkış yapmak istiyor musunuz?');" title="Çıkış Yap" class="w3-bar-item w3-button"><i class="fas fa-sign-out-alt"></i></a>
         </div>
-        <div id="id01" class="w3-panel w3-gray w3-opacity-min w3-display-container" style="display:none">
+        <div id="id01" class="w3-panel w3-gray w3-display-container" style="display:none">
   <span onclick="this.parentElement.style.display='none'"
         class="w3-button w3-red w3-display-topright">x</span>
             <div class="w3-container">

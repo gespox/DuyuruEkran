@@ -1,6 +1,14 @@
+<?php
+if(isset($_GET['eId'])){
+
+}
+
+?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head><title>
+<head>
+    <!--  Kurum Adi -->
+    <title>
         Cumhuriyet Universitesi Bilgisayar Muhendisligi Kanalı | DuyuruTV
     </title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
@@ -8,12 +16,11 @@
     <script src="js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
    <link href="https://fonts.googleapis.com/css?family=Roboto:900" rel="stylesheet" type="text/css" />
+    <!--  Css Ayar -->
     <link id="csstasarim" href="css/stil_yesil.css" rel="stylesheet" type="text/css" />
-    <link rel="icon" href="https://www.duyurutv.com/ico.png" />
+    <link rel="icon" href="img/ico.png" />
     <script type="text/javascript">
-        var ilke = 0;
         var timer1ID;
-        var timer60ID;
         function timer1_Tick() {
             var now = new Date();
             if (now.getHours() < 10)
