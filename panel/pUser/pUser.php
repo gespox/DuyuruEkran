@@ -33,8 +33,11 @@ require_once "../../baglan.php";
         
     </header>
     <!-- CONTENT CONTAINER -->
+
     <div class="w3-container w3-white w3-margin w3-padding w3-center" >
             <h1> KULLANICI PANELİNE HOŞGELDİNİZ</h1>
+    <div class="w3-container w3-white w3-margin w3-padding">
+
     </div>
 </body>
 </html>

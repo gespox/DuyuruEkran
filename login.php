@@ -19,6 +19,12 @@ if(isset($_POST['girisbtn'])) {
             yonlendir("panel/pAdmin/panelAdmin.php");
 
         } else {
+            $_SESSION['bildirim'] =1;
+            $ekranid = "SELECT id_ekran FROM ekran WHERE kullanici_id=?";
+            $stmt = $conn->prepare($ekranid);
+            $stmt->execute([$islem['id_kullanici']]);
+            $row = $stmt->fetch();
+            $_SESSION['ekran_id']=$row['id_ekran'];
             yonlendir("panel/pUser/pUser.php");
 
         }

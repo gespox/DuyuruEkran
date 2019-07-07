@@ -107,6 +107,12 @@ if(isset($_POST["submit"])) {
                 $bitis = $_POST['bitis'];
                 $sqlslider = "INSERT INTO o_slider (kullanici_id,slider_url,bitis) VALUES ('$userid','$target_file','$bitis')";
                 $conn->exec($sqlslider);
+
+                $sliderEkran= $conn->lastInsertId();
+                $ekran_id=$_SESSION['ekran_id'];
+                $sql = "INSERT INTO ekran_slider (ekran_id,slider_id) VALUES (?,?)";
+                $kayitsql = $conn->prepare($sql);
+                $kayitsql->execute([$ekran_id,$sliderEkran]);
                 echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
             Slider Basariyla Eklendi!
             <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
@@ -126,6 +132,9 @@ if(isset($_POST["sil"])){
 
     $sqlSil="DELETE FROM o_slider WHERE id_slider='$sliderID'";
     $conn->exec($sqlSil);
+    $sqlekrandansil="DELETE FROM ekran_slider WHERE slider_id=?";
+    $ekranSil=$conn->prepare($sqlekrandansil);
+    $ekranSil->execute([$sliderID]);
     echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>
             Slider Basariyla Silindi!
             <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>

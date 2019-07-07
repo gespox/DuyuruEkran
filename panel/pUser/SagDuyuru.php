@@ -63,6 +63,11 @@ require_once "../../baglan.php";
                 $resimsiz=$conn->prepare($sqlresimsiz);
                 $checkResimsiz=$resimsiz->execute([$idKullanici,$baslik,$yazi,$bitis]);
                 if($checkResimsiz) {
+                    $sagduyuruEkran= $conn->lastInsertId();
+                    $ekran_id=$_SESSION['ekran_id'];
+                    $sql = "INSERT INTO ekran_sagduyuru (ekran_id,sagduyuru_id) VALUES (?,?)";
+                    $kayitsql = $conn->prepare($sql);
+                    $kayitsql->execute([$ekran_id,$sagduyuruEkran]);
                     echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
                          Sag Duyuru Basariyla Eklendi!
                          <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
@@ -83,6 +88,9 @@ require_once "../../baglan.php";
             $ResimsizSil=$conn->prepare($sqlSil);
             $checkSil= $ResimsizSil->execute([$resimsizid]);
             if($checkSil) {
+                $sqlekrandansil="DELETE FROM ekran_sagduyuru WHERE sagduyuru_id=?";
+                $ekranSil=$conn->prepare($sqlekrandansil);
+                $ekranSil->execute([$resimsizid]);
                 echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
              Duyuru Basariyla Silindi!
             <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>

@@ -106,6 +106,11 @@ require_once "../../baglan.php";
                         $resimli=$conn->prepare($sqlresimli);
                         $checkResimli=$resimli->execute([$idKullanici,$baslik,$yazi,$target_file,$bitis]);
                         if($checkResimli) {
+                            $resimliEkran= $conn->lastInsertId();
+                            $ekran_id=$_SESSION['ekran_id'];
+                            $sql = "INSERT INTO ekran_resimli (ekran_id,resimli_id) VALUES (?,?)";
+                            $kayitsql = $conn->prepare($sql);
+                            $kayitsql->execute([$ekran_id,$resimliEkran]);
                             echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
                          Resimli Duyuru Basariyla Eklendi!
                          <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
@@ -134,6 +139,9 @@ require_once "../../baglan.php";
             $ResimliSil=$conn->prepare($sqlSil);
             $checkSil= $ResimliSil->execute([$resimliID]);
             if($checkSil) {
+                $sqlekrandansil="DELETE FROM ekran_resimli WHERE resimli_id=?";
+                $ekranSil=$conn->prepare($sqlekrandansil);
+                $ekranSil->execute([$resimliID]);
                 echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
             Resimli Duyuru Basariyla Silindi!
             <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>

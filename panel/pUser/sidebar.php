@@ -101,8 +101,8 @@ require_once "../../baglan.php";
                 <h5 class="w3-wide"><b>Ekrani Izle</b></h5>
             </div></a>
         <button class="w3-button w3-padding-16 w3-hide-large w3-block w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Menüyü Kapat </button>
-        <button class="w3-padding-16 w3-button w3-block w3-left-align w3-white w3-leftbar w3-border-white w3-hover-border-red">
-            Bilgi Ekrani </button>
+        <a href="pUser.php"> <button class="w3-padding-16 w3-button w3-block w3-left-align w3-white w3-leftbar w3-border-white w3-hover-border-red">
+                Bilgi Ekrani </button></a>
         <button onclick="myFunction('orta')" class="w3-padding-16 w3-button w3-block w3-left-align w3-white w3-leftbar w3-border-white w3-hover-border-red">
             Orta Bolum &nbsp;<i class="fa fa-caret-down"></i></button>
         <div id="orta" class="w3-hide">

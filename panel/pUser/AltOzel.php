@@ -44,6 +44,15 @@ require_once "../../baglan.php";
             $uyeKayit=$conn->prepare($sqlUyekayit);
             $checkUyeKayit=$uyeKayit->execute([$yazi,$kullaniciId]);
             if($checkUyeKayit) {
+                $ozelalanSQL = "SELECT id_aozel FROM a_ozel WHERE kullanici_id=?";
+                $ozelpre = $conn->prepare($ozelalanSQL);
+                $ozelpre->execute([$kullaniciId]);
+                $satir = $ozelpre->fetch();
+                $altDuyuru= $satir['id_aozel'];
+                $ekran_id=$_SESSION['ekran_id'];
+                $sql = "INSERT INTO ekran_altozel (ekran_id,altozel_id) VALUES (?,?)";
+                $kayitsql = $conn->prepare($sql);
+                $kayitsql->execute([$ekran_id,$altDuyuru]);
                 echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
                          Ozel Alan Basariyla Guncellendi!
                          <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
