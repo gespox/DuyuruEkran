@@ -35,7 +35,11 @@ require_once "../../baglan.php";
     <!-- CONTENT CONTAINER -->
 
     <div class="w3-container w3-white w3-margin w3-padding w3-center" >
+        <img src="img/duyuruEkran.png" alt="" width="600">
+        <hr>
             <h1> KULLANICI PANELİNE HOŞGELDİNİZ</h1>
+        <h4>Menülerden yayınlamak istediğiniz duyuruları ekledikten sonra <br>
+            <strong class="w3-deep-orange w3-text-black">Ekranı İzle</strong> butonuna basarak <span class="w3-text-pink">Duyuru</span> Ekranınızı görüntüleyebilirsiniz.</h4>
     <div class="w3-container w3-white w3-margin w3-padding">
 
     </div>
