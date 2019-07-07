@@ -36,7 +36,7 @@ require_once "../../baglan.php";
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
     <!-- Header -->
     <header class="w3-container" style="padding-top:22px">
-        <h5><b><i class="fa fa-dashboard"> </i> Genel Gorunum</b></h5>
+        <h5><b><i class="fa fa-dashboard"> </i> Kurum Ayarları </b></h5>
     </header>
     <!-- CONTENT CONTAINER -->
     <div class="w3-container w3-white w3-margin w3-padding">
@@ -154,7 +154,7 @@ require_once "../../baglan.php";
                     <input type="text" class="form-control" id="kurumad" name="kurumad" <?php if($row['kurumAd']!=NULL){?> value=<?php echo "\""; echo $row['kurumAd']; echo "\"";  } ?> required>
                 </div>
                 <div class="form-group">
-                    <label for="name">Yonetici Ad Soyad:</label>
+                    <label for="name">Yönetici Ad Soyad:</label>
                     <input type="text" class="form-control" id="name" name="adsoyad" value="<?php echo $row['ad_soyad'];  ?>" required>
                 </div>
                 <div class="form-group">
@@ -188,7 +188,7 @@ require_once "../../baglan.php";
                     </div>
                     <small id="fileHelp" class="form-text text-muted">Logo Seçiniz Dosya Boyutu:Mak:2 Mb Dosya Türü:(.png, .jpeg, .jpg) olmalıdır. Düzgün Görünmesi İçin En az 400px önerilir.</small>
                 </div>
-                <button type="submit" class="btn btn-primary" name="guncelle">Guncelle</button>
+                <button type="submit" class="btn btn-primary" name="guncelle">Güncelle</button>
             </form>
 
         </div>

@@ -30,11 +30,11 @@ require_once "../../baglan.php";
     <div class="w3-main" style="margin-left:300px;margin-top:43px;">
     <!-- Header -->
     <header class="w3-container" style="padding-top:22px">
-        <h5><b><i class="fa fa-dashboard"> </i> Genel Gorunum</b></h5>
+        
     </header>
     <!-- CONTENT CONTAINER -->
-    <div class="w3-container w3-white w3-margin w3-padding">
-
+    <div class="w3-container w3-white w3-margin w3-padding w3-center" >
+            <h1> KULLANICI PANELİNE HOŞGELDİNİZ</h1>
     </div>
 </body>
 </html>

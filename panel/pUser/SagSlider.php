@@ -33,7 +33,7 @@ require_once "../../baglan.php";
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
     <!-- Header -->
     <header class="w3-container" style="padding-top:22px">
-        <h5><b><i class="fa fa-dashboard"> </i> Genel Gorunum</b></h5>
+        <h5><b><i class="fa fa-dashboard"> </i> Resim Köşesi </b></h5>
     </header>
     <!-- CONTENT CONTAINER -->
 
@@ -45,16 +45,16 @@ require_once "../../baglan.php";
                         <label class="col-2 col-form-label" for="fileToUpload">Resim Secin</label>
                         <input type="file" name="fileToUpload" class="form-control-file col-4" id="fileToUpload" required>
                     </div>
-                    <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+                    <small id="fileHelp" class="form-text text-muted">Dosya boyutu max 2MB'tır.Sadece JPG, JPEG, PNG formatlarında resim yükleyebilirsiniz.</small>
                 </div>
                 <div class="form-group">
                     <div class="form-group row">
-                        <label for="example-date-input" class="col-2 col-form-label">Bitis Tarihi</label>
+                        <label for="example-date-input" class="col-2 col-form-label">Bitiş Tarihi</label>
                         <div class="col-3">
                             <input class="form-control" name="bitis" type="date"  id="example-date-input" required>
                         </div>
                     </div>
-                    <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+                    <small id="fileHelp" class="form-text text-muted"> Seçtiğiniz tarihe kadar ekranda kalacaktır. </small>
                 </div>
                 <div class="form-group row">
                     <div class="offset-sm-2 col-sm-10">

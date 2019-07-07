@@ -36,7 +36,7 @@ require_once "../../baglan.php";
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
     <!-- Header -->
     <header class="w3-container" style="padding-top:22px">
-        <h5><b><i class="fa fa-dashboard"> </i> Genel Gorunum</b></h5>
+        <h5><b><i class="fa fa-dashboard"> </i> Ekran Ayarları</b></h5>
     </header>
     <!-- CONTENT CONTAINER -->
     <div class="w3-container w3-white w3-margin w3-padding">
@@ -138,7 +138,7 @@ require_once "../../baglan.php";
                         <option value="300000"<?php if ($row['sagSayac_sure']==300000) echo " selected";?>>5 Dakika</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary" name="guncelle">Guncelle</button>
+                <button type="submit" class="btn btn-primary" name="guncelle">Güncelle</button>
             </form>
 
         </div>

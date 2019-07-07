@@ -33,7 +33,7 @@ require_once "../../baglan.php";
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
     <!-- Header -->
     <header class="w3-container" style="padding-top:22px">
-        <h5><b><i class="fa fa-dashboard"> </i> Genel Gorunum</b></h5>
+        <h5><b><i class="fa fa-dashboard"> </i> Küçük Duyuru </b></h5>
     </header>
     <!-- CONTENT CONTAINER -->
     <div class="w3-container w3-white w3-margin w3-padding">
@@ -84,13 +84,13 @@ require_once "../../baglan.php";
             $checkSil= $ResimsizSil->execute([$resimsizid]);
             if($checkSil) {
                 echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
-            Resimsiz Duyuru Basariyla Silindi!
+             Duyuru Basariyla Silindi!
             <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
         </div>";
             }
             else{
                 echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>
-            Hata! Resimsiz Duyuru Silinemedi.
+            Hata! Duyuru Silinemedi.
             <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
         </div>";
             }
@@ -132,7 +132,7 @@ require_once "../../baglan.php";
 
                 }else {
                     echo "</tbody></table><div class=\"alert alert-info\">
-      Resimsiz Duyuru Mevcut Degil.
+       Duyuru Mevcut Degil.
   </div>";
                 }
                 ?>

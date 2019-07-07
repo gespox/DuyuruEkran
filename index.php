@@ -36,7 +36,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Admin Paneline Giris</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle"> Panele Giris </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -152,7 +152,7 @@
                     <img src="img/sait.jpeg" alt="Sait"  height="400" width="100%">
                     <h3>Mehmet Sait OKAN</h3>
                     <p class="w3-opacity">Bilgisayar Mühendisi</p>
-                    <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+                    <p>Telefon: 05377669539</p>
                     <p><a href="https://www.linkedin.com/in/saitokan/"><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> İletişim </button></a></p>
                 </div>
             </div>
@@ -163,7 +163,7 @@
                     <img src="img/dyg.jpeg" alt="Duygu" height="400" width="100%">
                     <h3>Duygu KARAKAVUK</h3>
                     <p class="w3-opacity">Bilgisayar Mühendisi</p>
-                    <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+                    <p>Telefon: 05384138551 </p>
                     <p><a href="https://www.linkedin.com/in/duygu-karakavuk-50845b155/"><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> İletişim </button></a></p>
                 </div>
             </div>
@@ -174,7 +174,7 @@
                     <img src="img/gyuksek.jpg" alt="Gürkan" height="400" width="100%">
                     <h3>Ahhmet Gürkan YÜKSEK</h3>
                     <p class="w3-opacity">Ekip Sorumlusu</p>
-                    <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+                    <p>Telefon: 05369895656</p>
                     <p><a href="https://www.linkedin.com/in/g%C3%BCrkan-y%C3%BCksek-31b360108/"><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> İletişim </button></a></p>
                 </div>
             </div>

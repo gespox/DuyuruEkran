@@ -34,7 +34,7 @@ require_once "../../baglan.php";
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
     <!-- Header -->
     <header class="w3-container" style="padding-top:22px">
-        <h5><b><i class="fa fa-dashboard"> </i> Genel Gorunum</b></h5>
+        <h5><b><i class="fa fa-dashboard"> </i> Kullanıcı Ayarları </b></h5>
     </header>
     <!-- CONTENT CONTAINER -->
     <div class="w3-container w3-white w3-margin w3-padding">
@@ -148,10 +148,10 @@ require_once "../../baglan.php";
                         <img src="<?php echo $row['avatar'];?>" class="w3-circle w3-margin-right" style="width:46px">
                         </div>
                     </div>
-                    <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+                    <small id="fileHelp" class="form-text text-muted">Dosya boyutu max 2MB'tır.Sadece JPG, JPEG, PNG formatlarında resim yükleyebilirsiniz.</small>
                 </div>
 
-                <button type="submit" class="btn btn-primary" name="guncelle">Guncelle</button>
+                <button type="submit" class="btn btn-primary" name="guncelle">Güncelle</button>
             </form>
 
         </div>

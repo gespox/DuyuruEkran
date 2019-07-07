@@ -33,22 +33,22 @@ require_once "../../baglan.php";
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
     <!-- Header -->
     <header class="w3-container" style="padding-top:22px">
-        <h5><b><i class="fa fa-dashboard"> </i> Genel Gorunum</b></h5>
+        <h5><b><i class="fa fa-dashboard"> </i> Kayan Duyuru </b></h5>
     </header>
     <!-- CONTENT CONTAINER -->
     <div class="w3-container w3-white w3-margin w3-padding">
         <div class="w3-container  w3-white w3-margin w3-padding ">
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                 <div class="form-group">
-                    <label for="yazi">Alt Duyuru Yazisi:</label>
+                    <label for="yazi">Kayan Duyuru Yazisi:</label>
                     <textarea class="form-control col-6" id="yazi" rows="4" name="yazi" required></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="bitis">Bitis Tarihi:</label>
+                    <label for="bitis">Bitiş Tarihi:</label>
                     <input class="form-control col-6" name="bitis" type="date"  id="bitis" required>
                 </div>
 
-                <button type="submit" class="btn btn-primary" name="resimsizKayit">Alt Duyuru Ekle</button>
+                <button type="submit" class="btn btn-primary" name="resimsizKayit">Kayan Duyuru Ekle</button>
             </form>
         </div>
         <?php
