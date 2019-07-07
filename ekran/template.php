@@ -176,9 +176,9 @@ $kullanici_id=$kullaniciGetir['kullanici_id'];
         <div class="sag_tarih_saat_kutu">
             <p class="sag_tarih_gun">
                 <?php
-                setlocale(LC_TIME, "turkish"); //başka bir dil içinse burada belirteceksin.
-                setlocale(LC_ALL,'turkish'); //başka bir dil içinse burada belirteceksin.
-                echo strftime('%e %B %Y %A ');
+                date_default_timezone_set('Europe/Istanbul');
+                setlocale(LC_ALL, 'tr_TR.UTF-8');
+                echo strftime("%e %B %Y %A", time());
                 ?>
             </p>
             <div class="sag_saat" id="saatim">
@@ -232,18 +232,19 @@ $kullanici_id=$kullaniciGetir['kullanici_id'];
                                     <div class='item <?php if($i==0)echo " active"; ?>'>
                                         <p class="sagbaslikalti sag_baslik"><?php echo $rowsagsayac['yazi']; ?></p>
                                         <p class="sag_icerik_orta"><?php
+                                            date_default_timezone_set('Europe/Istanbul');
                                             $now = time(); // or your date as well
                                             $your_date = strtotime($rowsagsayac['bitis']);
                                             $datediff =$your_date- $now;
                                             $fark=round($datediff / (60 * 60 * 24));
-                                            if($fark==-1){
+                                            if($fark==0){
                                                 echo "BUGÜN";
                                             }
-                                            elseif ($fark==0){
+                                            elseif ($fark==1){
                                                 echo "YARIN";
                                             }
                                             else{
-                                                echo ++$fark." Gun Kaldı";
+                                                echo $fark." Gun Kaldı";
                                             }
                                             ?> </p>
                                     </div>
@@ -289,8 +290,6 @@ $kullanici_id=$kullaniciGetir['kullanici_id'];
             </div>
         </div>
     </div>
-
-
     <div class="alt_endis">
         <div class="alt_kayanlar">
             <!--**************** DUYURU  *****************-->
